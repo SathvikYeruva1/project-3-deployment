@@ -1,0 +1,9 @@
+.login-container {
+  background-color: linear-gradient(to right, #00f0ff, #0033ff);
+}
+
+button {
+  background-color: #fff;
+  color: #0033ff;
+  border: 1px solid #0033ff;
+}
