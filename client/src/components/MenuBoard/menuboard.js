@@ -30,49 +30,49 @@ const MenuBoard = () => {
     // Example menu item
     {
       name: "Coffee Milk Tea",
-      image: "coffee-image.jpg",
+      image: "/milkTea.jpg",
       category: "Coffee",
-      nutrition: "Nutrition info for coffee drink",
+      nutrition: "Aromatic coffee flavor blended with smooth milk tea.",
     },
     {
         name: "Rosehip Milk Tea",
-        image: "coffee-image.jpg",
+        image: "/milkTea.jpg",
         category: "Coffee",
-        nutrition: "Nutrition info for coffee drink",
+        nutrition: "Floral notes of rosehip in a creamy milk tea base.",
       },
       {
         name: "Green Tea",
-        image: "coffee-image.jpg",
+        image: "/milkTea.jpg",
         category: "Coffee",
-        nutrition: "Nutrition info for coffee drink",
+        nutrition: "Refreshing and detoxifying, rich in natural antioxidants.",
       },
       {
         name: "Taro Milk Tea",
-        image: "coffee-image.jpg",
+        image: "/milkTea.jpg",
         category: "Coffee",
         nutrition: "Nutrition info for coffee drink",
       },
       {
         name: "Honey Milk Tea",
-        image: "coffee-image.jpg",
+        image: "/milkTea.jpg",
         category: "Coffee",
         nutrition: "Nutrition info for coffee drink",
       },
       {
         name: "Thai Milk Tea",
-        image: "coffee-image.jpg",
+        image: "/milkTea.jpg",
         category: "Coffee",
         nutrition: "Nutrition info for coffee drink",
       },
       {
         name: "Coconut Milk Tea",
-        image: "coffee-image.jpg",
+        image: "/milkTea.jpg",
         category: "Coffee",
         nutrition: "Nutrition info for coffee drink",
       },
       {
         name: "Almond Milk Tea",
-        image: "coffee-image.jpg",
+        image: "/milkTea.jpg",
         category: "Coffee",
         nutrition: "Nutrition info for coffee drink",
       },
@@ -209,32 +209,45 @@ const MenuBoard = () => {
 
       {/* Right Side */}
       {/* Right Side */}
-      <VStack spacing={4} align="center" mt={50} mr={20}>
+      <Grid
+        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+        gap={4} // Reduced the gap to decrease the space between rows
+        pl={6} // Left padding to ensure some space from the left side
+        pt={10} // Increased the top padding
+        w="full" // Ensure the grid takes full width of the right side
+      >
         {filteredItems.map((item, index) => (
-          <Card key={index} borderRadius="lg" boxShadow="md" w="200px">
-            <Image src='/punchTea.jpg' alt={item.name} boxSize="100%" objectFit="cover" />
+          <GridItem key={index} colSpan={1}>
+            <Card borderRadius="lg" overflow="hidden" display="flex" flexDirection="column">
+              {/* Display the image for the drink */}
+              <Image src={item.image} alt={item.name} boxSize="100%" objectFit="cover" />
+              
+              {/* Product Name */}
+              <Box p={3} d="flex" flexDirection="column" justifyContent="space-between" flexGrow={1}>
+                <Text fontWeight="bold" textAlign="center" color="black">{item.name}</Text>
+                <Flex justifyContent="center" alignItems="center" mt={2}>
+                  {/* Add to Cart Button */}
+                  <IconButton aria-label="Add to cart" icon={<ChevronRightIcon />} colorScheme="teal" />
 
-            {/* Product Name */}
-            <Text>{item.name}</Text>
-
-            {/* Add to Cart Button */}
-            <IconButton icon={<ChevronRightIcon />} colorScheme="teal" />
-
-            {/* Nutrition Info Popover */}
-            <Popover>
-              <PopoverTrigger>
-                <IconButton icon={<InfoIcon />} colorScheme="teal" />
-              </PopoverTrigger>
-              <PopoverContent>
-                <PopoverArrow />
-                <PopoverCloseButton />
-                <PopoverHeader>Nutrition Information</PopoverHeader>
-                <PopoverBody>{item.nutrition}</PopoverBody>
-              </PopoverContent>
-            </Popover>
-          </Card>
+                  {/* Nutrition Info Popover */}
+                  <Popover>
+                    <PopoverTrigger>
+                      <IconButton aria-label="Nutrition info" icon={<InfoIcon />} colorScheme="teal" ml={2} />
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverHeader color="black">Nutrition Information</PopoverHeader>
+                      {/* This is where the description will show */}
+                      <PopoverBody color="black">{item.nutrition}</PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                </Flex>
+              </Box>
+            </Card>
+          </GridItem>
         ))}
-      </VStack>
+      </Grid>
     </Flex>
   );
 };
