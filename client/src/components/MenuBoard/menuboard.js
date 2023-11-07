@@ -45,49 +45,49 @@ const MenuBoard = () => {
       name: "Coffee Milk Tea",
       image: "/milkTea.jpg",
       category: "Coffee",
-      nutrition: "Aromatic coffee flavor blended with smooth milk tea.",
+      description: " A harmonious blend of robust coffee and creamy milk tea, offering the perfect balance of caffeine and comforting flavors",
     },
     {
         name: "Rosehip Milk Tea",
         image: "/milkTea.jpg",
         category: "Coffee",
-        nutrition: "Floral notes of rosehip in a creamy milk tea base.",
+        description: "A delicate infusion of fragrant rosehip and creamy milk tea, delivering a subtly floral and soothing experience",
       },
       {
         name: "Green Tea",
         image: "/milkTea.jpg",
         category: "Coffee",
-        nutrition: "Refreshing and detoxifying, rich in natural antioxidants.",
+        description: "A refreshing and invigorating classic, boasting the natural essence of green tea leaves and a subtly grassy undertone",
       },
       {
         name: "Taro Milk Tea",
         image: "/milkTea.jpg",
         category: "Coffee",
-        nutrition: "Nutrition info for coffee drink",
+        description: "A rich and velvety concoction combining the earthy sweetness of taro with the smoothness of milk tea, creating a delightful indulgence",
       },
       {
         name: "Honey Milk Tea",
         image: "/milkTea.jpg",
         category: "Coffee",
-        nutrition: "Nutrition info for coffee drink",
+        description: "A sweet and wholesome treat merging the golden richness of honey with the creamy allure of milk tea for a soothing and comforting beverage",
       },
       {
         name: "Thai Milk Tea",
         image: "/milkTea.jpg",
         category: "Coffee",
-        nutrition: "Nutrition info for coffee drink",
+        description: "An exotic and aromatic blend featuring strong black tea infused with spices and condensed milk, offering a uniquely rich and creamy Thai twist",
       },
       {
         name: "Coconut Milk Tea",
         image: "/milkTea.jpg",
         category: "Coffee",
-        nutrition: "Nutrition info for coffee drink",
+        description: "A tropical fusion of fragrant coconut and smooth milk tea, providing a luscious and indulgent taste of the tropics in every sip",
       },
       {
         name: "Almond Milk Tea",
         image: "/milkTea.jpg",
         category: "Coffee",
-        nutrition: "Nutrition info for coffee drink",
+        description: "A nutty and creamy delight that combines the subtle nuttiness of almonds with the comforting essence of milk tea, creating a deliciously smooth and satisfying drink",
       },
     // Add more menu items as needed
   ];
@@ -231,34 +231,35 @@ const MenuBoard = () => {
       >
         {filteredItems.map((item, index) => (
           <GridItem key={index} colSpan={1}>
-            <Card borderRadius="lg" overflow="hidden" display="flex" flexDirection="column">
-              {/* Display the image for the drink */}
-              <Image src={item.image} alt={item.name} boxSize="100%" objectFit="cover" />
-              
-              {/* Product Name */}
-              <Box p={3} d="flex" flexDirection="column" justifyContent="space-between" flexGrow={1}>
-                <Text fontWeight="bold" textAlign="center" color="black">{item.name}</Text>
-                <Flex justifyContent="center" alignItems="center" mt={2}>
-                  {/* Add to Cart Button */}
-                  <IconButton aria-label="Add to cart" icon={<ChevronRightIcon />} colorScheme="teal" />
-
-                  {/* Nutrition Info Popover */}
-                  <Popover>
-                    <PopoverTrigger>
-                      <IconButton aria-label="Nutrition info" icon={<InfoIcon />} colorScheme="teal" ml={2} />
-                    </PopoverTrigger>
-                    <PopoverContent>
-                      <PopoverArrow />
-                      <PopoverCloseButton />
-                      <PopoverHeader color="black">Nutrition Information</PopoverHeader>
-                      {/* This is where the description will show */}
-                      <PopoverBody color="black">{item.nutrition}</PopoverBody>
-                    </PopoverContent>
-                  </Popover>
-                </Flex>
-              </Box>
-            </Card>
-          </GridItem>
+          <Card borderRadius="lg" overflow="hidden" display="flex" flexDirection="column" position="relative">
+            {/* Display the image for the drink */}
+            <Image src={item.image} alt={item.name} boxSize="100%" objectFit="cover" />
+                      
+            {/* Product Name */}
+            <Box p={3} d="flex" flexDirection="column" justifyContent="space-between" flexGrow={1}>
+              <Text fontWeight="bold" textAlign="center" color="black">{item.name}</Text>
+              <Flex justifyContent="center" alignItems="center" mt={2}>
+                {/* Add to Cart Button */}
+                <IconButton aria-label="Add to cart" icon={<ChevronRightIcon />} colorScheme="teal" />
+        
+                {/* Description Popover */}
+                <Popover placement="bottom" strategy="fixed">
+                  <PopoverTrigger>
+                    <IconButton aria-label="Item Description" icon={<InfoIcon />} colorScheme="teal" ml={2} />
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <PopoverArrow />
+                    <PopoverCloseButton />
+                    <PopoverHeader color="black">Item Description</PopoverHeader>
+                    {/* This is where the description will show */}
+                    <PopoverBody color="black">{item.description}</PopoverBody>
+                  </PopoverContent>
+                </Popover>
+              </Flex>
+            </Box>
+          </Card>
+        </GridItem>
+        
         ))}
       </Grid>
     </Flex>
