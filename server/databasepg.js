@@ -3,8 +3,21 @@ const { Pool } = require('pg');
 // const dotenv = require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const path = require('path')
+const _dirname = path.dirname(__filename)
+const buildPath = path.join(_dirname, "../client/build")
 
+app.use(express.static(buildPath))
+app.get("/",function(req,res){
+  res.sendFile(
+    path.join(__dirname, "../client/build/index.html"),
+    function(err){
+      if(err){
+        res.status(500).send(err);
+      }
+    }
+  );
+})
 const pool = new Pool({
   host: "csce-315-db.engr.tamu.edu",
   user: "csce315_971_blakeolson",
@@ -19,7 +32,7 @@ process.on('SIGINT', function(){
   process.exit(0);
 });
 
-app.get('/menuboard', (req, res) => {
+app.get('/menudata', (req, res) => {
   menuitemsnames = []
   pool.query('SELECT tea_name FROM teaorders;').then(query_res => {
           for (let i = 0; i < query_res.rowCount; i++){
@@ -30,7 +43,7 @@ app.get('/menuboard', (req, res) => {
       });
 });
 
-app.get('/menuboard/teaorders', (req, res) => {
+app.get('/menudata/teaorders', (req, res) => {
   menuitemsingredients = []
   pool.query('SELECT ingredients FROM teaorders;').then(query_res => {
           for (let i = 0; i < query_res.rowCount; i++){
@@ -41,7 +54,7 @@ app.get('/menuboard/teaorders', (req, res) => {
       });
 });
 
-app.get('/menuboard/descriptions', (req, res) => {
+app.get('/menudata/descriptions', (req, res) => {
   menuitemsdescriptions = []
   pool.query('SELECT descriptions FROM teaorders;').then(query_res => {
           for (let i = 0; i < query_res.rowCount; i++){
@@ -54,6 +67,5 @@ app.get('/menuboard/descriptions', (req, res) => {
 
 
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+app.listen(5001, () => {console.log("Server started on port 5001")})
+
