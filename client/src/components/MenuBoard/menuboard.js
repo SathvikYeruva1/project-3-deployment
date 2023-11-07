@@ -1,5 +1,6 @@
 // menuboard.js
 import React, { useState } from 'react';
+//import axios from 'axios';
 import {
   Box,
   Heading,
@@ -24,6 +25,18 @@ import {
 } from "@chakra-ui/react";
 import { ChevronRightIcon, InfoIcon } from "@chakra-ui/icons";
 
+/*function menudata() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get('/menuboard') // Adjust the URL as needed
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data', error);
+      });
+  }, []);*/
 const MenuBoard = () => {
   // Define your menu items, e.g., an array of objects with name, image, category, and nutrition info
   const menuItems = [
