@@ -4,6 +4,9 @@ ADD ingredients varchar(255);
 ALTER TABLE teaorders
 ADD descriptions varchar(255);
 
+ALTER TABLE teaorders
+ADD categories varchar(255);
+
 UPDATE teaorders
 SET ingredients = 'Green Tea, Cane Sugar Syrup', descriptions = 'A refreshing, classic Green Tea'
 WHERE tea_name = 'Green Tea';
@@ -47,3 +50,47 @@ WHERE tea_name = 'Seasonal Boba';
 UPDATE teaorders
 SET ingredients = 'Cane Sugar Syrup, Milk Powder, Espresso, Water', descriptions = 'Coffee but as a slush!', tea_name = 'Coffee Slush'
 WHERE tea_name = 'Slush Boba';
+
+UPDATE teaorders
+SET categories = 'Classic'
+WHERE tea_name = 'Green Tea';
+
+UPDATE teaorders
+SET categories = 'Milk Tea'
+WHERE tea_name = 'Rosehip Milk Tea';
+
+UPDATE teaorders
+SET categories = 'Milk Tea'
+WHERE tea_name ='Coffee Milk Tea';
+
+UPDATE teaorders
+SET categories = 'Milk Tea'
+WHERE tea_name = 'Taro Milk Tea';
+
+UPDATE teaorders
+SET categories = 'Milk Tea'
+WHERE tea_name = 'Honey Milk Tea';
+
+UPDATE teaorders
+SET categories = 'Milk Tea'
+WHERE tea_name = 'Thai Milk Tea';
+
+UPDATE teaorders
+SET categories = 'Milk Tea'
+WHERE tea_name = 'Coconut Milk Tea';
+
+UPDATE teaorders
+SET categories = 'Milk Tea'
+WHERE tea_name = 'Almond Milk Tea';
+
+UPDATE teaorders
+SET categories = 'Milk Tea'
+WHERE tea_name = 'Peppermint Milk Tea';
+
+UPDATE teaorders
+SET categories = 'Punch'
+WHERE tea_name = 'Mango Green Tea';
+
+UPDATE teaorders
+SET categories = 'Slush'
+WHERE tea_name = 'Coffee Slush';
