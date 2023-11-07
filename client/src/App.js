@@ -7,6 +7,7 @@ import MenuBoard from "./components/MenuBoard/menuboard";
 // 1. import `ChakraProvider` component
 import { ChakraProvider } from '@chakra-ui/react'
 
+
 function App() {
   return (
     <ChakraProvider>
