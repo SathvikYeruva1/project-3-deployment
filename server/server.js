@@ -8,17 +8,17 @@ const app = express();
 
 const port = 5001;
 
-// app.use(express.static(buildPath))
-// app.get("/*",function(req,res){
-//   res.sendFile(
-//     path.join(__dirname, "../client/build/index.html"),
-//     function(err){
-//       if(err){
-//         res.status(500).send(err);
-//       }
-//     }
-//   );
-// })
+app.use(express.static(buildPath))
+app.get("/",function(req,res){
+  res.sendFile(
+    path.join(__dirname, "../client/build/index.html"),
+    function(err){
+      if(err){
+        res.status(500).send(err);
+      }
+    }
+  );
+})
 
 const pool = new Pool({
   host: "csce-315-db.engr.tamu.edu",
