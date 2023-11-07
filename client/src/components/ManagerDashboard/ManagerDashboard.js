@@ -27,7 +27,7 @@ function ManagerDashboard() {
             <a href="#">Inventory</a>
           </ListItem>
           <ListItem mb="10px">
-            <a href="#">Menu</a>
+            <a href="/menuboard">Menu</a>
           </ListItem>
           <ListItem mb="10px">
             <a href="#">Employees</a>
