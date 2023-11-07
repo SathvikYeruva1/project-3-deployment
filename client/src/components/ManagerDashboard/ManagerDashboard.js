@@ -10,6 +10,11 @@ function ManagerDashboard() {
     navigate("/");
   };
 
+  const handleMenubooard = () => {
+    navigate("/menuboard");
+  };
+  
+
   return (
     <Box>
       <Box className="sidebar" backgroundColor="#1A202C" color="#FFFFFF" height="100vh" width="200px" p="20px">
@@ -35,7 +40,7 @@ function ManagerDashboard() {
             <a href="#">Inventory</a>
           </ListItem>
           <ListItem mb="10px">
-            <a href="#">Menu</a>
+            <a href="/menuboard">Menu</a>
           </ListItem>
           <ListItem mb="10px">
             <a href="#">Employees</a>
@@ -43,6 +48,11 @@ function ManagerDashboard() {
           <ListItem mb="10px">
             <a href="/" onClick={handleLogout}>
               Logout
+            </a>
+          </ListItem>
+          <ListItem mb="10px">
+            <a onClick={handleMenubooard}>
+              Menuboard
             </a>
           </ListItem>
         </UnorderedList>
