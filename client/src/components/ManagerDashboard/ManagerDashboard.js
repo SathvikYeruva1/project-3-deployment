@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./ManagerDashboard.css"
+import { Box, Heading, UnorderedList, ListItem } from "@chakra-ui/react";
+import "./ManagerDashboard.css";
 
 function ManagerDashboard() {
   const navigate = useNavigate();
@@ -10,21 +11,35 @@ function ManagerDashboard() {
   };
 
   return (
-    <html>
-        <body>
-            <div class="sidebar">
-                <h1>Kung Fu Tea</h1>
-                <ul class="nav-links">
-                    <li><a href="/Manager-Dashboard">Dashboard</a></li>
-                    <li><a href="#">Orders</a></li>
-                    <li><a href="#">Inventory</a></li>
-                    <li><a href="#">Menu</a></li>
-                    <li><a href="#">Employees</a></li>
-                    <li><a href="/">Logout</a></li>
-                </ul> 
-            </div>
-        </body>
-    </html>
+    <Box>
+      <Box className="sidebar" backgroundColor="#1A202C" color="#FFFFFF" height="100vh" width="200px" p="20px">
+        <Heading as="h1" size="xl" textAlign="center" mb="20px">
+          Kung Fu Tea
+        </Heading>
+        <UnorderedList styleType="none" p="0">
+          <ListItem mb="10px">
+            <a href="/Manager-Dashboard">Dashboard</a>
+          </ListItem>
+          <ListItem mb="10px">
+            <a href="#">Orders</a>
+          </ListItem>
+          <ListItem mb="10px">
+            <a href="#">Inventory</a>
+          </ListItem>
+          <ListItem mb="10px">
+            <a href="#">Menu</a>
+          </ListItem>
+          <ListItem mb="10px">
+            <a href="#">Employees</a>
+          </ListItem>
+          <ListItem mb="10px">
+            <a href="/" onClick={handleLogout}>
+              Logout
+            </a>
+          </ListItem>
+        </UnorderedList>
+      </Box>
+    </Box>
   );
 }
 
