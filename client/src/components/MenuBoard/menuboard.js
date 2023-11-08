@@ -41,6 +41,7 @@ const MenuBoard = () => {
   const [menuItemData, setMenuItemData] = useState([]);
   const [menuItemDescriptions, setMenuItemDescriptions] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+  const [menuItemIngredients, setMenuItemIngredients] = useState([]);
 
   useEffect(() =>{
     const fetchMenuData = async () => {
@@ -79,8 +80,27 @@ const MenuBoard = () => {
       }
     }
     }
+  const fetchMenuIngredients = async () => {
+    try{
+      const initialResult = await fetch(`http://54.92.197.133/menudata/teaorders`);
+      const jsonResult = await initialResult.json();
+      setMenuItemIngredients(jsonResult.menuitemsingredients);
+      } catch (error) {
+        // Handle the error or try an alternative URL
+        console.error('Error fetching menu data:', error);
+        // Attempt an alternative URL
+        try {
+          const initialResult = await fetch(`http://localhost:5001/menudata/teaorders`);
+          const jsonResult = await initialResult.json();
+          setMenuItemIngredients(jsonResult.menuitemsingredients);
+        } catch (alternativeError) {
+          console.error('Error fetching menu data from the alternative URL:', alternativeError);
+        }
+      }
+    }
     fetchMenuData();
     fetchMenuDescriptions();
+    fetchMenuIngredients();
   }, [])
 
 
@@ -88,7 +108,7 @@ const MenuBoard = () => {
     if (menuItemData.length !== 0 && menuItemDescriptions.length !== 0) {
       // Combine the data from menuItemData and menuItemDescriptions
       const newMenuItems = menuItemData.map((item, index) => {
-        const description = menuItemDescriptions[index].descriptions;
+        const description = menuItemDescriptions[index].descriptions + '\nIngredients: ' + menuItemIngredients[index].ingredients;
         return {
           name: item.tea_name,
           image: "/milkTea.jpg", // You can set the image path here
