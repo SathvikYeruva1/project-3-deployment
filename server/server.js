@@ -7,12 +7,12 @@ const _dirname = path.dirname(__filename)
 const buildPath = path.join(_dirname, "../client/build")
 const app = express();
 
-const corsOptions = {
-  origin: 'http://localhost:5001/menudata',
-};
+// const corsOptions = {
+//   origin: 'http://localhost:5001/menudata',
+// };
 
 app.use(express.static(buildPath));
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 // app.use('/static', express.static(path.join(_dirname, 'client/src/components'));
 
 // app.get("/",function(req,res){
