@@ -40,42 +40,33 @@ function ManagerDashboard() {
   
 
   return (
-    <Flex>
+ <Flex>
     <Box display="flex" width="200px">
-      <Box className="sidebar" backgroundColor="#1A202C" color="#FFFFFF" height="100vh" width="200px" p="20px">
+      <Box className="sidebar" backgroundColor="#1A202C" color="#FFFFFF" height="100vh" width="200px" p="20px" >
       <Image
-            src='/kungfutealogo.png'
-            alt='Kung Fu Tea Logo'
-            boxSize="125px"
-            objectFit="contain" 
-            textAlign="center"  
-            borderRadius="md"
-            boxShadow="md"   
-            mb={4}  
-            mt = {20}  
+            src='/kungfutealogo.png' borderRadius="lg" mb={6}
         />
         <UnorderedList styleType="none" p="0">
-          <ListItem mb="10px">
+          <ListItem mb="15px" fontSize="lg">
             <a href="/manager-dashboard">Dashboard</a>
           </ListItem>
-          <ListItem mb="10px">
+          <ListItem mb="15px" fontSize="lg">
             <a href="/manager-dashboard">Orders</a>
           </ListItem>
-          <ListItem mb="10px">
+          <ListItem mb="15px" fontSize="lg">
             <a href="/manager-dashboard">Inventory</a>
           </ListItem>
-          <ListItem mb="10px">
+          <ListItem mb="15px" fontSize="lg">
             <a href = "/menuboard">
               Menu
             </a>
           </ListItem>
-          <ListItem mb="10px">
+          <ListItem mb="15px" fontSize="lg">
             <a href="/manager-dashboard">Employees</a>
           </ListItem>
-          <ListItem mb="10px">
+          <ListItem mb="15px" fontSize="lg">
             <a href="/" onClick={handleLogout}>
-              Logout
-            </a>
+              Log out </a>
           </ListItem>
         </UnorderedList>
       </Box>
@@ -89,7 +80,7 @@ function ManagerDashboard() {
         color="white"
         paddingTop="70px" // Add padding to the top
       >
-        <Box w="27%" bg="blue.900" ml={4} mr={4} borderRadius="lg" h="120px">
+        <Box w="27%" bg="blue.900" ml={6} mr={4} borderRadius="lg" h="120px">
           <Center
             w="40px"
             h="58px"
@@ -125,8 +116,6 @@ function ManagerDashboard() {
         </Box>
       </HStack>
     </Flex>
-    
-    
   );
 }
 
