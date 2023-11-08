@@ -8,7 +8,7 @@ const buildPath = path.join(_dirname, "../client/build")
 const app = express();
 
 const corsOptions = {
-  origin: 'http://54.92.197.133',
+  origin: 'http://localhost:5001/menudata',
 };
 
 app.use(express.static(buildPath));
