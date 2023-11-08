@@ -15,12 +15,18 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    // if (username === "manager") {
-    //   navigate("/manager-dashboard");
-    // } else {
-    //   alert("Invalid username or password.");
-    // }
-    navigate("/manager-dashboard");
+     if (username === "manager" && password === "manager") {
+       navigate("/manager-dashboard");
+     }
+     else if(username === "customer" && password === "customer"){
+      navigate("/menuboard");
+     } 
+     else if(username === "cashier" && password === "cashier"){
+      navigate("/CashierDashboard");
+     }
+     else {
+       alert("Invalid username or password.");
+     }
   };
 
   return (
