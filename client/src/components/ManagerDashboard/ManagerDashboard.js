@@ -35,10 +35,6 @@ function ManagerDashboard() {
   const handleLogout = () => {
     navigate("/");
   };
-
-
-  
-
   return (
  <Flex>
     <Box display="flex" width="200px">
