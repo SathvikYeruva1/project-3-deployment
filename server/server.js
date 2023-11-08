@@ -2,6 +2,7 @@ const express = require('express');
 const { Pool } = require('pg');
 // const dotenv = require('dotenv').config();
 const path = require('path')
+const cors = require('cors');
 const _dirname = path.dirname(__filename)
 const buildPath = path.join(_dirname, "../client/build")
 const app = express();
@@ -9,6 +10,7 @@ const app = express();
 const port = 5001;
 
 app.use(express.static(buildPath));
+app.use(cors());
 // app.use('/static', express.static(path.join(_dirname, 'client/src/components'));
 
 // app.get("/",function(req,res){
