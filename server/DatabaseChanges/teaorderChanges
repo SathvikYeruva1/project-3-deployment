@@ -8,35 +8,35 @@ ALTER TABLE teaorders
 ADD categories varchar(255);
 
 UPDATE teaorders
-SET ingredients = 'Green Tea, Cane Sugar Syrup', descriptions = 'A refreshing, classic Green Tea'
+SET ingredients = 'Green Tea, Cane Sugar Syrup', descriptions = 'A refreshing and invigorating classic, boasting the natural essence of green tea leaves and a subtly grassy undertone'
 WHERE tea_name = 'Green Tea';
 
 UPDATE teaorders
-SET ingredients = 'Black Tea, Rosehip Powder, Milk Powder', descriptions = 'A sweet, tart rose drink'
+SET ingredients = 'Black Tea, Rosehip Powder, Milk Powder', descriptions = 'A delicate infusion of fragrant rosehip and creamy milk tea, delivering a subtly floral and soothing experience'
 WHERE tea_name = 'Rosehip Milk Tea';
 
 UPDATE teaorders
-SET ingredients = 'Black Tea, Cane Sugar Syrup, Milk Powder, Espresso', descriptions = 'A tasteful milk tea with some extra kick!'
+SET ingredients = 'Black Tea, Cane Sugar Syrup, Milk Powder, Espresso', descriptions = 'A harmonious blend of robust coffee and creamy milk tea, offering the perfect balance of caffeine and comforting flavors'
 WHERE tea_name = 'Coffee Milk Tea';
 
 UPDATE teaorders
-SET ingredients = 'Black Tea, Cane Sugar Syrup, Milk Powder, Taro Syrup', descriptions = 'A light, nutty flavored milk tea'
+SET ingredients = 'Black Tea, Cane Sugar Syrup, Milk Powder, Taro Syrup', descriptions = 'A rich and velvety concoction combining the earthy sweetness of taro with the smoothness of milk tea, creating a delightful indulgence'
 WHERE tea_name = 'Taro Milk Tea';
 
 UPDATE teaorders
-SET ingredients = 'Black Tea, Honey Syrup, Milk Powder', descriptions = 'A classic milk tea with some extra honey sweetness'
+SET ingredients = 'Black Tea, Honey Syrup, Milk Powder', descriptions = 'A sweet and wholesome treat merging the golden richness of honey with the creamy allure of milk tea for a soothing and comforting beverage'
 WHERE tea_name = 'Honey Milk Tea';
 
 Update teaorders
-SET ingredients = 'Thai Tea, Cane Sugar Syrup, Milk Powder', descriptions = 'A slightly floral, mildly sweet, and a bit spicy'
+SET ingredients = 'Thai Tea, Cane Sugar Syrup, Milk Powder', descriptions = 'An exotic and aromatic blend featuring strong black tea infused with spices and condensed milk, offering a uniquely rich and creamy Thai twist'
 WHERE tea_name = 'Thai Milk Tea';
 
 UPDATE teaorders
-SET ingredients = 'Black Tea, Cane Sugar Syrup, Milk Powder, Coconut Powder, Caseinate, Artifical Coconut Flavor, Water', descriptions = 'A classic milk tea with coconut milk for a different taste'
+SET ingredients = 'Black Tea, Cane Sugar Syrup, Milk Powder, Coconut Powder, Caseinate, Artifical Coconut Flavor, Water', descriptions = 'A tropical fusion of fragrant coconut and smooth milk tea, providing a luscious and indulgent taste of the tropics in every sip'
 WHERE tea_name = 'Coconut Milk Tea';
 
 UPDATE teaorders
-SET ingredients = 'Black Tea, Almond Syrup, Milk Powder, Water', descriptions = 'A classic milk tea, but healthier'
+SET ingredients = 'Black Tea, Almond Syrup, Milk Powder, Water', descriptions = 'A nutty and creamy delight that combines the subtle nuttiness of almonds with the comforting essence of milk tea, creating a deliciously smooth and satisfying drink'
 WHERE tea_name = 'Almond Milk Tea';
 
 UPDATE teaorders
