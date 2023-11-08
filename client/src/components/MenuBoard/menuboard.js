@@ -44,12 +44,12 @@ const MenuBoard = () => {
 
   useEffect(() =>{
     const fetchMenuData = async () => {
-      const initialResult = await fetch(`http://localhost:5001/menudata`);
+      const initialResult = await fetch(`http://54.92.197.133/menudata`);
       const jsonResult = await initialResult.json();
       setMenuItemData(jsonResult.menuitemsnames);
     }
     const fetchMenuDescriptions = async () => {
-      const initialResult = await fetch(`http://localhost:5001/menudata/descriptions`);
+      const initialResult = await fetch(`http://54.92.197.133/menudata/descriptions`);
       const jsonResult = await initialResult.json();
       setMenuItemDescriptions(jsonResult.menuitemsdescriptions);
     }
