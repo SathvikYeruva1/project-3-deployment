@@ -221,7 +221,6 @@ const MenuBoard = () => {
       </Center>
 
       {/* Right Side */}
-      {/* Right Side */}
       <Grid
         templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
         gap={4} // Reduced the gap to decrease the space between rows
