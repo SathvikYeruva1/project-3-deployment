@@ -1,5 +1,5 @@
 // menuboard.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 //import axios from 'axios';
 import {
   Box,
@@ -38,67 +38,48 @@ import { ChevronRightIcon, InfoIcon } from "@chakra-ui/icons";
       });
   }, []);*/
 const MenuBoard = () => {
-  // Define your menu items, e.g., an array of objects with name, image, category, and nutrition info
-  const menuItems = [
-    // Example menu item
-    {
-      name: "Coffee Milk Tea",
-      image: "/milkTea.jpg",
-      category: "Coffee",
-      description: " A harmonious blend of robust coffee and creamy milk tea, offering the perfect balance of caffeine and comforting flavors",
-    },
-    {
-        name: "Rosehip Milk Tea",
-        image: "/milkTea.jpg",
-        category: "Coffee",
-        description: "A delicate infusion of fragrant rosehip and creamy milk tea, delivering a subtly floral and soothing experience",
-      },
-      {
-        name: "Green Tea",
-        image: "/milkTea.jpg",
-        category: "Coffee",
-        description: "A refreshing and invigorating classic, boasting the natural essence of green tea leaves and a subtly grassy undertone",
-      },
-      {
-        name: "Taro Milk Tea",
-        image: "/milkTea.jpg",
-        category: "Coffee",
-        description: "A rich and velvety concoction combining the earthy sweetness of taro with the smoothness of milk tea, creating a delightful indulgence",
-      },
-      {
-        name: "Honey Milk Tea",
-        image: "/milkTea.jpg",
-        category: "Coffee",
-        description: "A sweet and wholesome treat merging the golden richness of honey with the creamy allure of milk tea for a soothing and comforting beverage",
-      },
-      {
-        name: "Thai Milk Tea",
-        image: "/milkTea.jpg",
-        category: "Coffee",
-        description: "An exotic and aromatic blend featuring strong black tea infused with spices and condensed milk, offering a uniquely rich and creamy Thai twist",
-      },
-      {
-        name: "Coconut Milk Tea",
-        image: "/milkTea.jpg",
-        category: "Coffee",
-        description: "A tropical fusion of fragrant coconut and smooth milk tea, providing a luscious and indulgent taste of the tropics in every sip",
-      },
-      {
-        name: "Almond Milk Tea",
-        image: "/milkTea.jpg",
-        category: "Coffee",
-        description: "A nutty and creamy delight that combines the subtle nuttiness of almonds with the comforting essence of milk tea, creating a deliciously smooth and satisfying drink",
-      },
-    // Add more menu items as needed
-  ];
+  const [menuItemData, setMenuItemData] = useState([]);
+  const [menuItemDescriptions, setMenuItemDescriptions] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
 
-  // State to filter menu items by category
-  const [filteredItems, setFilteredItems] = useState(menuItems);
+  useEffect(() =>{
+    const fetchMenuData = async () => {
+      const initialResult = await fetch(`http://localhost:5001/menudata`);
+      const jsonResult = await initialResult.json();
+      setMenuItemData(jsonResult.menuitemsnames);
+    }
+    const fetchMenuDescriptions = async () => {
+      const initialResult = await fetch(`http://localhost:5001/menudata/descriptions`);
+      const jsonResult = await initialResult.json();
+      setMenuItemDescriptions(jsonResult.menuitemsdescriptions);
+    }
+    fetchMenuData();
+    fetchMenuDescriptions();
+  }, [])
+
+
+  useEffect(() => {
+    if (menuItemData.length !== 0 && menuItemDescriptions.length !== 0) {
+      // Combine the data from menuItemData and menuItemDescriptions
+      const newMenuItems = menuItemData.map((item, index) => {
+        const description = menuItemDescriptions[index].descriptions;
+        return {
+          name: item.tea_name,
+          image: "/milkTea.jpg", // You can set the image path here
+          category: "Coffee", // Set the category as needed
+          description,
+        };
+      });
+      setFilteredItems(newMenuItems);
+    }
+  }, [menuItemData, menuItemDescriptions]);
 
   const handleFilterCategory = (category) => {
-    const filtered = menuItems.filter((item) => item.category === category);
+    // Filter the items based on the selected category
+    const filtered = filteredItems.filter((item) => item.category === category);
     setFilteredItems(filtered);
   };
+
 
   return (
     <Flex>
