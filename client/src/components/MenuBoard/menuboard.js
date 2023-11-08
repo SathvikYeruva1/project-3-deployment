@@ -44,14 +44,40 @@ const MenuBoard = () => {
 
   useEffect(() =>{
     const fetchMenuData = async () => {
+      try{
       const initialResult = await fetch(`http://54.92.197.133/menudata`);
       const jsonResult = await initialResult.json();
       setMenuItemData(jsonResult.menuitemsnames);
+      } catch (error) {
+        // Handle the error or try an alternative URL
+        console.error('Error fetching menu data:', error);
+        // Attempt an alternative URL
+        try {
+          const initialResult = await fetch(`http://localhost:5001/menudata`);
+          const jsonResult = await initialResult.json();
+          setMenuItemData(jsonResult.menuitemsnames);
+        } catch (alternativeError) {
+          console.error('Error fetching menu data from the alternative URL:', alternativeError);
+        }
+      }
     }
     const fetchMenuDescriptions = async () => {
+      try{
       const initialResult = await fetch(`http://54.92.197.133/menudata/descriptions`);
       const jsonResult = await initialResult.json();
       setMenuItemDescriptions(jsonResult.menuitemsdescriptions);
+    } catch (error) {
+      // Handle the error or try an alternative URL
+      console.error('Error fetching menu data:', error);
+      // Attempt an alternative URL
+      try {
+        const initialResult = await fetch(`http://localhost:5001/menudata/descriptions`);
+        const jsonResult = await initialResult.json();
+        setMenuItemDescriptions(jsonResult.menuitemsdescriptions);
+      } catch (alternativeError) {
+        console.error('Error fetching menu data from the alternative URL:', alternativeError);
+      }
+    }
     }
     fetchMenuData();
     fetchMenuDescriptions();

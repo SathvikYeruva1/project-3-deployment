@@ -7,12 +7,21 @@ const _dirname = path.dirname(__filename)
 const buildPath = path.join(_dirname, "../client/build")
 const app = express();
 
-// const corsOptions = {
-//   origin: 'http://localhost:5001/menudata',
-// };
+app.use(cors({
+  origin: 'http://localhost:5001',
+}));
+app.options('*', cors());
+
 
 app.use(express.static(buildPath));
-// app.use(cors(corsOptions));
+
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', 'http://localhost:5001');
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type');
+//   next();
+// });
+
 // app.use('/static', express.static(path.join(_dirname, 'client/src/components'));
 
 // app.get("/",function(req,res){
