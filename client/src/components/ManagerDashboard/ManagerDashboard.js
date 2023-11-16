@@ -24,7 +24,13 @@ import {
   Flex,  // Import Flex from Chakra UI for layout
   UnorderedList,
    ListItem,
-   Icon
+   Icon,
+   Table,
+   Thead,
+   Tbody,
+   Tr,
+   Th,
+   Td,
 } from "@chakra-ui/react";
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./ManagerDashboard.css";
@@ -36,11 +42,21 @@ function ManagerDashboard() {
     navigate("/");
   };
 
+  const TableRow = ({ data, borderBottom = true }) => (
+    <Tr>
+      {data.map((item, index) => (
+        <Td key={index} borderBottom={borderBottom ? "1px solid #E2E8F0" : "none"} color="blackAlpha.900">
+          {item}
+        </Td>
+      ))}
+    </Tr>
+  );
+
 
   
 
   return (
- <Flex>
+ <Flex >
     <Box display="flex" width="200px">
       <Box className="sidebar" backgroundColor="#1A202C" color="#FFFFFF" height="100vh" width="200px" p="20px" >
       <Image
@@ -72,15 +88,17 @@ function ManagerDashboard() {
       </Box>
       </Box>
       {/* Right-side content */}
+      <Flex direction="column" flex="10" bg="#F2F2F2"  minHeight="100vh" pb={10}> 
       <HStack
         flex="1"
-        p={4}
-        spacing={10}  // Adjust the spacing as needed
+        pt={-10}  // Adjust the padding-top as needed
+        pb={-5}
+        spacing={3}  // Adjust the spacing as needed
         align="center"
         color="white"
-        paddingTop="70px" // Add padding to the top
+        justifyContent="center"
       >
-        <Box w="27%" bg="blue.900" ml={6} mr={4} borderRadius="lg" h="120px">
+        <Box w="32%" bg="blue.900" ml={6} mr={4} borderRadius="lg" h="140px">
           <Center
             w="40px"
             h="58px"
@@ -91,7 +109,7 @@ function ManagerDashboard() {
           <Text fontSize="l" textAlign="left" ml={3} >Total Revenue</Text>
         </Box>
 
-        <Box w="27%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="120px">
+        <Box w="32%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="140px">
           <Center
             w="40px"
             h="58px"
@@ -103,7 +121,7 @@ function ManagerDashboard() {
           <Text fontSize="l" textAlign="left" ml={3}>Total Orders</Text>
         </Box>
 
-        <Box w="27%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="120px">
+        <Box w="32%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="140px">
           <Center
             w="40px"
             h="58px"
@@ -115,6 +133,32 @@ function ManagerDashboard() {
           <Text fontSize="l" textAlign="left" ml={3}>Employees</Text>
         </Box>
       </HStack>
+        {/* Table */}
+        <Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">
+          <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
+            Order Details
+          </Heading>
+          <Table variant="simple" borderCollapse="separate">
+            <Thead>
+              <Tr>
+                <Th>Date</Th>
+                <Th>Order Number</Th>
+                <Th>Amount</Th>
+                <Th>Order Item</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+          {/* Use the TableRow component to render rows */}
+          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
+          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
+          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
+          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
+          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
+          {/* Add more rows as needed */}
+            </Tbody>
+          </Table>
+        </Box>
+        </Flex>
     </Flex>
   );
 }
