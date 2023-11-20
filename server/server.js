@@ -1,8 +1,9 @@
 const express = require('express');
 const { Pool } = require('pg');
-// const dotenv = require('dotenv').config();
+require('dotenv').config();
 const path = require('path')
 const cors = require('cors');
+const { Translate } = require('@google-cloud/translate').v2;
 const _dirname = path.dirname(__filename)
 const buildPath = path.join(_dirname, "../client/build")
 const app = express();
@@ -34,21 +35,37 @@ app.use(express.static(buildPath));
 //     }
 //   );
 // })
-
+const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
+const translate = new Translate({
+  credentials: CREDENTIALS,
+  projectId: CREDENTIALS.project_id
+});
 
 
 const pool = new Pool({
-  host: "csce-315-db.engr.tamu.edu",
-  user: "csce315_971_blakeolson",
-  port: 5432,
-  password: "password",
-  database: "csce315331_08b_db"
+  host: process.env.PSQL_HOST,
+  user: process.env.PSQL_USER,
+  port: process.env.PSQL_PORT,
+  password: process.env.PSQL_PASSWORD,
+  database: process.env.PSQL_DATABASE
 });
 
 process.on('SIGINT', function(){
   pool.end();
   console.log('Application closed');
   process.exit(0);
+});
+
+app.get('/translate', async(req,res) => {
+  const {text, wantedLanguage} = req.query;
+
+  try{
+    const translated = await translate(text, {to: wantedLanguage});
+    res.json({translated : translated.text}); 
+  }
+  catch(err){
+    res.status(500).json({error: err.message});
+  }
 });
 
 app.get('/menudata', (req, res) => {
