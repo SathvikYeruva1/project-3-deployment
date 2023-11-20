@@ -12,3 +12,9 @@ During this scrum meeting, each team member provided their status updates and di
 
 ## Scrum Meeting 4 11/15
 We discussed Jira changes and planned the coming sprint through assigning tasks and point values. In particular, we discussed adding the features of the Weather API, the Google translate, and the oauth for login. Assigning these specific tasks helped move forward our vision of the final MVP. Everyone has no blockers and discussed that they successfully completed all of their tasks since the last SCRUM meeting. During this scrum meeting, we were hoping to develop a large majority of the website.
+
+## Scrum Meeting 5 11/18
+For this scrum meeting each of the team members shared their updates and blockers. The meeting began with our Project Manager Blake discussing the status of the sprint. He mentioned that we are a little bit behind schedule so we need to push the next few days. Kevin then shared his updates stating the completion of the tables for the manager dashboard and pages navigated from there. He did not have any blockers. Jack has continued work on implementing the Google Translate API. Satvik is working on getting the data from the backend to display in the tables Kevin created. Shu is helping Kevin create the pages and improve the UI.
+
+## Scrum Meeting 6 11/20
+In this scrum meeting each person shared their updates on their tickets for this sprint. For this sprint the goal was to create the pages for the Manager view. Kevin finished the creation of the layouts for the pages that will display the data from the database. We are little bit behind in the implementation of one of the key accessibility features, the transalting. This task is starting to become a bit more intensive so some of the other members will be working with Jack to complete this task. Blake has been working on assisting Jack and Satvik in making the tables load the data dynamically. Shu and Kevin are about 70% completed with the UI.
