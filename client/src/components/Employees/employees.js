@@ -33,9 +33,9 @@ import {
    Td,
 } from "@chakra-ui/react";
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
-import "./ManagerDashboard.css";
+import "./employees.css";
 
-function ManagerDashboard() {
+function Employees() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -105,8 +105,7 @@ function ManagerDashboard() {
           >
             <Icon as={FaDollarSign} fontSize="2xl" color="white" ml={3} />
           </Center>
-          <Text fontSize="xl" textAlign="left" ml={3} mb={0.5}>$10,000</Text>
-          <Text fontSize="l" textAlign="left" ml={3} >Total Revenue</Text>
+          <Text fontSize="l" textAlign="center" ml={3} ><a href="/menuinfo">Menu</a></Text>
         </Box>
 
         <Box w="32%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="140px">
@@ -117,8 +116,7 @@ function ManagerDashboard() {
           >
             <Icon as={FaReceipt} fontSize="2xl" color="white" ml={3}/>
           </Center>
-          <Text fontSize="xl" textAlign="left" ml={3} mb={0.5}>500</Text>
-          <Text fontSize="l" textAlign="left" ml={3}><a href="/inventory">Inventory</a></Text>
+          <Text fontSize="l" textAlign="center" ml={3}><a href="/inventory">Inventory</a></Text>
         </Box>
 
         <Box w="32%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="140px">
@@ -129,14 +127,13 @@ function ManagerDashboard() {
           >
             <Icon as={FaUsers} fontSize="2xl" color="white" ml={3}/>
           </Center>
-          <Text fontSize="xl" textAlign="left" ml={3} mb={0.5}>20</Text>
-          <Text fontSize="l" textAlign="left" ml={3}><a href="/employees">Employees</a></Text>
+          <Text fontSize="l" textAlign="center" ml={3}><a href="/employees">Employees</a></Text>
         </Box>
       </HStack>
         {/* Table */}
         <Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">
           <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
-            Order Details
+            Employee Details
           </Heading>
           <Table variant="simple" borderCollapse="separate">
             <Thead>
@@ -163,4 +160,4 @@ function ManagerDashboard() {
   );
 }
 
-export default ManagerDashboard;
+export default Employees;
