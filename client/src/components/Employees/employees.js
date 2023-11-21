@@ -138,10 +138,10 @@ function Employees() {
           <Table variant="simple" borderCollapse="separate">
             <Thead>
               <Tr>
-                <Th>Date</Th>
-                <Th>Order Number</Th>
-                <Th>Amount</Th>
-                <Th>Order Item</Th>
+                <Th>ID</Th>
+                <Th>Employee Name</Th>
+                <Th>Salary</Th>
+                <Th>Employee Role</Th>
               </Tr>
             </Thead>
             <Tbody>
