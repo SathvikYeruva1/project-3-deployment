@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -159,11 +159,9 @@ function ManagerDashboard() {
             </Thead>
             <Tbody>
           {/* Use the TableRow component to render rows */}
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
+              {ordersData.map((order, index) => (
+                <TableRow key={index} data={[order.orderdate, order.id, `$${order.totalamount}`, order.cashiername]} />
+              ))}
           {/* Add more rows as needed */}
             </Tbody>
           </Table>
