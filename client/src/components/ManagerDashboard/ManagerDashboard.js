@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -51,6 +51,16 @@ function ManagerDashboard() {
       ))}
     </Tr>
   );
+
+  //fetching the order data
+  const [ordersData, setOrdersData] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5001/ordersdata')
+      .then(response => response.json())
+      .then(data => setOrdersData(data))
+      .catch(error => console.error('Error fetching data: ', error));
+  }, []);
 
 
   
@@ -144,16 +154,14 @@ function ManagerDashboard() {
                 <Th>Date</Th>
                 <Th>Order Number</Th>
                 <Th>Amount</Th>
-                <Th>Order Item</Th>
+                <Th>Cashier Name</Th>
               </Tr>
             </Thead>
             <Tbody>
           {/* Use the TableRow component to render rows */}
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
+              {ordersData.map((order, index) => (
+                <TableRow key={index} data={[order.orderdate, order.id, `$${order.totalamount}`, order.cashiername]} />
+              ))}
           {/* Add more rows as needed */}
             </Tbody>
           </Table>
