@@ -109,5 +109,37 @@ app.post('/inventory/post', async (request, response) => {
   }
 });
 
+// Edit item in the inventory
+app.put('/inventory/edit/:id', async (request, response) => {
+  const itemId = request.params.id;
+  const { quantity, itemcategory, minimumamount } = request.body;
+
+  try {
+    await pool.query(
+      'UPDATE inventory SET quantity = $1, itemcategory = $2, minimumamount = $3 WHERE itemid = $4',
+      [quantity, itemcategory, minimumamount, itemId]
+    );
+
+    response.status(200).json({ message: 'Item updated successfully' });
+  } catch (error) {
+    console.error('Error updating item:', error);
+    response.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Delete item from the inventory
+app.delete('/inventory/delete/:id', async (request, response) => {
+  const itemId = request.params.id;
+
+  try {
+    await pool.query('DELETE FROM inventory WHERE itemid = $1', [itemId]);
+
+    response.status(200).json({ message: 'Item deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting item:', error);
+    response.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 app.listen(5001, () => {console.log("Server started on port 5001")})
 

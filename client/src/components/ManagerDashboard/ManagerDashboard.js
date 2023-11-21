@@ -34,7 +34,7 @@ import {
 } from "@chakra-ui/react";
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./ManagerDashboard.css";
-import PostComponent from "../PostComponent/PostComponent";
+import InventoryPost from "../PostComponent/InventoryPost";
 
 function ManagerDashboard() {
   const navigate = useNavigate();
@@ -134,7 +134,7 @@ function ManagerDashboard() {
           <Text fontSize="l" textAlign="left" ml={3}><a href="/employees">Employees</a></Text>
         </Box>
       </HStack>
-      <PostComponent></PostComponent>
+      <InventoryPost></InventoryPost>
 
         {/* Table */}
         <Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">

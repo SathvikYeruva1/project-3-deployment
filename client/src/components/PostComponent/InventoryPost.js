@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Button, Input } from "@chakra-ui/react";
 
-export default function PostComponent() {
+export default function InventoryPost() {
   const [formData, setFormData] = useState({
     itemId: "",
     quantity: "",
