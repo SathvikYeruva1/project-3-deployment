@@ -10,6 +10,7 @@ import Menuinfo from "./components/Menuinfo/menuinfo";
 // 1. import `ChakraProvider` component
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { useEffect } from "react";
+import InventoryPost from "./components/PostComponent/InventoryPost";
 
 const customTheme = extendTheme({ 
   styles: {
@@ -40,7 +41,7 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/manager-dashboard" element={<ManagerDashboard />} />
         <Route path="/menuboard" element={<MenuBoard />} />
-        <Route path="/inventory" element={<Inventory />} />
+        <Route path="/inventory" element={<InventoryPost />} />
         <Route path="/employees" element={<Employees />} />
         <Route path="/menuinfo" element={<Menuinfo />} />
       </Routes>

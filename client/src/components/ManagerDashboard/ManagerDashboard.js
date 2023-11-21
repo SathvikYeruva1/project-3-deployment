@@ -71,7 +71,7 @@ function ManagerDashboard() {
             <a href="/manager-dashboard">Orders</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href="/manager-dashboard">Inventory</a>
+            <a href="/inventory">Inventory</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
             <a href = "/menuboard">
@@ -134,8 +134,6 @@ function ManagerDashboard() {
           <Text fontSize="l" textAlign="left" ml={3}><a href="/employees">Employees</a></Text>
         </Box>
       </HStack>
-      <InventoryPost></InventoryPost>
-
         {/* Table */}
         <Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">
           <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">

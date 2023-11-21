@@ -96,11 +96,11 @@ app.get('*', function (req, res) {
 app.post('/inventory/post', async (request, response) => {
   console.log('Received request body:', request.body);
 
-  const { itemid, quantity, itemcategory, minamount } = request.body;
+  const { itemId, quantity, itemCategory, minimumAmount } = request.body;
 
   try {
     await pool.query('INSERT INTO inventory (itemid, quantity, itemcategory, minimumamount) VALUES ($1, $2, $3, $4)', 
-      [itemid, quantity, itemcategory, minamount]);
+      [itemId, quantity, itemCategory, minimumAmount]);
 
     response.status(201).json({ message: 'Item added successfully' });
   } catch (error) {
