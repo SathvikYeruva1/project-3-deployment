@@ -52,6 +52,16 @@ function ManagerDashboard() {
     </Tr>
   );
 
+  //fetching the order data
+  const [ordersData, setOrdersData] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5001/ordersdata')
+      .then(response => response.json())
+      .then(data => setOrdersData(data))
+      .catch(error => console.error('Error fetching data: ', error));
+  }, []);
+
 
   
 
