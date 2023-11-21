@@ -6,6 +6,7 @@ const cors = require('cors');
 const _dirname = path.dirname(__filename)
 const buildPath = path.join(_dirname, "../client/build")
 const app = express();
+const bodyParser = require('body-parser'); // Import body-parser
 
 app.use(cors({
   origin: 'http://localhost:5001',
@@ -14,6 +15,7 @@ app.options('*', cors());
 
 
 app.use(express.static(buildPath));
+app.use(bodyParser.json()); // Use body-parser middleware to parse JSON
 
 // app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Origin', 'http://localhost:5001');
@@ -91,15 +93,20 @@ app.get('*', function (req, res) {
   });
 });
 
-app.post('/inventory', (request, response) => {
-  const { itemid, quantity, itemcategory, minamount } = request.body
+app.post('/inventory/post', async (request, response) => {
+  console.log('Received request body:', request.body);
 
-  pool.query('INSERT INTO inventory (itemid, quantity, itemcategory, minimumamount) VALUES ($1, $2, $3, $4)', 
-  [itemid, quantity, itemcategory, minamount], (error) => {
-    if (error) {
-      throw error
-    }
-  })
+  const { itemid, quantity, itemcategory, minamount } = request.body;
+
+  try {
+    await pool.query('INSERT INTO inventory (itemid, quantity, itemcategory, minimumamount) VALUES ($1, $2, $3, $4)', 
+      [itemid, quantity, itemcategory, minamount]);
+
+    response.status(201).json({ message: 'Item added successfully' });
+  } catch (error) {
+    console.error('Error adding item:', error);
+    response.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 app.listen(5001, () => {console.log("Server started on port 5001")})

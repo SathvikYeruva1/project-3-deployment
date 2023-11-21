@@ -27,8 +27,9 @@ export default function PostComponent() {
   };
 
   const handleAddClick = () => {
+    console.log(formData);
     // Assuming you have an API endpoint to handle the data
-    fetch("YOUR_API_ENDPOINT", {
+    fetch("http://localhost:5001/inventory/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
