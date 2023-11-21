@@ -9,11 +9,23 @@ import Menuinfo from "./components/Menuinfo/menuinfo";
 // import "./App.css"
 // 1. import `ChakraProvider` component
 import { ChakraProvider } from '@chakra-ui/react'
+import { useEffect } from "react";
 
+const App = () => {
+  const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement({pageLanguage: "en"},"google_translate_element");
+  };
 
-function App() {
+  useEffect(() => {
+    var addScriptToTranslate = document.createElement("script");
+    addScriptToTranslate.setAttribute("src","https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit");
+    document.body.appendChild(addScriptToTranslate);
+    window.googleTranslateElementInit = googleTranslateElementInit;
+  }, []);
+
   return (
     <ChakraProvider>
+      <div id="google_translate_element"></div>
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/manager-dashboard" element={<ManagerDashboard />} />
@@ -24,6 +36,6 @@ function App() {
     </Routes>
     </ChakraProvider>
   );
-}
+};
 
 export default App;
