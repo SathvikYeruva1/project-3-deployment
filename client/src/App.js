@@ -26,14 +26,14 @@ const App = () => {
   return (
     <ChakraProvider>
       <div id="google_translate_element"></div>
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/manager-dashboard" element={<ManagerDashboard />} />
-      <Route path="/menuboard" element={<MenuBoard />} />
-      <Route path="/inventory" element={<Inventory />} />
-      <Route path="/employees" element={<Employees />} />
-      <Route path="/menuinfo" element={<Menuinfo />} />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/manager-dashboard" element={<ManagerDashboard />} />
+        <Route path="/menuboard" element={<MenuBoard />} />
+        <Route path="/inventory" element={<Inventory />} />
+        <Route path="/employees" element={<Employees />} />
+        <Route path="/menuinfo" element={<Menuinfo />} />
+      </Routes>
     </ChakraProvider>
   );
 };
