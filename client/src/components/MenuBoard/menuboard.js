@@ -65,25 +65,6 @@ const MenuBoard = () => {
       }
     }
 
-    const translateText = async (text, wantedLanguage) => {
-      try{
-      const initialResult = await fetch(`http://54.92.197.133/translate`);
-      const jsonResult = await initialResult.json();
-      return jsonResult.translated;
-      } catch (error) {
-        // Handle the error or try an alternative URL
-        console.error('Error translating text:', error);
-        // Attempt an alternative URL
-        try {
-          const initialResult = await fetch(`http://localhost:5001/translate`);
-          const jsonResult = await initialResult.json();
-          return jsonResult.translated;
-        } catch (alternativeError) {
-          console.error('Error translating text from the alternative URL:', alternativeError);
-        }
-      }
-    }
-
     const fetchMenuDescriptions = async () => {
       try{
       const initialResult = await fetch(`http://54.92.197.133/menudata/descriptions`);

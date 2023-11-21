@@ -3,7 +3,6 @@ const { Pool } = require('pg');
 require('dotenv').config();
 const path = require('path')
 const cors = require('cors');
-const { Translate } = require('@google-cloud/translate').v2;
 const _dirname = path.dirname(__filename)
 const buildPath = path.join(_dirname, "../client/build")
 const app = express();
@@ -35,11 +34,6 @@ app.use(express.static(buildPath));
 //     }
 //   );
 // })
-const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
-const translate = new Translate({
-  credentials: CREDENTIALS,
-  projectId: CREDENTIALS.project_id
-});
 
 
 const pool = new Pool({
@@ -54,18 +48,6 @@ process.on('SIGINT', function(){
   pool.end();
   console.log('Application closed');
   process.exit(0);
-});
-
-app.get('/translate', async(req,res) => {
-  const {text, wantedLanguage} = req.query;
-
-  try{
-    const translated = await translate(text, {to: wantedLanguage});
-    res.json({translated : translated.text}); 
-  }
-  catch(err){
-    res.status(500).json({error: err.message});
-  }
 });
 
 app.get('/menudata', (req, res) => {
