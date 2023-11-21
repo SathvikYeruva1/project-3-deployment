@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -51,6 +51,24 @@ function Employees() {
       ))}
     </Tr>
   );
+
+
+  //get the employee data
+  const [employeeData, setEmployeeData] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5001/employeesdata')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => setEmployeeData(data))
+      .catch(error => console.error('Error fetching employee data:', error));
+  }, []);
+
+  
 
 
   
@@ -146,11 +164,9 @@ function Employees() {
             </Thead>
             <Tbody>
           {/* Use the TableRow component to render rows */}
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
+              {employeeData.map((employee, index) => (
+                <TableRow key={index} data={[employee.id, employee.employeename, employee.salary, employee.employeerole]} />
+              ))}
           {/* Add more rows as needed */}
             </Tbody>
           </Table>
