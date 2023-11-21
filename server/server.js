@@ -91,7 +91,16 @@ app.get('*', function (req, res) {
   });
 });
 
+app.post('/inventory', (request, response) => {
+  const { itemid, quantity, itemcategory, minamount } = request.body
 
+  pool.query('INSERT INTO inventory (itemid, quantity, itemcategory, minimumamount) VALUES ($1, $2, $3, $4)', 
+  [itemid, quantity, itemcategory, minamount], (error) => {
+    if (error) {
+      throw error
+    }
+  })
+});
 
 app.listen(5001, () => {console.log("Server started on port 5001")})
 

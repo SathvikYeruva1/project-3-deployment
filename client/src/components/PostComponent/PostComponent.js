@@ -13,7 +13,7 @@ export default function PostComponent() {
     color: "black",
     borderColor: "lightgrey",
     mb: 2,
-    '::placeholder': {
+    '_placeholder': {
       color: 'grey',
     },
   };
