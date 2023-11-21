@@ -154,7 +154,7 @@ function ManagerDashboard() {
                 <Th>Date</Th>
                 <Th>Order Number</Th>
                 <Th>Amount</Th>
-                <Th>Order Item</Th>
+                <Th>Cashier Name</Th>
               </Tr>
             </Thead>
             <Tbody>
