@@ -46,6 +46,45 @@ export default function InventoryPost() {
       });
   };
 
+  const handleEditClick = () => {
+    fetch(`http://localhost:5001/inventory/edit/${formData.itemId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        quantity: formData.quantity,
+        itemcategory: formData.itemCategory,
+        minimumamount: formData.minimumAmount
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Item updated successfully:', data);
+        // Perform additional actions if needed
+      })
+      .catch((error) => {
+        console.error('Error updating item:', error);
+        // Handle error
+      });
+  };
+  
+  // Delete item
+  const handleDeleteClick = () => {
+    fetch(`http://localhost:5001/inventory/delete/${formData.itemId}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Item deleted successfully:', data);
+        // Perform additional actions if needed
+      })
+      .catch((error) => {
+        console.error('Error deleting item:', error);
+        // Handle error
+      });
+  };
+
   return (
     <Box maxInlineSize={"sm"}>
       <Input
@@ -81,8 +120,8 @@ export default function InventoryPost() {
           Add
         </Button>
         {/* Add Edit and Delete button handlers here */}
-        <Button color="black">Edit</Button>
-        <Button color="black">Delete</Button>
+        <Button color="black" onClick={handleEditClick}>Edit</Button>
+        <Button color="black" onClick={handleDeleteClick}>Delete</Button>
       </Box>
     </Box>
   );
