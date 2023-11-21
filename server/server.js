@@ -83,6 +83,15 @@ app.get('/menudata/descriptions', (req, res) => {
       });
 });
 
+//get all of the orders data
+app.get('/ordersdata', (req, res) => {
+  pool.query('SELECT * FROM orders;').then(query_res => {
+    res.json(query_res.rows);
+  }).catch(err => {
+    res.status(500).json({error: err.message});
+  });
+});
+
 app.get('*', function (req, res) {
   res.sendFile(path.join(buildPath, 'index.html'), function (err) {
     if (err) {
