@@ -8,8 +8,18 @@ import Employees from "./components/Employees/employees";
 import Menuinfo from "./components/Menuinfo/menuinfo";
 // import "./App.css"
 // 1. import `ChakraProvider` component
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { useEffect } from "react";
+
+const customTheme = extendTheme({ 
+  styles: {
+    global: {
+      body: {
+        color: "black", // Set the default text color to black
+      },
+    },
+  },
+})
 
 const App = () => {
   const googleTranslateElementInit = () => {
@@ -24,7 +34,7 @@ const App = () => {
   }, []);
 
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={customTheme}>
       <div id="google_translate_element"></div>
       <Routes>
         <Route path="/" element={<Login />} />
