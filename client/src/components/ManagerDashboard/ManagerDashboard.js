@@ -34,6 +34,7 @@ import {
 } from "@chakra-ui/react";
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./ManagerDashboard.css";
+import InventoryPost from "../PostComponent/InventoryCRUD";
 
 function ManagerDashboard() {
   const navigate = useNavigate();
@@ -62,9 +63,6 @@ function ManagerDashboard() {
       .catch(error => console.error('Error fetching data: ', error));
   }, []);
 
-
-  
-
   return (
  <Flex >
     <Box display="flex" width="200px">
@@ -77,10 +75,10 @@ function ManagerDashboard() {
             <a href="/manager-dashboard">Dashboard</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href="/manager-dashboard">Orders</a>
+            <a href="/orders">Orders</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href="/manager-dashboard">Inventory</a>
+            <a href="/inventory">Inventory</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
             <a href = "/menuboard">
@@ -88,7 +86,7 @@ function ManagerDashboard() {
             </a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href="/manager-dashboard">Employees</a>
+            <a href="/employees">Employees</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
             <a href="/" onClick={handleLogout}>
