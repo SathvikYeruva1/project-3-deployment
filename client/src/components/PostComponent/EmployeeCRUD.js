@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Button, Input } from "@chakra-ui/react";
 
-export default function EmployeePost() {
+export default function EmployeeCRUD() {
   const [formData, setFormData] = useState({
     id: "",
     employeeName: "",
