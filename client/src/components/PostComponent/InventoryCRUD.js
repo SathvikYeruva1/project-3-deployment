@@ -28,63 +28,114 @@ export default function InventoryCRUD(props) {
 
   const handleAddClick = () => {
     props.onUpdate();
-    // Assuming you have an API endpoint to handle the data
-    fetch("http://localhost:5001/inventory/post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the response or perform additional actions
-        console.log("Data posted successfully:", data);
+
+    try{
+      // Assuming you have an API endpoint to handle the data
+      fetch("http://54.92.197.133/inventory/post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       })
-      .catch((error) => {
-        console.error("Error posting data:", error);
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          // Handle the response or perform additional actions
+          console.log("Data posted successfully:", data);
+        })
+        .catch((error) => {
+          console.error("Error posting data:", error);
+        });
+    }
+    catch (error) {
+      console.error('Error post inventory ID data:', error);
+      fetch("http://localhost:5001/inventory/post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Handle the response or perform additional actions
+          console.log("Data posted successfully:", data);
+        })
+        .catch((error) => {
+          console.error("Error posting data:", error);
+        });
+    }
   };
 
   const handleEditClick = () => {
     props.onUpdate();
-    fetch(`http://localhost:5001/inventory/edit/${formData.itemId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        quantity: formData.quantity,
-        itemcategory: formData.itemCategory,
-        minimumamount: formData.minimumAmount
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Item updated successfully:', data);
-        // Perform additional actions if needed
+    try{
+      fetch(`http://54.92.197.133/inventory/edit/${formData.itemId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          quantity: formData.quantity,
+          itemcategory: formData.itemCategory,
+          minimumamount: formData.minimumAmount
+        }),
       })
-      .catch((error) => {
-        console.error('Error updating item:', error);
-        // Handle error
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Item updated successfully:', data);
+        })
+    }
+    catch{
+      fetch(`http://localhost:5001/inventory/edit/${formData.itemId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          quantity: formData.quantity,
+          itemcategory: formData.itemCategory,
+          minimumamount: formData.minimumAmount
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Item updated successfully:', data);
+        })
+    }
   };
   
   // Delete item
   const handleDeleteClick = () => {
     props.onUpdate();
-    fetch(`http://localhost:5001/inventory/delete/${formData.itemId}`, {
-      method: 'DELETE',
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Item deleted successfully:', data);
-        // Perform additional actions if needed
+    try{
+      fetch(`http://54.92.197.133/inventory/delete/${formData.itemId}`, {
+        method: 'DELETE',
       })
-      .catch((error) => {
-        console.error('Error deleting item:', error);
-        // Handle error
-      });
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Item deleted successfully:', data);
+          // Perform additional actions if needed
+        })
+        .catch((error) => {
+          console.error('Error deleting item:', error);
+          // Handle error
+        });
+    }
+    catch{
+      fetch(`http://localhost:5001/inventory/delete/${formData.itemId}`, {
+        method: 'DELETE',
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Item deleted successfully:', data);
+          // Perform additional actions if needed
+        })
+        .catch((error) => {
+          console.error('Error deleting item:', error);
+          // Handle error
+        });
+    }
   };
 
   return (
