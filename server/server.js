@@ -159,5 +159,53 @@ app.delete('/inventory/delete/:id', async (request, response) => {
   }
 });
 
+app.post('/employee/post', async (request, response) => {
+  console.log('Received request body:', request.body);
+
+  const { id, employeeName, salary, employeeRole } = request.body;
+
+  try {
+    await pool.query('INSERT INTO employees (id, employeename, salary, employeeRole) VALUES ($1, $2, $3, $4)', 
+      [id, employeeName, salary, employeeRole]);
+
+    response.status(201).json({ message: 'Item added successfully' });
+  } catch (error) {
+    console.error('Error adding item:', error);
+    response.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Edit item in the inventory
+app.put('/employee/edit/:id', async (request, response) => {
+  const itemId = request.params.id;
+  const { employeeName, salary, employeeRole } = request.body;
+
+  try {
+    await pool.query(
+      'UPDATE employees SET employeeName = $1, salary = $2, employeeRole = $3 WHERE id = $4',
+      [employeeName, salary, employeeRole, itemId]
+    );
+
+    response.status(200).json({ message: 'Item updated successfully' });
+  } catch (error) {
+    console.error('Error updating item:', error);
+    response.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Delete item from the inventory
+app.delete('/employee/delete/:id', async (request, response) => {
+  const itemId = request.params.id;
+
+  try {
+    await pool.query('DELETE FROM emlpoyees WHERE id = $1', [itemId]);
+
+    response.status(200).json({ message: 'Item deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting item:', error);
+    response.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 app.listen(5001, () => {console.log("Server started on port 5001")})
 
