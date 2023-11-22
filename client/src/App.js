@@ -42,7 +42,7 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/manager-dashboard" element={<ManagerDashboard />} />
         <Route path="/menuboard" element={<MenuBoard />} />
-        <Route path="/inventory" element={<InventoryCRUD />} />
+        <Route path="/inventory" element={<Inventory />} />
         <Route path="/employees" element={<EmployeeCRUD />} />
         <Route path="/menuinfo" element={<Menuinfo />} />
       </Routes>

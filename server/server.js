@@ -103,6 +103,14 @@ app.get('/employeesdata', (req, res) => {
   });
 });
 
+app.get('/inventory/data', (req, res) => {
+  pool.query('SELECT * FROM inventory;').then(query_res => {
+    res.json(query_res.rows);
+  }).catch(err => {
+    res.status(500).json({error: err.message});
+  });
+});
+
 app.get('/inventory/itemid', (req, res) => {
   inventoryids = []
   pool.query('SELECT itemid FROM inventory;').then(query_res => {
