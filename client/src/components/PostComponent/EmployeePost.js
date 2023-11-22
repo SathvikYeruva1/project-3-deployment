@@ -29,7 +29,7 @@ export default function EmployeePost() {
   const handleAddClick = () => {
     console.log(formData);
     // Assuming you have an API endpoint to handle the data
-    fetch("http://localhost:5001/inventory/post", {
+    fetch("http://localhost:5001/employee/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,15 +47,15 @@ export default function EmployeePost() {
   };
 
   const handleEditClick = () => {
-    fetch(`http://localhost:5001/inventory/edit/${formData.id}`, {
+    fetch(`http://localhost:5001/employee/edit/${formData.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        quantity: formData.quantity,
-        itemcategory: formData.itemCategory,
-        minimumamount: formData.minimumAmount
+        employeeName: formData.employeeName,
+        salary: formData.salary,
+        employeeRole: formData.employeeRole
       }),
     })
       .then((response) => response.json())
@@ -71,7 +71,7 @@ export default function EmployeePost() {
   
   // Delete item
   const handleDeleteClick = () => {
-    fetch(`http://localhost:5001/inventory/delete/${formData.id}`, {
+    fetch(`http://localhost:5001/employee/delete/${formData.id}`, {
       method: 'DELETE',
     })
       .then((response) => response.json())
@@ -89,30 +89,30 @@ export default function EmployeePost() {
     <Box maxInlineSize={"sm"}>
       <Input
         {...inputStyle}
-        placeholder="ItemId"
-        name="itemId"
-        value={formData.itemId}
+        placeholder="id"
+        name="id"
+        value={formData.id}
         onChange={handleInputChange}
       />
       <Input
         {...inputStyle}
-        placeholder="Quantity"
-        name="quantity"
-        value={formData.quantity}
+        placeholder="employeeName"
+        name="employeeName"
+        value={formData.employeeName}
         onChange={handleInputChange}
       />
       <Input
         {...inputStyle}
-        placeholder="Item Category"
-        name="itemCategory"
-        value={formData.itemCategory}
+        placeholder="Salary"
+        name="salary"
+        value={formData.salary}
         onChange={handleInputChange}
       />
       <Input
         {...inputStyle}
-        placeholder="Minimum Amount"
-        name="minimumAmount"
-        value={formData.minimumAmount}
+        placeholder="employeeRole"
+        name="employeeRole"
+        value={formData.employeeRole}
         onChange={handleInputChange}
       />
       <Box display="flex" justifyContent={"center"}>

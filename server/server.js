@@ -198,7 +198,7 @@ app.delete('/employee/delete/:id', async (request, response) => {
   const itemId = request.params.id;
 
   try {
-    await pool.query('DELETE FROM emlpoyees WHERE id = $1', [itemId]);
+    await pool.query('DELETE FROM employees WHERE id = $1', [itemId]);
 
     response.status(200).json({ message: 'Item deleted successfully' });
   } catch (error) {
