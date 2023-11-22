@@ -103,6 +103,50 @@ app.get('/employeesdata', (req, res) => {
   });
 });
 
+app.get('/inventory/itemid', (req, res) => {
+  inventoryids = []
+  pool.query('SELECT itemid FROM inventory;').then(query_res => {
+          for (let i = 0; i < query_res.rowCount; i++){
+              inventoryids.push(query_res.rows[i]);
+          }
+          const data = {inventoryids: inventoryids};
+          res.json(data);
+      });
+});
+
+app.get('/inventory/quantity', (req, res) => {
+  inventoryquantity = []
+  pool.query('SELECT quantity FROM inventory;').then(query_res => {
+          for (let i = 0; i < query_res.rowCount; i++){
+              inventoryquantity.push(query_res.rows[i]);
+          }
+          const data = {inventoryquantity: inventoryquantity};
+          res.json(data);
+      });
+});
+
+app.get('/inventory/itemcategory', (req, res) => {
+  inventorycategories = []
+  pool.query('SELECT itemcategory FROM inventory;').then(query_res => {
+          for (let i = 0; i < query_res.rowCount; i++){
+              inventorycategories.push(query_res.rows[i]);
+          }
+          const data = {inventorycategories: inventorycategories};
+          res.json(data);
+      });
+});
+
+app.get('/inventory/minimumamount', (req, res) => {
+  inventoryminimum = []
+  pool.query('SELECT minimumamount FROM inventory;').then(query_res => {
+          for (let i = 0; i < query_res.rowCount; i++){
+              inventoryminimum.push(query_res.rows[i]);
+          }
+          const data = {inventoryminimum: inventoryminimum};
+          res.json(data);
+      });
+});
+
 app.get('*', function (req, res) {
   res.sendFile(path.join(buildPath, 'index.html'), function (err) {
     if (err) {
