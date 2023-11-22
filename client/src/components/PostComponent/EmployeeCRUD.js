@@ -28,119 +28,102 @@ export default function EmployeeCRUD() {
 
   const handleAddClick = () => {
     console.log(formData);
-    try{
-      fetch("http://54.92.197.133/employee/post", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+    fetch("http://54.92.197.133/employee/post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response or perform additional actions
+        console.log("Data posted successfully:", data);
       })
-        .then((response) => response.json())
-        .then((data) => {
-          // Handle the response or perform additional actions
-          console.log("Data posted successfully:", data);
+      .catch(() => {
+        fetch("http://localhost:5001/employee/post", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         })
-        .catch((error) => {
-          console.error("Error posting data:", error);
-        });
-    }
-    catch{
-      fetch("http://localhost:5001/employee/post", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+          .then((response) => response.json())
+          .then((data) => {
+            // Handle the response or perform additional actions
+            console.log("Data posted successfully:", data);
+          })
+          .catch((error) => {
+            console.error("Error posting data:", error);
+          });
       })
-        .then((response) => response.json())
-        .then((data) => {
-          // Handle the response or perform additional actions
-          console.log("Data posted successfully:", data);
-        })
-        .catch((error) => {
-          console.error("Error posting data:", error);
-        });
-    }
   };
 
   const handleEditClick = () => {
-    try{
-      fetch(`http://54.92.197.133/employee/edit/${formData.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          employeeName: formData.employeeName,
-          salary: formData.salary,
-          employeeRole: formData.employeeRole
-        }),
+    fetch(`http://54.92.197.133/employee/edit/${formData.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        employeeName: formData.employeeName,
+        salary: formData.salary,
+        employeeRole: formData.employeeRole
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Item updated successfully:', data);
+        // Perform additional actions if needed
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Item updated successfully:', data);
-          // Perform additional actions if needed
+      .catch(() => {
+        fetch(`http://localhost:5001/employee/edit/${formData.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            employeeName: formData.employeeName,
+            salary: formData.salary,
+            employeeRole: formData.employeeRole
+          }),
         })
-        .catch((error) => {
-          console.error('Error updating item:', error);
-          // Handle error
-        });
-    }
-    catch{
-      fetch(`http://localhost:5001/employee/edit/${formData.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          employeeName: formData.employeeName,
-          salary: formData.salary,
-          employeeRole: formData.employeeRole
-        }),
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Item updated successfully:', data);
+            // Perform additional actions if needed
+          })
+          .catch((error) => {
+            console.error('Error updating item:', error);
+            // Handle error
+          });
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Item updated successfully:', data);
-          // Perform additional actions if needed
-        })
-        .catch((error) => {
-          console.error('Error updating item:', error);
-          // Handle error
-        });
-    }
   };
   
   // Delete item
   const handleDeleteClick = () => {
-    try{
-      fetch(`http://54.92.197.133/employee/delete/${formData.id}`, {
-        method: 'DELETE',
+    fetch(`http://54.92.197.133/employee/delete/${formData.id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Item deleted successfully:', data);
+        // Perform additional actions if needed
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Item deleted successfully:', data);
-          // Perform additional actions if needed
+      .catch(() => {
+        fetch(`http://localhost:5001/employee/delete/${formData.id}`, {
+          method: 'DELETE',
         })
-        .catch((error) => {
-          console.error('Error deleting item:', error);
-          // Handle error
-        });
-    }
-    catch{
-      fetch(`http://localhost:5001/employee/delete/${formData.id}`, {
-        method: 'DELETE',
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Item deleted successfully:', data);
+            // Perform additional actions if needed
+          })
+          .catch((error) => {
+            console.error('Error deleting item:', error);
+            // Handle error
+          });
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Item deleted successfully:', data);
-          // Perform additional actions if needed
-        })
-        .catch((error) => {
-          console.error('Error deleting item:', error);
-          // Handle error
-        });
-    }
   };
 
   return (
