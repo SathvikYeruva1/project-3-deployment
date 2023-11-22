@@ -3,24 +3,10 @@ import { useNavigate } from "react-router-dom";
 import {
   Box,
   Heading,
-  Divider,
-  Card,
-  Grid,
-  GridItem,
-  VStack,
   HStack,
-  Button,
   Text,
   Image,
   Center,
-  IconButton,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverArrow,
-  PopoverCloseButton,
-  PopoverHeader,
-  PopoverBody,
   Flex,  // Import Flex from Chakra UI for layout
   UnorderedList,
    ListItem,
@@ -38,7 +24,9 @@ import InventoryCRUD from "../PostComponent/InventoryCRUD";
 
 function Inventory() {
   const navigate = useNavigate();
-  const[inventoryItems, setInventoryItems] = useState([]);
+  const [inventoryItems, setInventoryItems] = useState([]);
+  const [handleInventoryUpdate, setInventoryUpdate] = useState(false);
+  
   useEffect(() =>{
     const fetchInventory = async () => {
       try{
@@ -59,10 +47,14 @@ function Inventory() {
       }
     }
     fetchInventory();
-  }, [])
+  }, [handleInventoryUpdate])
   
   const handleLogout = () => {
     navigate("/");
+  };
+
+  const handleCrudButtonClick = () => {
+    setInventoryUpdate((prevValue) => !prevValue);
   };
 
   const TableRow = ({ data, borderBottom = true }) => (
@@ -151,7 +143,7 @@ function Inventory() {
         </Box>
       </HStack>
         {/* Table */}
-        <Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">
+        <Flex w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto" alignItems={"center"} justifyContent={"center"} flexDirection={"column"}>
           <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
             Inventory Details
           </Heading>
@@ -172,9 +164,9 @@ function Inventory() {
           {/* Add more rows as needed */}
             </Tbody>
           </Table>
-        </Box>
-          <InventoryCRUD></InventoryCRUD>
+          <InventoryCRUD onUpdate={handleCrudButtonClick}></InventoryCRUD>
         </Flex>
+      </Flex>
     </Flex>
   );
 }

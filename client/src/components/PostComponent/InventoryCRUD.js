@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Button, Input } from "@chakra-ui/react";
 
-export default function InventoryCRUD() {
+export default function InventoryCRUD(props) {
   const [formData, setFormData] = useState({
     itemId: "",
     quantity: "",
@@ -27,7 +27,7 @@ export default function InventoryCRUD() {
   };
 
   const handleAddClick = () => {
-    console.log(formData);
+    props.onUpdate();
     // Assuming you have an API endpoint to handle the data
     fetch("http://localhost:5001/inventory/post", {
       method: "POST",
@@ -47,6 +47,7 @@ export default function InventoryCRUD() {
   };
 
   const handleEditClick = () => {
+    props.onUpdate();
     fetch(`http://localhost:5001/inventory/edit/${formData.itemId}`, {
       method: 'PUT',
       headers: {
@@ -71,6 +72,7 @@ export default function InventoryCRUD() {
   
   // Delete item
   const handleDeleteClick = () => {
+    props.onUpdate();
     fetch(`http://localhost:5001/inventory/delete/${formData.itemId}`, {
       method: 'DELETE',
     })
