@@ -87,7 +87,7 @@ app.get('/menudata/descriptions', (req, res) => {
 
 //get all of the orders data
 app.get('/ordersdata', (req, res) => {
-  pool.query('SELECT * FROM orders;').then(query_res => {
+  pool.query('SELECT * FROM orders LIMIT 100;').then(query_res => {
     res.json(query_res.rows);
   }).catch(err => {
     res.status(500).json({error: err.message});
@@ -96,7 +96,7 @@ app.get('/ordersdata', (req, res) => {
 
 //get all of the employees data
 app.get('/employeesdata', (req, res) => {
-  pool.query('SELECT * FROM employees;').then(query_res => {
+  pool.query('SELECT * FROM employees LIMIT 100;').then(query_res => {
     res.json(query_res.rows);
   }).catch(err => {
     res.status(500).json({error: err.message});
@@ -104,7 +104,7 @@ app.get('/employeesdata', (req, res) => {
 });
 
 app.get('/inventory/data', (req, res) => {
-  pool.query('SELECT * FROM inventory;').then(query_res => {
+  pool.query('SELECT * FROM inventory LIMIT 100;').then(query_res => {
     res.json(query_res.rows);
   }).catch(err => {
     res.status(500).json({error: err.message});

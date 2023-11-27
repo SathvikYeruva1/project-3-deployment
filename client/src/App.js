@@ -19,6 +19,9 @@ const customTheme = extendTheme({
       body: {
         color: "black", // Set the default text color to black
       },
+      "#google_translate_element .goog-te-text": {
+        color: "black !important",
+      },
     },
   },
 })
