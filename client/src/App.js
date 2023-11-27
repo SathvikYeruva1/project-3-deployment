@@ -46,7 +46,7 @@ const App = () => {
         <Route path="/manager-dashboard" element={<ManagerDashboard />} />
         <Route path="/menuboard" element={<MenuBoard />} />
         <Route path="/inventory" element={<Inventory />} />
-        <Route path="/employees" element={<EmployeeCRUD />} />
+        <Route path="/employees" element={<Employees />} />
         <Route path="/menuinfo" element={<Menuinfo />} />
       </Routes>
     </ChakraProvider>

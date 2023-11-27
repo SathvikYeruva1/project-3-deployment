@@ -34,6 +34,7 @@ import {
 } from "@chakra-ui/react";
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./employees.css";
+import EmployeeCRUD from "../PostComponent/EmployeeCRUD";
 
 function Employees() {
   const navigate = useNavigate();
@@ -67,11 +68,6 @@ function Employees() {
       .then(data => setEmployeeData(data))
       .catch(error => console.error('Error fetching employee data:', error));
   }, []);
-
-  
-
-
-  
 
   return (
  <Flex >
@@ -148,6 +144,7 @@ function Employees() {
           <Text fontSize="l" textAlign="center" ml={3}><a href="/employees">Employees</a></Text>
         </Box>
       </HStack>
+      <EmployeeCRUD/>
         {/* Table */}
         <Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">
           <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
