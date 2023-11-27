@@ -23,7 +23,7 @@ import {
   PopoverBody,
   Flex,  // Import Flex from Chakra UI for layout
 } from "@chakra-ui/react";
-import { ChevronRightIcon, InfoIcon, CloseIcon } from "@chakra-ui/icons";
+import { AddIcon, InfoIcon, CloseIcon } from "@chakra-ui/icons";
 
 /*function menudata() {
   const [data, setData] = useState([]);
@@ -40,7 +40,10 @@ import { ChevronRightIcon, InfoIcon, CloseIcon } from "@chakra-ui/icons";
 const MenuBoard = () => {
   const [menuItemData, setMenuItemData] = useState([]);
   const [menuItemDescriptions, setMenuItemDescriptions] = useState([]);
+
   const [filteredItems, setFilteredItems] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
   const [menuItemIngredients, setMenuItemIngredients] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false); // Manage cart section visibility
@@ -112,22 +115,35 @@ const MenuBoard = () => {
       // Combine the data from menuItemData and menuItemDescriptions
       const newMenuItems = menuItemData.map((item, index) => {
         const description = menuItemDescriptions[index].descriptions + '\nIngredients: ' + menuItemIngredients[index].ingredients;
+        const words = item.tea_name.split(' ').map(word => word.toLowerCase());
+        let category;
+  
+        if (words[1] === 'milk') {
+          category = 'Milk';
+        } else if (words[0] === 'mango') {
+          category = 'Fruit';
+        } else {
+          category = 'Seasonal';
+        }
         return {
           name: item.tea_name,
           image: "/milkTea.jpg", // You can set the image path here
-          category: "Coffee", // Set the category as needed
+          category, // Set the category as needed
           description,
         };
       });
-      setFilteredItems(newMenuItems);
+      const filteredItems = selectedCategory
+      ? newMenuItems.filter((item) => item.category === selectedCategory)
+      : newMenuItems;
+
+    setFilteredItems(filteredItems);
     }
-  }, [menuItemData, menuItemDescriptions]);
+  }, [menuItemData, menuItemDescriptions,selectedCategory]);
 
   const handleFilterCategory = (category) => {
-    // Filter the items based on the selected category
-    const filtered = filteredItems.filter((item) => item.category === category);
-    setFilteredItems(filtered);
+    setSelectedCategory(category);
   };
+
 
   const handleAddToCart = (item) => {
     setCartItems([...cartItems, item]); // Add the selected item to the cart
@@ -135,7 +151,7 @@ const MenuBoard = () => {
   };
 
   const calculateTotalPrice = () => {
-    const totalPrice = cartItems.reduce((total, item) => total + item.price, 0); // Sum up the prices of all items in the cart
+    const totalPrice = cartItems.reduce((total, item) => total + 4.99, 0); // Sum up the prices of all items in the cart
     return totalPrice.toFixed(2); // Return the total with two decimal places
   };
 
@@ -163,8 +179,8 @@ const MenuBoard = () => {
         {/* Category Cards */}
         
         <Card
-        variant={filteredItems[0] ? "solid" : "outline"}
-        onClick={() => handleFilterCategory("Coffee")}
+        // variant={filteredItems[0] ? "solid" : "outline"}
+        // onClick={() => handleFilterCategory("Coffee")}
         borderRadius="lg"      // Add rounded edges
         boxShadow="md"    
         boxSize="155px"
@@ -181,14 +197,16 @@ const MenuBoard = () => {
         />
         <Divider />
         {/* <Text>Freshly brewed teas paired with milk powder</Text> */}
-        <Button variant='solid' colorScheme='blue' align="start">
+        <Button 
+        variant={selectedCategory === "Milk" ? "solid" : "outline"}
+        colorScheme="blue"
+        onClick={() => handleFilterCategory("Milk")}
+        align="start">
             Filter
         </Button>
         </Card>
 
-        <Card
-        variant={filteredItems[0] ? "solid" : "outline"}
-        onClick={() => handleFilterCategory("Coffee")}
+        {/* <Card
         borderRadius="lg"      // Add rounded edges
         boxShadow="md"    
         boxSize="155px"
@@ -205,14 +223,17 @@ const MenuBoard = () => {
         />
         <Divider />
         {/* <Text>Freshly brewed teas paired with milk powder</Text> */}
-        <Button variant='solid' colorScheme='blue' align="start">
+        {/* <Button variant={selectedCategory === "Classic" ? "solid" : "outline"}
+          colorScheme="blue"
+          onClick={() => handleFilterCategory("Classic")}
+          align="start">
             Filter
         </Button>
-        </Card>
+        </Card> */} 
 
         <Card
-        variant={filteredItems[0] ? "solid" : "outline"}
-        onClick={() => handleFilterCategory("Coffee")}
+        // variant={filteredItems[0] ? "solid" : "outline"}
+        // onClick={() => handleFilterCategory("Coffee")}
         borderRadius="lg"      // Add rounded edges
         boxShadow="md"    
         boxSize="155px"
@@ -229,14 +250,17 @@ const MenuBoard = () => {
         />
         <Divider />
         {/* <Text>Freshly brewed teas paired with milk powder</Text> */}
-        <Button variant='solid' colorScheme='blue' align="start">
+        <Button variant={selectedCategory === "Fruit" ? "solid" : "outline"}
+          colorScheme="blue"
+          onClick={() => handleFilterCategory("Fruit")}
+          align="start">
             Filter
         </Button>
         </Card>
 
         <Card
-        variant={filteredItems[0] ? "solid" : "outline"}
-        onClick={() => handleFilterCategory("Coffee")}
+        // variant={filteredItems[0] ? "solid" : "outline"}
+        // onClick={() => handleFilterCategory("Coffee")}
         borderRadius="lg"      // Add rounded edges
         boxShadow="md"    
         boxSize="155px"
@@ -253,7 +277,10 @@ const MenuBoard = () => {
         />
         <Divider />
         {/* <Text>Freshly brewed teas paired with milk powder</Text> */}
-        <Button variant='solid' colorScheme='blue' align="start">
+        <Button variant={selectedCategory === "Seasonal" ? "solid" : "outline"}
+          colorScheme="blue"
+          onClick={() => handleFilterCategory("Seasonal")}
+          align="start">
             Filter
         </Button>
         </Card>
@@ -279,7 +306,7 @@ const MenuBoard = () => {
               <Text fontWeight="bold" textAlign="center" color="black">{item.name}</Text>
               <Flex justifyContent="center" alignItems="center" mt={2}>
                 {/* Add to Cart Button */}
-                <IconButton aria-label="Add to cart" icon={<ChevronRightIcon />} colorScheme="teal" onClick={() => handleAddToCart(item)}/>
+                <IconButton aria-label="Add to cart" icon={<AddIcon />} colorScheme="teal" onClick={() => handleAddToCart(item)}/>
         
                 {/* Description Popover */}
                 <Popover placement="bottom" strategy="fixed">
