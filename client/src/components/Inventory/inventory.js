@@ -104,7 +104,7 @@ function Inventory() {
       <HStack
         flex="1"
         pt={-10}  // Adjust the padding-top as needed
-        pb={-5}
+        pb={5}
         spacing={3}  // Adjust the spacing as needed
         align="center"
         color="white"
