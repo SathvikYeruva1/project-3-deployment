@@ -60,11 +60,11 @@ function Employees() {
   useEffect(() => {
     fetch('http://54.92.197.133/employeesdata')
       .then(response => response.json())
-      .then(data => setOrdersData(data))
+      .then(data => setEmployeeData(data))
       .catch(() => {
         fetch('http://localhost:5001/employeesdata')
         .then(response => response.json())
-        .then(data => setOrdersData(data))
+        .then(data => setEmployeeData(data))
       });
   }, []);
 
