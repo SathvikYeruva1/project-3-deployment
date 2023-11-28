@@ -67,10 +67,7 @@ function Menuinfo() {
             <a href="/manager-dashboard">Dashboard</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href="/manager-dashboard">Orders</a>
-          </ListItem>
-          <ListItem mb="15px" fontSize="lg">
-            <a href="/manager-dashboard">Inventory</a>
+            <a href="/inventory">Inventory</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
             <a href = "/menuboard">
@@ -78,7 +75,7 @@ function Menuinfo() {
             </a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href="/manager-dashboard">Employees</a>
+            <a href="/employees">Employees</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
             <a href="/" onClick={handleLogout}>

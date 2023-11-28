@@ -78,9 +78,6 @@ function ManagerDashboard() {
           <ListItem mb="15px" fontSize="lg">
             <a href="/manager-dashboard">Dashboard</a>
           </ListItem>
-          {/* <ListItem mb="15px" fontSize="lg">
-            <a href="/orders">Orders</a>
-          </ListItem> */}
           <ListItem mb="15px" fontSize="lg">
             <a href="/inventory">Inventory</a>
           </ListItem>
