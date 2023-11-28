@@ -58,15 +58,14 @@ function Employees() {
   const [employeeData, setEmployeeData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/employeesdata')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => setEmployeeData(data))
-      .catch(error => console.error('Error fetching employee data:', error));
+    fetch('http://54.92.197.133/employeesdata')
+      .then(response => response.json())
+      .then(data => setOrdersData(data))
+      .catch(() => {
+        fetch('http://localhost:5001/employeesdata')
+        .then(response => response.json())
+        .then(data => setOrdersData(data))
+      });
   }, []);
 
   return (
