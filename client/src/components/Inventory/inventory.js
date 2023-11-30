@@ -82,7 +82,7 @@ function Inventory() {
             <a href="/inventory">Inventory</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href = "/menuboard">
+            <a href = "/menuinfo">
               Menu
             </a>
           </ListItem>
@@ -139,8 +139,9 @@ function Inventory() {
           <Text fontSize="l" textAlign="center" ml={3}><a href="/employees">Employees</a></Text>
         </Box>
       </HStack>
+      <InventoryCRUD onUpdate={handleCrudButtonClick}></InventoryCRUD>
         {/* Table */}
-        <Flex w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto" alignItems={"center"} justifyContent={"center"} flexDirection={"column"}>
+        <Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">
           <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
             Inventory Details
           </Heading>
@@ -161,8 +162,7 @@ function Inventory() {
           {/* Add more rows as needed */}
             </Tbody>
           </Table>
-          <InventoryCRUD onUpdate={handleCrudButtonClick}></InventoryCRUD>
-        </Flex>
+        </Box>
       </Flex>
     </Flex>
   );

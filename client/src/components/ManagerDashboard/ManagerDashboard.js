@@ -82,7 +82,7 @@ function ManagerDashboard() {
             <a href="/inventory">Inventory</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href = "/menuboard">
+            <a href = "/menuinfo">
               Menu
             </a>
           </ListItem>
