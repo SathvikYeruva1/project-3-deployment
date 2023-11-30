@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -34,13 +34,42 @@ import {
 } from "@chakra-ui/react";
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./menuinfo.css";
+import MenuinfoCRUD from "../PostComponent/MenuinfoCRUD";
 
 function Menuinfo() {
   const navigate = useNavigate();
+  const [menuinfoItems, setMenuinfoItems] = useState([]);
+  const [handleMenuinfoUpdate, setMenuinfoUpdate] = useState(false);
+
+  useEffect(() =>{
+    const fetchMenuinfo = async () => {
+      try{
+      const initialResult = await fetch(`http://54.92.197.133/menuinfo/data`);
+      const jsonResult = await initialResult.json();
+      setMenuinfoItems(jsonResult);
+      } catch (error) {
+        // Handle the error or try an alternative URL
+        console.error('Error fetching menu ID data:', error);
+        // Attempt an alternative URL
+        try {
+          const initialResult = await fetch(`http://localhost:5001/menuinfo/data`);
+          const jsonResult = await initialResult.json();
+          setMenuinfoItems(jsonResult);
+        } catch (alternativeError) {
+          console.error('Error fetching menu ID data from the alternative URL:', alternativeError);
+        }
+      }
+    }
+    fetchMenuinfo();
+  }, [handleMenuinfoUpdate])
 
   const handleLogout = () => {
     navigate("/");
   };
+
+  const handleCrudButtonClick = () => {
+    setMenuinfoUpdate((prevValue) => !prevValue);
+  }
 
   const TableRow = ({ data, borderBottom = true }) => (
     <Tr>
@@ -70,7 +99,7 @@ function Menuinfo() {
             <a href="/inventory">Inventory</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href = "/menuboard">
+            <a href = "/menuinfo">
               Menu
             </a>
           </ListItem>
@@ -127,6 +156,7 @@ function Menuinfo() {
           <Text fontSize="l" textAlign="center" ml={3}><a href="/employees">Employees</a></Text>
         </Box>
       </HStack>
+      <MenuinfoCRUD onUpdate={handleCrudButtonClick}></MenuinfoCRUD>
         {/* Table */}
         <Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">
           <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
@@ -135,19 +165,19 @@ function Menuinfo() {
           <Table variant="simple" borderCollapse="separate">
             <Thead>
               <Tr>
-                <Th>Date</Th>
-                <Th>Order Number</Th>
-                <Th>Amount</Th>
-                <Th>Order Item</Th>
+                <Th>Item ID</Th>
+                <Th>Item Name</Th>
+                <Th>Price</Th>
+                <Th>Ingredients</Th>
+                <Th>Description</Th>
+                <Th>Category</Th>
               </Tr>
             </Thead>
             <Tbody>
           {/* Use the TableRow component to render rows */}
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
-          <TableRow data={["2023-01-01", "123456", "$100", "Item 1"]} />
+          {menuinfoItems.map((item, index) => (
+          <TableRow key = {index} data={[item.id, item.tea_name, item.price, item.ingredients, item.descriptions, item.categories]} />
+          ))}
           {/* Add more rows as needed */}
             </Tbody>
           </Table>

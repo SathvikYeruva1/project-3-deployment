@@ -111,6 +111,14 @@ app.get('/inventory/data', (req, res) => {
   });
 });
 
+app.get('/menuinfo/data', (req, res) => {
+  pool.query('SELECT * FROM teaorders LIMIT 100;').then(query_res => {
+    res.json(query_res.rows);
+  }).catch(err => {
+    res.status(500).json({error: err.message});
+  });
+});
+
 app.get('*', function (req, res) {
   res.sendFile(path.join(buildPath, 'index.html'), function (err) {
     if (err) {
@@ -166,7 +174,53 @@ app.delete('/inventory/delete/:id', async (request, response) => {
     response.status(500).json({ error: 'Internal Server Error' });
   }
 });
+////post menu info data
+app.post('/menuinfo/post', async (request, response) => {
+  console.log('Received request body:', request.body);
 
+  const { id, name, price, ingredients, description, category } = request.body;
+
+  try {
+    await pool.query('INSERT INTO teaorders (id, tea_name, price, ingredients, descriptions, categories) VALUES ($1, $2, $3, $4, $5, $6)', 
+      [id, name, price, ingredients, description, category]);
+
+    response.status(201).json({ message: 'Item added successfully' });
+  } catch (error) {
+    console.error('Error adding item:', error);
+    response.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+/////edit menu info data
+app.put('/menuinfo/edit/:id', async (request, response) => {
+  const itemId = request.params.id;
+  const {name, price, ingredients, description, category } = request.body;
+
+  try {
+    await pool.query(
+      'UPDATE teaorders SET tea_name = $2, price = $3, ingredients = $4, descriptions = $5, categories = $6 WHERE id = $1',
+      [itemId, name, price, ingredients, description, category]
+    );
+
+    response.status(200).json({ message: 'Item updated successfully' });
+  } catch (error) {
+    console.error('Error updating item:', error);
+    response.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+///// delete menu info data
+app.delete('/menuinfo/delete/:id', async (request, response) => {
+  const itemId = request.params.id;
+
+  try {
+    await pool.query('DELETE FROM teaorders WHERE id = $1', [itemId]);
+
+    response.status(200).json({ message: 'Item deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting item:', error);
+    response.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+/////
 app.post('/employee/post', async (request, response) => {
   console.log('Received request body:', request.body);
 
