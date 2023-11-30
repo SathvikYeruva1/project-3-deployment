@@ -40,7 +40,10 @@ const App = () => {
 
   return (
     <ChakraProvider theme={customTheme}>
-      <div id="google_translate_element"></div>
+      <div style={{ position: "absolute", top: "0", left: "0", zIndex: "999", height: "75%" }}>
+        {/* Container for Google Translate element */}
+        <div id="google_translate_element"></div>
+      </div>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/manager-dashboard" element={<ManagerDashboard />} />
