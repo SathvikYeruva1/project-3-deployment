@@ -49,85 +49,52 @@ const MenuBoard = () => {
   const [isCartOpen, setIsCartOpen] = useState(false); // Manage cart section visibility
 
   useEffect(() =>{
-    const fetchMenuData = async () => {
-      try{
-      const initialResult = await fetch(`http://54.92.197.133/menudata`);
-      const jsonResult = await initialResult.json();
-      setMenuItemData(jsonResult.menuitemsnames);
-      } catch (error) {
-        // Handle the error or try an alternative URL
-        console.error('Error fetching menu data:', error);
-        // Attempt an alternative URL
-        try {
-          const initialResult = await fetch(`http://localhost:5001/menudata`);
-          const jsonResult = await initialResult.json();
-          setMenuItemData(jsonResult.menuitemsnames);
-        } catch (alternativeError) {
-          console.error('Error fetching menu data from the alternative URL:', alternativeError);
-        }
-      }
-    }
-
-    const fetchMenuDescriptions = async () => {
-      try{
-      const initialResult = await fetch(`http://54.92.197.133/menudata/descriptions`);
-      const jsonResult = await initialResult.json();
-      setMenuItemDescriptions(jsonResult.menuitemsdescriptions);
-    } catch (error) {
-      // Handle the error or try an alternative URL
-      console.error('Error fetching menu data:', error);
-      // Attempt an alternative URL
-      try {
-        const initialResult = await fetch(`http://localhost:5001/menudata/descriptions`);
-        const jsonResult = await initialResult.json();
-        setMenuItemDescriptions(jsonResult.menuitemsdescriptions);
-      } catch (alternativeError) {
-        console.error('Error fetching menu data from the alternative URL:', alternativeError);
-      }
-    }
-    }
-  const fetchMenuIngredients = async () => {
+  const fetchMenuData = async () => {
     try{
-      const initialResult = await fetch(`http://54.92.197.133/menudata/teaorders`);
+      const initialResult = await fetch(`http://localhost:5001/menudata/teaorders`);
       const jsonResult = await initialResult.json();
       setMenuItemIngredients(jsonResult.menuitemsingredients);
+      setMenuItemData(jsonResult.menuitemsingredients);
+      setMenuItemDescriptions(jsonResult.menuitemsingredients);
       } catch (error) {
         // Handle the error or try an alternative URL
         console.error('Error fetching menu data:', error);
         // Attempt an alternative URL
         try {
-          const initialResult = await fetch(`http://localhost:5001/menudata/teaorders`);
+          const initialResult = await fetch(`http://54.92.197.133/menudata/teaorders`);
           const jsonResult = await initialResult.json();
           setMenuItemIngredients(jsonResult.menuitemsingredients);
+          setMenuItemData(jsonResult.menuitemsingredients);
+          setMenuItemDescriptions(jsonResult.menuitemsingredients);
         } catch (alternativeError) {
           console.error('Error fetching menu data from the alternative URL:', alternativeError);
         }
       }
     }
     fetchMenuData();
-    fetchMenuDescriptions();
-    fetchMenuIngredients();
   }, [])
 
 
   useEffect(() => {
     if (menuItemData.length !== 0 && menuItemDescriptions.length !== 0) {
       // Combine the data from menuItemData and menuItemDescriptions
-      const newMenuItems = menuItemData.map((item, index) => {
-        const description = menuItemDescriptions[index].descriptions + '\nIngredients: ' + menuItemIngredients[index].ingredients;
-        const words = item.tea_name.split(' ').map(word => word.toLowerCase());
+      const newMenuItems = menuItemData.map((item) => {
+        const description = item.description + '\nIngredients: ' + item.ingredients;
         let category;
-  
-        if (words[1] === 'milk') {
-          category = 'Milk';
-        } else if (words[0] === 'mango') {
-          category = 'Fruit';
-        } else {
-          category = 'Seasonal';
+        category = item.categories
+        let image;
+        if(category == "Punch" || category == "Slush"){
+          category = "Fruit";
+          image = "/punchTea.jpg";
+        }else if(category == "Milk Tea"){
+          image = "milkTea.jpg";
+        }else{
+          image = "/seasonalTea.jpg"
         }
+        console.log(item);
         return {
           name: item.tea_name,
-          image: "/milkTea.jpg", // You can set the image path here
+          image, // You can set the image path here
           category, // Set the category as needed
           description,
         };
@@ -141,7 +108,7 @@ const MenuBoard = () => {
   }, [menuItemData, menuItemDescriptions,selectedCategory]);
 
   const handleFilterCategory = (category) => {
-    setSelectedCategory(category);
+    setSelectedCategory((prevCategory) => (prevCategory === category ? null : category));
   };
 
 
@@ -198,9 +165,9 @@ const MenuBoard = () => {
         <Divider />
         {/* <Text>Freshly brewed teas paired with milk powder</Text> */}
         <Button 
-        variant={selectedCategory === "Milk" ? "solid" : "outline"}
+        variant={selectedCategory === "Milk Tea" ? "solid" : "outline"}
         colorScheme="blue"
-        onClick={() => handleFilterCategory("Milk")}
+        onClick={() => handleFilterCategory("Milk Tea")}
         align="start">
             Filter
         </Button>
@@ -277,9 +244,9 @@ const MenuBoard = () => {
         />
         <Divider />
         {/* <Text>Freshly brewed teas paired with milk powder</Text> */}
-        <Button variant={selectedCategory === "Seasonal" ? "solid" : "outline"}
+        <Button variant={selectedCategory === "Classic" ? "solid" : "outline"}
           colorScheme="blue"
-          onClick={() => handleFilterCategory("Seasonal")}
+          onClick={() => handleFilterCategory("Classic")}
           align="start">
             Filter
         </Button>

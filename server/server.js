@@ -65,7 +65,7 @@ app.get('/menudata', (req, res) => {
 
 app.get('/menudata/teaorders', (req, res) => {
   menuitemsingredients = []
-  pool.query('SELECT ingredients FROM teaorders;').then(query_res => {
+  pool.query('SELECT * FROM teaorders;').then(query_res => {
           for (let i = 0; i < query_res.rowCount; i++){
               menuitemsingredients.push(query_res.rows[i]);
           }
