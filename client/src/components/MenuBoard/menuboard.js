@@ -25,18 +25,7 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, InfoIcon, CloseIcon } from "@chakra-ui/icons";
 
-/*function menudata() {
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    axios.get('/menuboard') // Adjust the URL as needed
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data', error);
-      });
-  }, []);*/
 const MenuBoard = () => {
   const [menuItemData, setMenuItemData] = useState([]);
   const [menuItemDescriptions, setMenuItemDescriptions] = useState([]);
@@ -49,85 +38,52 @@ const MenuBoard = () => {
   const [isCartOpen, setIsCartOpen] = useState(false); // Manage cart section visibility
 
   useEffect(() =>{
-    const fetchMenuData = async () => {
-      try{
-      const initialResult = await fetch(`http://54.92.197.133/menudata`);
-      const jsonResult = await initialResult.json();
-      setMenuItemData(jsonResult.menuitemsnames);
-      } catch (error) {
-        // Handle the error or try an alternative URL
-        console.error('Error fetching menu data:', error);
-        // Attempt an alternative URL
-        try {
-          const initialResult = await fetch(`http://localhost:5001/menudata`);
-          const jsonResult = await initialResult.json();
-          setMenuItemData(jsonResult.menuitemsnames);
-        } catch (alternativeError) {
-          console.error('Error fetching menu data from the alternative URL:', alternativeError);
-        }
-      }
-    }
-
-    const fetchMenuDescriptions = async () => {
-      try{
-      const initialResult = await fetch(`http://54.92.197.133/menudata/descriptions`);
-      const jsonResult = await initialResult.json();
-      setMenuItemDescriptions(jsonResult.menuitemsdescriptions);
-    } catch (error) {
-      // Handle the error or try an alternative URL
-      console.error('Error fetching menu data:', error);
-      // Attempt an alternative URL
-      try {
-        const initialResult = await fetch(`http://localhost:5001/menudata/descriptions`);
-        const jsonResult = await initialResult.json();
-        setMenuItemDescriptions(jsonResult.menuitemsdescriptions);
-      } catch (alternativeError) {
-        console.error('Error fetching menu data from the alternative URL:', alternativeError);
-      }
-    }
-    }
-  const fetchMenuIngredients = async () => {
+  const fetchMenuData = async () => {
     try{
-      const initialResult = await fetch(`http://54.92.197.133/menudata/teaorders`);
+      const initialResult = await fetch(`http://localhost:5001/menudata/teaorders`);
       const jsonResult = await initialResult.json();
       setMenuItemIngredients(jsonResult.menuitemsingredients);
+      setMenuItemData(jsonResult.menuitemsingredients);
+      setMenuItemDescriptions(jsonResult.menuitemsingredients);
       } catch (error) {
         // Handle the error or try an alternative URL
         console.error('Error fetching menu data:', error);
         // Attempt an alternative URL
         try {
-          const initialResult = await fetch(`http://localhost:5001/menudata/teaorders`);
+          const initialResult = await fetch(`http://54.92.197.133/menudata/teaorders`);
           const jsonResult = await initialResult.json();
           setMenuItemIngredients(jsonResult.menuitemsingredients);
+          setMenuItemData(jsonResult.menuitemsingredients);
+          setMenuItemDescriptions(jsonResult.menuitemsingredients);
         } catch (alternativeError) {
           console.error('Error fetching menu data from the alternative URL:', alternativeError);
         }
       }
     }
     fetchMenuData();
-    fetchMenuDescriptions();
-    fetchMenuIngredients();
   }, [])
 
 
   useEffect(() => {
     if (menuItemData.length !== 0 && menuItemDescriptions.length !== 0) {
       // Combine the data from menuItemData and menuItemDescriptions
-      const newMenuItems = menuItemData.map((item, index) => {
-        const description = menuItemDescriptions[index].descriptions + '\nIngredients: ' + menuItemIngredients[index].ingredients;
-        const words = item.tea_name.split(' ').map(word => word.toLowerCase());
+      const newMenuItems = menuItemData.map((item) => {
+        const description = item.description + '\nIngredients: ' + item.ingredients;
         let category;
-  
-        if (words[1] === 'milk') {
-          category = 'Milk';
-        } else if (words[0] === 'mango') {
-          category = 'Fruit';
-        } else {
-          category = 'Seasonal';
+        category = item.categories
+        let image;
+        if(category == "Punch" || category == "Slush"){
+          category = "Fruit";
+          image = "/punchTea.jpg";
+        }else if(category == "Milk Tea"){
+          image = "milkTea.jpg";
+        }else{
+          image = "/seasonalTea.jpg"
         }
+        console.log(item);
         return {
           name: item.tea_name,
-          image: "/milkTea.jpg", // You can set the image path here
+          image, // You can set the image path here
           category, // Set the category as needed
           description,
         };
@@ -141,7 +97,7 @@ const MenuBoard = () => {
   }, [menuItemData, menuItemDescriptions,selectedCategory]);
 
   const handleFilterCategory = (category) => {
-    setSelectedCategory(category);
+    setSelectedCategory((prevCategory) => (prevCategory === category ? null : category));
   };
 
 
@@ -156,12 +112,23 @@ const MenuBoard = () => {
   };
 
   return (
-    <Flex>
+    <Flex flexDirection="column">
+    {/* Dark Blue Banner */}
+    <Box
+      bg="blue.800" // Adjust the shade of blue as needed
+      color="white"
+      py={2}
+      px={4}
+      textAlign="center"
+      borderRadius="md"
+    >
+      <Heading as="h1" size="lg">
+        Menu Board
+      </Heading>
+    </Box>
+    <Flex alignItems="flex-start" bg="#F2F2F2">
       {/* Left Side */}
       <Center w="20%" display="flex" flexDirection="column">
-        {/* <Button leftIcon={<ChevronRightIcon />} colorScheme="teal" mb={8}>
-          Back
-        </Button> */}
 
         {/* Kung Fu Tea Logo */}
         <Image
@@ -179,8 +146,6 @@ const MenuBoard = () => {
         {/* Category Cards */}
         
         <Card
-        // variant={filteredItems[0] ? "solid" : "outline"}
-        // onClick={() => handleFilterCategory("Coffee")}
         borderRadius="lg"      // Add rounded edges
         boxShadow="md"    
         boxSize="155px"
@@ -198,42 +163,15 @@ const MenuBoard = () => {
         <Divider />
         {/* <Text>Freshly brewed teas paired with milk powder</Text> */}
         <Button 
-        variant={selectedCategory === "Milk" ? "solid" : "outline"}
+        variant={selectedCategory === "Milk Tea" ? "solid" : "outline"}
         colorScheme="blue"
-        onClick={() => handleFilterCategory("Milk")}
+        onClick={() => handleFilterCategory("Milk Tea")}
         align="start">
             Filter
         </Button>
         </Card>
 
-        {/* <Card
-        borderRadius="lg"      // Add rounded edges
-        boxShadow="md"    
-        boxSize="155px"
-        mb={5}     // Add a small drop shadow
-        height='auto'
-        >
-        <Image
-            src='/classicTea.jpg'   // Adjust the image path as needed
-            alt='Classic Tea Example'
-            objectFit="cover" 
-            textAlign="center"
-            borderRadius="md"
-            boxShadow="md"
-        />
-        <Divider />
-        {/* <Text>Freshly brewed teas paired with milk powder</Text> */}
-        {/* <Button variant={selectedCategory === "Classic" ? "solid" : "outline"}
-          colorScheme="blue"
-          onClick={() => handleFilterCategory("Classic")}
-          align="start">
-            Filter
-        </Button>
-        </Card> */} 
-
         <Card
-        // variant={filteredItems[0] ? "solid" : "outline"}
-        // onClick={() => handleFilterCategory("Coffee")}
         borderRadius="lg"      // Add rounded edges
         boxShadow="md"    
         boxSize="155px"
@@ -259,8 +197,6 @@ const MenuBoard = () => {
         </Card>
 
         <Card
-        // variant={filteredItems[0] ? "solid" : "outline"}
-        // onClick={() => handleFilterCategory("Coffee")}
         borderRadius="lg"      // Add rounded edges
         boxShadow="md"    
         boxSize="155px"
@@ -277,9 +213,9 @@ const MenuBoard = () => {
         />
         <Divider />
         {/* <Text>Freshly brewed teas paired with milk powder</Text> */}
-        <Button variant={selectedCategory === "Seasonal" ? "solid" : "outline"}
+        <Button variant={selectedCategory === "Classic" ? "solid" : "outline"}
           colorScheme="blue"
-          onClick={() => handleFilterCategory("Seasonal")}
+          onClick={() => handleFilterCategory("Classic")}
           align="start">
             Filter
         </Button>
@@ -291,8 +227,9 @@ const MenuBoard = () => {
         templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
         gap={4} // Reduced the gap to decrease the space between rows
         pl={6} // Left padding to ensure some space from the left side
+        pb = {8}
         pt={10} // Increased the top padding
-        pr={cartItems.length > 0 ? 320 : 0} // Adjust the right padding based on whether the cart is open or not
+        pr={cartItems.length > 0 ? 320 : 8} // Adjust the right padding based on whether the cart is open or not
         w="full" // Ensure the grid takes full width of the right side
       >
         {filteredItems.map((item, index) => (
@@ -367,6 +304,7 @@ const MenuBoard = () => {
           </Flex>
         </Box>
       )}
+    </Flex>
     </Flex>
   );
 };
