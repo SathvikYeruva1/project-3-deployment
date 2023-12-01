@@ -115,14 +115,14 @@ const MenuBoard = () => {
     <Flex flexDirection="column">
     {/* Dark Blue Banner */}
     <Box
-      bg="blue.800" // Adjust the shade of blue as needed
+      bg="grey" // Adjust the shade of blue as needed
       color="white"
       py={2}
       px={4}
       textAlign="center"
       borderRadius="md"
     >
-      <Heading as="h1" size="lg">
+      <Heading as="h1" size="lg" color="black">
         Menu Board
       </Heading>
     </Box>

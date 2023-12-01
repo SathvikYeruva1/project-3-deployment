@@ -72,7 +72,7 @@ function Inventory() {
     <Box display="flex" width="200px" alignItems="center" justifyContent="center">
       <Box className="sidebar" backgroundColor="#1A202C" color="#FFFFFF" height="100vh" width="200px" p="20px" >
       <Image
-            src='/kungfutealogo.png' borderRadius="lg" mb={6}
+            src='/kungfutealogo.png' borderRadius="lg" mb={6} mt={10}
         />
         <UnorderedList styleType="none" p="0">
           <ListItem mb="15px" fontSize="lg">
@@ -97,7 +97,7 @@ function Inventory() {
       </Box>
       </Box>
       {/* Right-side content */}
-      <Flex direction="column" flex="10" bg="#F2F2F2"  minHeight="100vh" pb={10}> 
+      <Flex direction="column" flex="10" bg="#F2F2F2"  minHeight="100vh" pb={10} mt={5}> 
       <HStack
         flex="1"
         pt={-10}  // Adjust the padding-top as needed
