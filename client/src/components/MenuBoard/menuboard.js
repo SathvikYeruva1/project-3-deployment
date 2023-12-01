@@ -86,6 +86,7 @@ const MenuBoard = () => {
           image, // You can set the image path here
           category, // Set the category as needed
           description,
+          price:item.price
         };
       });
       const filteredItems = selectedCategory
@@ -107,7 +108,7 @@ const MenuBoard = () => {
   };
 
   const calculateTotalPrice = () => {
-    const totalPrice = cartItems.reduce((total, item) => total + 4.99, 0); // Sum up the prices of all items in the cart
+    const totalPrice = cartItems.reduce((total, item) => total + parseFloat(item.price), 0); // Sum up the prices of all items in the cart
     return totalPrice.toFixed(2); // Return the total with two decimal places
   };
 
@@ -294,7 +295,7 @@ const MenuBoard = () => {
               mr={1}
             />
             <Text color="black" marginLeft="0" marginRight="2" flexGrow="1" >{cartItem.name}</Text>
-            <Text color="black">${4.99}</Text> {/* Display the default price */}
+            <Text color="black">${parseFloat(cartItem.price)}</Text> {/* Display the default price */}
             </Flex>
           ))}
           <Divider my={4} />
