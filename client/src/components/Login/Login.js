@@ -153,7 +153,7 @@ function Login() {
               Log In
             </Button>
             <div id="SignInButton">
-              <GoogleLogin clientId={clientId} buttonText="Login with Google" onSuccess={onSuccess} onFailure={onFailure} cookiePolicy={'single_host_origin'}></GoogleLogin>
+              <GoogleLogin clientId={clientId} buttonText="Manager Login with Google" onSuccess={onSuccess} onFailure={onFailure} cookiePolicy={'single_host_origin'}></GoogleLogin>
             </div>
           </Box>
         </Box>
