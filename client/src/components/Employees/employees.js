@@ -34,7 +34,7 @@ import {
 } from "@chakra-ui/react";
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./employees.css";
-import EmployeeCRUD from "../PostComponent/EmployeeCRUD";
+import EmployeeCRUD from "../CRUDComponents/EmployeeCRUD";
 
 function Employees() {
   const navigate = useNavigate();

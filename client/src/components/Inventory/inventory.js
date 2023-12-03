@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./inventory.css";
-import InventoryCRUD from "../PostComponent/InventoryCRUD";
+import InventoryCRUD from "../CRUDComponents/InventoryCRUD";
 
 function Inventory() {
   const navigate = useNavigate();

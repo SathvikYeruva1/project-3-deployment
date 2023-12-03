@@ -10,8 +10,6 @@ import Menuinfo from "./components/Menuinfo/menuinfo";
 // 1. import `ChakraProvider` component
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { useEffect } from "react";
-import InventoryCRUD from "./components/PostComponent/InventoryCRUD";
-import EmployeeCRUD from "./components/PostComponent/EmployeeCRUD";
 
 const customTheme = extendTheme({ 
   styles: {

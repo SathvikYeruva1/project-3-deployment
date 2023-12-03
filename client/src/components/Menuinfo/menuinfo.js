@@ -34,7 +34,7 @@ import {
 } from "@chakra-ui/react";
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./menuinfo.css";
-import MenuinfoCRUD from "../PostComponent/MenuinfoCRUD";
+import MenuinfoCRUD from "../CRUDComponents/MenuinfoCRUD";
 
 function Menuinfo() {
   const navigate = useNavigate();

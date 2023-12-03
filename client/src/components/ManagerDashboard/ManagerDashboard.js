@@ -34,7 +34,6 @@ import {
 } from "@chakra-ui/react";
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./ManagerDashboard.css";
-import InventoryPost from "../PostComponent/InventoryCRUD";
 
 function ManagerDashboard() {
   const navigate = useNavigate();
