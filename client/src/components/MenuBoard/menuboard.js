@@ -21,36 +21,43 @@ import {
   PopoverCloseButton,
   PopoverHeader,
   PopoverBody,
+  Input,
+  HStack,
   Flex,  // Import Flex from Chakra UI for layout
 } from "@chakra-ui/react";
-import { AddIcon, InfoIcon, CloseIcon } from "@chakra-ui/icons";
+import { AddIcon, InfoIcon, CloseIcon, ArrowBackIcon, } from "@chakra-ui/icons";
+import { FaMoneyBill, FaCreditCard, FaQrcode} from "react-icons/fa"
+import "./menuboard.css";
 
 
 const MenuBoard = () => {
   const [menuItemData, setMenuItemData] = useState([]);
   const [menuItemDescriptions, setMenuItemDescriptions] = useState([]);
-
+  
   const [filteredItems, setFilteredItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
-
+  
   const [menuItemIngredients, setMenuItemIngredients] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false); // Manage cart section visibility
-
+  
+  const [showCheckout, setShowCheckout] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
+  
   useEffect(() =>{
   const fetchMenuData = async () => {
     try{
-      const initialResult = await fetch(`http://localhost:5001/menudata/teaorders`);
+      const initialResult = await fetch(`http://54.92.197.133/menudata/teaorders`);
       const jsonResult = await initialResult.json();
       setMenuItemIngredients(jsonResult.menuitemsingredients);
       setMenuItemData(jsonResult.menuitemsingredients);
       setMenuItemDescriptions(jsonResult.menuitemsingredients);
-      } catch (error) {
-        // Handle the error or try an alternative URL
-        console.error('Error fetching menu data:', error);
-        // Attempt an alternative URL
-        try {
-          const initialResult = await fetch(`http://54.92.197.133/menudata/teaorders`);
+    } catch (error) {
+      // Handle the error or try an alternative URL
+      console.error('Error fetching menu data:', error);
+      // Attempt an alternative URL
+      try {
+          const initialResult = await fetch(`http://localhost:5001/menudata/teaorders`);
           const jsonResult = await initialResult.json();
           setMenuItemIngredients(jsonResult.menuitemsingredients);
           setMenuItemData(jsonResult.menuitemsingredients);
@@ -110,6 +117,14 @@ const MenuBoard = () => {
   const calculateTotalPrice = () => {
     const totalPrice = cartItems.reduce((total, item) => total + parseFloat(item.price), 0); // Sum up the prices of all items in the cart
     return totalPrice.toFixed(2); // Return the total with two decimal places
+  };
+
+  const handleCheckout = () => {
+    // Whatever is needed to post the order to the DB
+  
+    // After checkout, you can clear the cart and close the checkout pane
+    setCartItems([]);
+    setShowCheckout(false);
   };
 
   return (
@@ -272,7 +287,7 @@ const MenuBoard = () => {
           right="0"
           top="0"
           bottom="0"
-          width="300px"
+          width="330px"
           bg="white"
           boxShadow="md"
           p="4"
@@ -295,7 +310,7 @@ const MenuBoard = () => {
               mr={1}
             />
             <Text color="black" marginLeft="0" marginRight="2" flexGrow="1" >{cartItem.name}</Text>
-            <Text color="black">${parseFloat(cartItem.price)}</Text> {/* Display the default price */}
+            <Text color="black">${parseFloat(cartItem.price)}</Text>
             </Flex>
           ))}
           <Divider my={4} />
@@ -303,8 +318,138 @@ const MenuBoard = () => {
             <Text fontWeight="bold" color="black">Total Price:</Text>
             <Text color="black">${calculateTotalPrice()}</Text>
           </Flex>
+          <Button width="100%" position="absolute" bottom="4" colorScheme="blue" onClick={() => setShowCheckout(true)}>
+            Checkout
+          </Button>
         </Box>
       )}
+
+      {showCheckout && (
+        <Box
+          className={showCheckout ? 'checkout-pane' : ''}
+          position="fixed"
+          right="0"
+          top="0"
+          bottom="0"
+          width="30%"
+          bg="white"
+          boxShadow="md"
+          p="4"
+          zIndex="2"  // Set a higher z-index to appear above the cart panel
+        >
+            <IconButton
+            aria-label="Back to Cart"
+            icon={<ArrowBackIcon />}  
+            colorScheme="gray"
+            position="absolute"
+            top="4"
+            right="4"
+            onClick={() => setShowCheckout(false)}
+          />
+          {/* Checkout pane content */}
+          <Heading as="h3" size="md" mb="4" color="black">
+            Checkout
+          </Heading>
+
+              {/* Order Total */}
+          <Text textAlign="center" fontWeight="bold" color="black" fontSize="xl" mb="2">
+            Order Total:
+          </Text>
+          <Text textAlign="center" color="black" fontSize="2xl" mb="4">
+            ${calculateTotalPrice()}
+          </Text>
+
+          {/* Payment options */}
+          <HStack spacing={4} mt={4} justify="center">
+            {/* Cash */}
+            <Box
+              width="70px"
+              height="70px"
+              bg={selectedPaymentMethod === 'cash' ? 'blue.200' : 'white'}
+              borderRadius="lg"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              cursor="pointer"
+              onClick={() => setSelectedPaymentMethod('cash')}
+            >
+              <FaMoneyBill size={30} color={selectedPaymentMethod === 'cash' ? 'white' : 'black'} />
+              <Text mt="2" fontSize="sm">
+                Cash
+              </Text>
+            </Box>
+
+            {/* Card */}
+            <Box
+              width="70px"
+              height="70px"
+              bg={selectedPaymentMethod === 'card' ? 'blue.200' : 'white'}
+              borderRadius="lg"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              cursor="pointer"
+              onClick={() => setSelectedPaymentMethod('card')}
+            >
+              <FaCreditCard size={30} color={selectedPaymentMethod === 'card' ? 'white' : 'black'} />
+              <Text mt="2" fontSize="sm">
+                Card
+              </Text>
+            </Box>
+
+            {/* QR Code */}
+            <Box
+              width="70px"
+              height="70px"
+              bg={selectedPaymentMethod === 'qrCode' ? 'blue.200' : 'white'}
+              borderRadius="lg"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              cursor="pointer"
+              onClick={() => setSelectedPaymentMethod('qrCode')}
+            >
+              <FaQrcode size={30} color={selectedPaymentMethod === 'qrCode' ? 'white' : 'black'} />
+              <Text mt="2" fontSize="sm">
+                QR Code
+              </Text>
+            </Box>
+          </HStack>
+          {/* Payment details */}
+          {selectedPaymentMethod === 'card' && (
+             <VStack spacing={4} mt={4}>
+             <Input
+               placeholder="Card Number"
+             />
+             <Input
+               placeholder="Expiration Date"
+             />
+             <Input
+               placeholder="CVV"
+             />
+             <Input
+               placeholder="Card Type"
+             />
+           </VStack>
+          )}
+
+          {/* QR Code */}
+          {selectedPaymentMethod === 'qrCode' && (
+            <Box textAlign="center" mt="4">
+              {/* Display fake QR Code */}
+              <Image src="/rickroll.jpg" alt="You j got rick rolled!" />
+            </Box>
+          )}
+
+          <Button width="95%" position="absolute" bottom="4" colorScheme="blue" onClick={handleCheckout}>
+            Place Order
+          </Button>
+        </Box>
+      )}
+
     </Flex>
     </Flex>
   );
