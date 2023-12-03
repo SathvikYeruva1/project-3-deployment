@@ -71,7 +71,7 @@ function Menuinfo() {
 
   const handleCrudButtonClick = () => {
     setMenuinfoUpdate((prevValue) => !prevValue);
-    toast({ title: 'Menu Item added', description: 'Item added to database', status: 'success', duration: 2500 });
+    toast({ title: 'Operation Success', description: 'Database modified', status: 'success', duration: 2500 });
   }
 
   const TableRow = ({ data, borderBottom = true }) => (

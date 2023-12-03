@@ -17,6 +17,7 @@ import {
    Tr,
    Th,
    Td,
+   useToast,
 } from "@chakra-ui/react";
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./inventory.css";
@@ -26,6 +27,7 @@ function Inventory() {
   const navigate = useNavigate();
   const [inventoryItems, setInventoryItems] = useState([]);
   const [handleInventoryUpdate, setInventoryUpdate] = useState(false);
+  const toast = useToast();
   
   useEffect(() =>{
     const fetchInventory = async () => {
@@ -55,6 +57,7 @@ function Inventory() {
 
   const handleCrudButtonClick = () => {
     setInventoryUpdate((prevValue) => !prevValue);
+    toast({ title: 'Operation Success', description: 'Database modified', status: 'success', duration: 2500 });
   };
 
   const TableRow = ({ data, borderBottom = true }) => (
