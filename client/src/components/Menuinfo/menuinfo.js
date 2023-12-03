@@ -35,11 +35,13 @@ import {
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./menuinfo.css";
 import MenuinfoCRUD from "../CRUDComponents/MenuinfoCRUD";
+import { useToast } from "@chakra-ui/react";
 
 function Menuinfo() {
   const navigate = useNavigate();
   const [menuinfoItems, setMenuinfoItems] = useState([]);
   const [handleMenuinfoUpdate, setMenuinfoUpdate] = useState(false);
+  const toast = useToast();
 
   useEffect(() =>{
     const fetchMenuinfo = async () => {
@@ -69,6 +71,7 @@ function Menuinfo() {
 
   const handleCrudButtonClick = () => {
     setMenuinfoUpdate((prevValue) => !prevValue);
+    toast({ title: 'Menu Item added', description: 'Item added to database', status: 'success', duration: 2500 });
   }
 
   const TableRow = ({ data, borderBottom = true }) => (
@@ -156,7 +159,7 @@ function Menuinfo() {
           <Text fontSize="l" textAlign="center" ml={3}><a href="/employees">Employees</a></Text>
         </Box>
       </HStack>
-      <MenuinfoCRUD onUpdate={handleCrudButtonClick}></MenuinfoCRUD>
+      
         {/* Table */}
         <Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">
           <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
@@ -182,6 +185,7 @@ function Menuinfo() {
             </Tbody>
           </Table>
         </Box>
+        <MenuinfoCRUD onUpdate={handleCrudButtonClick}></MenuinfoCRUD>
         </Flex>
     </Flex>
   );
