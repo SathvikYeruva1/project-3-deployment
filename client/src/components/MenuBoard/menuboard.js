@@ -28,6 +28,7 @@ import {
 import { AddIcon, InfoIcon, CloseIcon, ArrowBackIcon, } from "@chakra-ui/icons";
 import { FaMoneyBill, FaCreditCard, FaQrcode} from "react-icons/fa"
 import "./menuboard.css";
+import { useToast } from '@chakra-ui/react';
 
 
 const MenuBoard = () => {
@@ -44,6 +45,8 @@ const MenuBoard = () => {
   const [showCheckout, setShowCheckout] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
   
+  const toast = useToast();
+
   useEffect(() =>{
   const fetchMenuData = async () => {
     try{
@@ -121,7 +124,9 @@ const MenuBoard = () => {
 
   const handleCheckout = () => {
     // Whatever is needed to post the order to the DB
-  
+    console.log(cartItems)
+    toast({title:"Checkout Successful", description:"Order added to database", status:"success", duration:1000})
+
     // After checkout, you can clear the cart and close the checkout pane
     setCartItems([]);
     setShowCheckout(false);
