@@ -9,6 +9,7 @@ import {
   Text,
   extendTheme,
 } from '@chakra-ui/react';
+import { GoogleLogin } from 'react-google-login';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -16,6 +17,9 @@ function Login() {
   const navigate = useNavigate();
   const [weatherData, setWeatherData] = useState(null);
   const [city, setCity] = useState('College Station'); // Set default city
+
+  const clientId = "881293908310-52t5ht6pc84gr01iklt9bjr8voh7ng85.apps.googleusercontent.com";
+  var isSignedIn = false;
 
   const handleCityChange = (e) => {
     setCity(e.target.value);
@@ -47,6 +51,24 @@ function Login() {
       alert('Invalid username or password.');
     }
   };
+
+  const onSuccess = (res) => {
+    console.log("Login success. Current user: ", res.profileObj);
+    isSignedIn = true;
+    
+    const profileObj = res.profileObj;
+    const message = `Welcome, Manager ${profileObj.name}! \nYour email is ${profileObj.email}.`;
+    alert(message);
+
+    if (isSignedIn) {
+      navigate('/manager-dashboard');
+      isSignedIn = false;
+    }
+  }
+
+  const onFailure = (res) => {
+    console.log("Login failed. res: ", res);
+  }
 
   return (
     <ChakraProvider theme={customTheme}>
@@ -125,10 +147,14 @@ function Login() {
               padding='15px'
               color='#FFFFFF'
               fontSize='14px'
+              marginBottom={"10px"}
               _hover={{ background: '#C39B91' }}
             >
               Log In
             </Button>
+            <div id="SignInButton">
+              <GoogleLogin clientId={clientId} buttonText="Manager Login with Google" onSuccess={onSuccess} onFailure={onFailure} cookiePolicy={'single_host_origin'}></GoogleLogin>
+            </div>
           </Box>
         </Box>
       </Box>
