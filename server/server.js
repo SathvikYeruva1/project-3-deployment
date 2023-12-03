@@ -269,5 +269,30 @@ app.delete('/employee/delete/:id', async (request, response) => {
   }
 });
 
+app.post('/order/post', async (request, response) => {
+  console.log('Received request body:', request.body);
+
+  const { id, totalAmount, orderDate, cashierName, paymentMethod, time } = request.body;
+
+  try {
+    await pool.query('INSERT INTO orders (id, totalAmount, orderdate, cashiername, paymentmethod, time) VALUES ($1, $2, $3, $4, $5, $6)', 
+      [id, totalAmount, orderDate, cashierName, paymentMethod, time]);
+
+    response.status(201).json({ message: 'Item added successfully' });
+  } catch (error) {
+    console.error('Error adding item:', error);
+    response.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/order/lastid', (req, res) => {
+  pool.query('SELECT id FROM orders ORDER BY id DESC LIMIT 1;').then(query_res => {
+    const lastId = query_res.rows.length > 0 ? query_res.rows[0].id : null;
+    res.json({ lastId });
+  }).catch(err => {
+    res.status(500).json({error: err.message});
+  });
+});
+
 app.listen(5001, () => {console.log("Server started on port 5001")})
 
