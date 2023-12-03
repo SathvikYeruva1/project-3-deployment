@@ -43,7 +43,7 @@ const MenuBoard = () => {
   
   const [showCheckout, setShowCheckout] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
-  const [uniqueId, setUniqueId] = useState("");
+  const [uniqueId, setUniqueId] = useState(0);
 
   const toast = useToast();
 
@@ -71,6 +71,7 @@ const MenuBoard = () => {
       }
     }
     fetchMenuData();
+    fetchLastId();
   }, [])
 
 
@@ -124,23 +125,28 @@ const MenuBoard = () => {
   const fetchLastId = async () => {
     console.log("fetching")
     try {
+      const response = await fetch('http://54.92.197.133/order/lastid');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch last ID: ${response.statusText}`);
+      }
+      const lastIdData = await response.json();
+      const lastId = lastIdData.lastId;
+      setUniqueId(lastId + 1);
+    } catch (error) {
       const response = await fetch('http://localhost:5001/order/lastid');
       if (!response.ok) {
         throw new Error(`Failed to fetch last ID: ${response.statusText}`);
       }
       const lastIdData = await response.json();
-      const lastId = lastIdData.length > 0 ? lastIdData[0].id : 0;
+      const lastId = lastIdData.lastId;
+      console.log(lastId);
       setUniqueId(lastId + 1);
-    } catch (error) {
+      console.log(uniqueId);
       console.error('Error fetching last ID:', error);
     }
   };
 
   const handleCheckout = async () => {
-    console.log("handlecheckout");
-    await fetchLastId();
-    console.log("finished fetching last id: ", uniqueId);
-
     try {
       // Extracting data from the first item in the cart (you may need to modify this based on your data structure)
       let totalPrice = 0;
@@ -152,7 +158,7 @@ const MenuBoard = () => {
   
       // Creating the request body
       const requestBody = {
-        id: parseInt(uniqueId),
+        id: uniqueId,
         totalAmount: totalPrice,
         orderDate: new Date().toISOString(),
         cashierName: 'Blake', 
@@ -171,7 +177,8 @@ const MenuBoard = () => {
   
       if (response.status === 201) {
         toast({ title: 'Checkout Successful', description: 'Order added to database', status: 'success', duration: 2500 });
-  
+        
+        setUniqueId(uniqueId + 1);
         setCartItems([]);
         setShowCheckout(false);
       } else {

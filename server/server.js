@@ -85,6 +85,16 @@ app.get('/menudata/descriptions', (req, res) => {
       });
 });
 
+app.get('/order/lastid', (req, res) => {
+  pool.query('SELECT id FROM orders ORDER BY id DESC LIMIT 1;').then(query_res => {
+    const lastId = query_res.rows.length > 0 ? query_res.rows[0].id : null;
+    res.json({ lastId });
+  }).catch(err => {
+    res.status(500).json({error: err.message});
+  });
+});
+
+
 //get all of the orders data
 app.get('/ordersdata', (req, res) => {
   pool.query('SELECT * FROM orders LIMIT 100;').then(query_res => {
@@ -285,14 +295,6 @@ app.post('/order/post', async (request, response) => {
   }
 });
 
-app.get('/order/lastid', (req, res) => {
-  pool.query('SELECT id FROM orders ORDER BY id DESC LIMIT 1;').then(query_res => {
-    const lastId = query_res.rows.length > 0 ? query_res.rows[0].id : null;
-    res.json({ lastId });
-  }).catch(err => {
-    res.status(500).json({error: err.message});
-  });
-});
 
 app.listen(5001, () => {console.log("Server started on port 5001")})
 
