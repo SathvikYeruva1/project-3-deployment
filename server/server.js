@@ -11,7 +11,6 @@ const bodyParser = require('body-parser'); // Import body-parser
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Check if the origin is allowed, or allow all origins with '*'
     const allowedOrigins = ['https://bobapos-3xci.onrender.com', 'https://localhost:5001'];
     const isAllowed = allowedOrigins.includes(origin) || !origin;
     callback(null, isAllowed);

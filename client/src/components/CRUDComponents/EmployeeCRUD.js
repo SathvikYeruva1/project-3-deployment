@@ -28,7 +28,7 @@ export default function EmployeeCRUD() {
 
   const handleAddClick = () => {
     console.log(formData);
-    fetch("http://54.92.197.133/employee/post", {
+    fetch("https://bobaposapp.onrender.com/employee/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export default function EmployeeCRUD() {
   };
 
   const handleEditClick = () => {
-    fetch(`http://54.92.197.133/employee/edit/${formData.id}`, {
+    fetch(`https://bobaposapp.onrender.com/employee/edit/${formData.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ export default function EmployeeCRUD() {
   
   // Delete item
   const handleDeleteClick = () => {
-    fetch(`http://54.92.197.133/employee/delete/${formData.id}`, {
+    fetch(`https://bobaposapp.onrender.com/employee/delete/${formData.id}`, {
       method: 'DELETE',
     })
       .then((response) => response.json())

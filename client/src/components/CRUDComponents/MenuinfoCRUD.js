@@ -31,7 +31,7 @@ export default function MenuinfoCRUD(props) {
   const handleAddClick = () => {
     props.onUpdate();
     console.log(formData);
-    fetch("http://54.92.197.133/menuinfo/post", {
+    fetch("https://bobaposapp.onrender.com/menuinfo/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +64,7 @@ export default function MenuinfoCRUD(props) {
 
   const handleEditClick = () => {
     props.onUpdate();
-    fetch(`http://54.92.197.133/menuinfo/edit/${formData.id}`, {
+    fetch(`https://bobaposapp.onrender.com/menuinfo/edit/${formData.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ export default function MenuinfoCRUD(props) {
   // Delete item
   const handleDeleteClick = () => {
     props.onUpdate();
-    fetch(`http://54.92.197.133/menuinfo/delete/${formData.id}`, {
+    fetch(`https://bobaposapp.onrender.com/menuinfo/delete/${formData.id}`, {
       method: 'DELETE',
     })
       .then((response) => response.json())

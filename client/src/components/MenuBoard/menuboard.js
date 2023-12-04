@@ -125,7 +125,7 @@ const MenuBoard = () => {
   const fetchLastId = async () => {
     console.log("fetching")
     try {
-      const response = await fetch('http://localhost:5001/order/lastid');
+      const response = await fetch('https://bobaposapp.onrender.com/order/lastid');
       if (!response.ok) {
         throw new Error(`Failed to fetch last ID: ${response.statusText}`);
       }
@@ -136,7 +136,7 @@ const MenuBoard = () => {
       if (!response.ok) {
         throw new Error(`Failed to fetch last ID: ${response.statusText}`);
       }
-      const response = await fetch('https://bobaposapp.onrender.com/order/lastid');
+      const response = await fetch('http://localhost:5001/order/lastid');
       const lastIdData = await response.json();
       const lastId = lastIdData.lastId;
       console.log(lastId);
@@ -183,6 +183,7 @@ const MenuBoard = () => {
         setShowCheckout(false);
       } else {
         toast({ title: 'Checkout Failed', description: 'Failed to add order to database', status: 'error', duration: 2500 });
+        console.log(JSON.stringify(requestBody));
       }
     } catch (error) {
       console.error('Error during checkout:', error);

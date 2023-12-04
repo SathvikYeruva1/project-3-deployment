@@ -29,7 +29,7 @@ export default function InventoryCRUD(props) {
   const handleAddClick = () => {
     props.onUpdate();
     // Assuming you have an API endpoint to handle the data
-    fetch("http://54.92.197.133/inventory/post", {
+    fetch("https://bobaposapp.onrender.com/inventory/post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ export default function InventoryCRUD(props) {
 
   const handleEditClick = () => {
     props.onUpdate();
-    fetch(`http://54.92.197.133/inventory/edit/${formData.itemId}`, {
+    fetch(`https://bobaposapp.onrender.com/inventory/edit/${formData.itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export default function InventoryCRUD(props) {
   // Delete item
   const handleDeleteClick = () => {
     props.onUpdate();
-    fetch(`http://54.92.197.133/inventory/delete/${formData.itemId}`, {
+    fetch(`https://bobaposapp.onrender.com/inventory/delete/${formData.itemId}`, {
       method: 'DELETE',
     })
       .then((response) => response.json())
