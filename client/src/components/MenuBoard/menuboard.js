@@ -19,6 +19,7 @@ import {
   PopoverContent,
   PopoverArrow,
   PopoverCloseButton,
+  Icon,
   PopoverHeader,
   PopoverBody,
   Input,
@@ -176,7 +177,7 @@ const MenuBoard = () => {
   return (
     <Flex flexDirection="column">
     <Box background={"gray.800"} py={3}>
-      <Heading textAlign={'center'} color={'white'} fontFamily={'Roboto, sans-serif'}>Menu Board</Heading>
+      <Heading as="h1" textAlign={'center'} color={'white'} fontFamily={'Roboto, sans-serif'}>Menu Board</Heading>
     </Box>
     <Flex alignItems="flex-start" bg="gray.800">
       {/* Left Side */}
@@ -206,7 +207,7 @@ const MenuBoard = () => {
         >
         <Image
             src='/milkTea.jpg'   // Adjust the image path as needed
-            alt='Coffee Tea Example'
+            alt='Milk Tea'
             objectFit="cover" 
             textAlign="center"
             borderRadius="md"
@@ -218,7 +219,8 @@ const MenuBoard = () => {
         variant={selectedCategory === "Milk Tea" ? "solid" : "outline"}
         colorScheme="blue"
         onClick={() => handleFilterCategory("Milk Tea")}
-        align="start">
+        align="start"
+        aria-label="Filter Milk Tea">
             Filter
         </Button>
         </Card>
@@ -232,7 +234,7 @@ const MenuBoard = () => {
         >
         <Image
             src='/punchTea.jpg'   // Adjust the image path as needed
-            alt='Punch Tea Example'
+            alt='Punch Tea'
             objectFit="cover" 
             textAlign="center"
             borderRadius="md"
@@ -243,7 +245,8 @@ const MenuBoard = () => {
         <Button variant={selectedCategory === "Fruit" ? "solid" : "outline"}
           colorScheme="blue"
           onClick={() => handleFilterCategory("Fruit")}
-          align="start">
+          align="start"
+          aria-label="Filter Punch Tea">
             Filter
         </Button>
         </Card>
@@ -257,7 +260,7 @@ const MenuBoard = () => {
         >
         <Image
             src='/seasonalTea.jpg'   // Adjust the image path as needed
-            alt='Seasonal Tea Example'
+            alt='Seasonal Tea'
             objectFit="cover" 
             textAlign="center"
             borderRadius="md"
@@ -268,7 +271,8 @@ const MenuBoard = () => {
         <Button variant={selectedCategory === "Classic" ? "solid" : "outline"}
           colorScheme="blue"
           onClick={() => handleFilterCategory("Classic")}
-          align="start">
+          align="start"
+          aria-label="Filter Classic Tea">
             Filter
         </Button>
         </Card>
@@ -300,12 +304,12 @@ const MenuBoard = () => {
                 {/* Description Popover */}
                 <Popover placement="bottom" strategy="fixed">
                   <PopoverTrigger>
-                    <IconButton aria-label="Item Description" icon={<InfoIcon />} colorScheme="teal" ml={2} />
+                    <IconButton aria-label={`Description of ${item.name}`} icon={<InfoIcon />} colorScheme="teal" ml={2} />
                   </PopoverTrigger>
                   <PopoverContent>
                     <PopoverArrow />
-                    <PopoverCloseButton />
-                    <PopoverHeader color="black">Item Description</PopoverHeader>
+                    <PopoverCloseButton aria-label="Close description"/>
+                    <PopoverHeader color="black">Description of {item.name}</PopoverHeader>
                     {/* This is where the description will show */}
                     <PopoverBody color="black">{item.description}</PopoverBody>
                   </PopoverContent>
@@ -354,7 +358,7 @@ const MenuBoard = () => {
             <Text fontWeight="bold" color="black">Total Price:</Text>
             <Text color="black">${calculateTotalPrice()}</Text>
           </Flex>
-          <Button width="100%" position="absolute" bottom="4" colorScheme="blue" onClick={() => setShowCheckout(true)}>
+          <Button width="100%" position="absolute" bottom="4" colorScheme="blue" onClick={() => setShowCheckout(true)} aria-label="Proceed to Checkout">
             Checkout
           </Button>
         </Box>
@@ -410,7 +414,7 @@ const MenuBoard = () => {
               cursor="pointer"
               onClick={() => setSelectedPaymentMethod('cash')}
             >
-              <FaMoneyBill size={30} color={selectedPaymentMethod === 'cash' ? 'white' : 'black'} />
+            <Icon as={FaMoneyBill} size={30} aria-label="Cash Payment" color={selectedPaymentMethod === 'cash' ? 'white' : 'black'} />
               <Text mt="2" fontSize="sm">
                 Cash
               </Text>
@@ -429,7 +433,7 @@ const MenuBoard = () => {
               cursor="pointer"
               onClick={() => setSelectedPaymentMethod('card')}
             >
-              <FaCreditCard size={30} color={selectedPaymentMethod === 'card' ? 'white' : 'black'} />
+            <Icon as={FaCreditCard} size={30} aria-label="Card Payment" color={selectedPaymentMethod === 'card' ? 'white' : 'black'} />
               <Text mt="2" fontSize="sm">
                 Card
               </Text>
@@ -448,7 +452,7 @@ const MenuBoard = () => {
               cursor="pointer"
               onClick={() => setSelectedPaymentMethod('qrCode')}
             >
-              <FaQrcode size={30} color={selectedPaymentMethod === 'qrCode' ? 'white' : 'black'} />
+            <Icon as={FaQrcode} size={30} aria-label="QR Code Payment" color={selectedPaymentMethod === 'qrCode' ? 'white' : 'black'} />
               <Text mt="2" fontSize="sm">
                 QR Code
               </Text>
