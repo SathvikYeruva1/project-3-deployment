@@ -8,7 +8,9 @@ const buildPath = path.join(_dirname, "../client/build")
 const app = express();
 const bodyParser = require('body-parser'); // Import body-parser
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5001',
+}));
 app.options('*', cors());
 
 
