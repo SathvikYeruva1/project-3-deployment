@@ -8,9 +8,19 @@ const buildPath = path.join(_dirname, "../client/build")
 const app = express();
 const bodyParser = require('body-parser'); // Import body-parser
 
+
 app.use(cors({
-  origin: 'http://localhost:5001', 
+  origin: (origin, callback) => {
+    // Check if the origin is allowed, or allow all origins with '*'
+    const allowedOrigins = ['https://bobapos-3xci.onrender.com', 'https://localhost:5001'];
+    const isAllowed = allowedOrigins.includes(origin) || !origin;
+    callback(null, isAllowed);
+  },
 }));
+
+// app.use(cors({
+//   origin: '*',
+// }));
 app.options('*', cors());
 
 
@@ -96,7 +106,7 @@ app.get('/order/lastid', (req, res) => {
 
 
 //get all of the orders data
-app.get('/ordersdata', (req, res) => {
+app.get('/ordersdata', cors(),(req, res) => {
   pool.query('SELECT * FROM orders LIMIT 100;').then(query_res => {
     res.json(query_res.rows);
   }).catch(err => {
