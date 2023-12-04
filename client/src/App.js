@@ -37,14 +37,6 @@ const App = () => {
     window.googleTranslateElementInit = googleTranslateElementInit;
   }, []);
 
-  gapi.load("client:auth2", () => {
-    gapi.client.init({
-      clientId:
-        "881293908310-52t5ht6pc84gr01iklt9bjr8voh7ng85.apps.googleusercontent.com",
-      plugin_name: "chat",
-    });
-  });
-
   return (
     <ChakraProvider theme={customTheme}>
       <div style={{ position: "absolute", top: "0", left: "0", zIndex: "999" }}>
