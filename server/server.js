@@ -8,9 +8,7 @@ const buildPath = path.join(_dirname, "../client/build")
 const app = express();
 const bodyParser = require('body-parser'); // Import body-parser
 
-app.use(cors({
-  origin: 'https://bobaposapp.onrender.com/',
-}));
+app.use(cors());
 app.options('*', cors());
 
 
