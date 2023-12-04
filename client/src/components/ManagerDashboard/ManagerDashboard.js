@@ -56,11 +56,11 @@ function ManagerDashboard() {
   const [ordersData, setOrdersData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/ordersdata')
-      .then(response => response.json())
-      .then(data => setOrdersData(data))
-      .catch(() => {
-        fetch('https://bobaposapp.onrender.com/ordersdata')
+    fetch('https://bobaposapp.onrender.com/ordersdata')
+    .then(response => response.json())
+    .then(data => setOrdersData(data))
+    .catch(() => {
+        fetch('http://localhost:5001/ordersdata')
         .then(response => response.json())
         .then(data => setOrdersData(data))
       });
