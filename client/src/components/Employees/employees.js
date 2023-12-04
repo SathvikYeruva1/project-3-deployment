@@ -70,11 +70,11 @@ function Employees() {
   const [employeeData, setEmployeeData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/employeesdata')
+    fetch('https://bobaposapp.onrender.com/employeesdata')
     .then(response => response.json())
     .then(data => setEmployeeData(data))
     .catch(() => {
-        fetch('https://bobaposapp.onrender.com/employeesdata')
+        fetch('http://localhost:5001/employeesdata')
         .then(response => response.json())
         .then(data => setEmployeeData(data))
       });

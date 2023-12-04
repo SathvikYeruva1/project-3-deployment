@@ -48,7 +48,7 @@ function Inventory() {
   useEffect(() =>{
     const fetchInventory = async () => {
       try{
-        const initialResult = await fetch(`http://localhost:5001/inventory/data`);
+        const initialResult = await fetch(`https://bobaposapp.onrender.com/inventory/data`);
         const jsonResult = await initialResult.json();
         setInventoryItems(jsonResult);
       } catch (error) {
@@ -56,7 +56,7 @@ function Inventory() {
         console.error('Error fetching inventory ID data:', error);
         // Attempt an alternative URL
         try {
-          const initialResult = await fetch(`https://bobaposapp.onrender.com/inventory/data`);
+          const initialResult = await fetch(`http://localhost:5001/inventory/data`);
           const jsonResult = await initialResult.json();
           setInventoryItems(jsonResult);
         } catch (alternativeError) {
