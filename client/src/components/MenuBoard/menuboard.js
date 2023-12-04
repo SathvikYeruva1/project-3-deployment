@@ -134,47 +134,43 @@ const MenuBoard = () => {
 
 
   const handleCheckout = async () => {
-    try {
-      // Extracting data from the first item in the cart (you may need to modify this based on your data structure)
-      let totalPrice = 0;
+    let totalPrice = 0;
 
-      // Loop through cartItems to calculate the total price
-      cartItems.forEach((item) => {
-        totalPrice += parseFloat(item.price);
-      });
-  
-      // Creating the request body
-      const requestBody = {
-        id: uniqueId,
-        totalAmount: totalPrice,
-        orderDate: new Date().toISOString(),
-        cashierName: 'Blake', 
-        paymentMethod: selectedPaymentMethod, 
-        time: new Date().toLocaleTimeString(),
-      };
-  
-      // Sending the POST request to the API
-      const response = await fetch('/order/post', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
-  
-      if (response.status === 201) {
+    // Loop through cartItems to calculate the total price
+    cartItems.forEach((item) => {
+      totalPrice += parseFloat(item.price);
+    });
+
+    // Creating the request body
+    const requestBody = {
+      id: uniqueId,
+      totalAmount: totalPrice,
+      orderDate: new Date().toISOString(),
+      cashierName: 'Blake', 
+      paymentMethod: selectedPaymentMethod, 
+      time: new Date().toLocaleTimeString(),
+    };
+
+    fetch("https://bobaposapp.onrender.com/order/post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response or perform additional actions
         toast({ title: 'Checkout Successful', description: 'Order added to database', status: 'success', duration: 2500 });
         
         setUniqueId(uniqueId + 1);
         setCartItems([]);
         setShowCheckout(false);
-      } else {
+      })
+      .catch(() => {
         toast({ title: 'Checkout Failed', description: 'Failed to add order to database', status: 'error', duration: 2500 });
         console.log(JSON.stringify(requestBody));
-      }
-    } catch (error) {
-      console.error('Error during checkout:', error);
-    }
+      })
   };
 
   return (
