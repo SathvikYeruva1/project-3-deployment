@@ -50,28 +50,38 @@ const MenuBoard = () => {
   useEffect(() =>{
   const fetchMenuData = async () => {
     try{
-      const initialResult = await fetch(`http://localhost:5001/menudata/teaorders`);
+      const initialResult = await fetch(`https://bobaposapp.onrender.com/menudata/teaorders`);
       const jsonResult = await initialResult.json();
       setMenuItemIngredients(jsonResult.menuitemsingredients);
       setMenuItemData(jsonResult.menuitemsingredients);
       setMenuItemDescriptions(jsonResult.menuitemsingredients);
+      const response = await fetch('https://bobaposapp.onrender.com/order/lastid');
+      const lastIdData = await response.json();
+      const lastId = lastIdData.lastId;
+      setUniqueId(lastId + 1);
     } catch (error) {
       // Handle the error or try an alternative URL
       console.error('Error fetching menu data:', error);
       // Attempt an alternative URL
       try {
-          const initialResult = await fetch(`https://bobaposapp.onrender.com/menudata/teaorders`);
+          const initialResult = await fetch(`http://localhost:5001/menudata/teaorders`);
           const jsonResult = await initialResult.json();
           setMenuItemIngredients(jsonResult.menuitemsingredients);
           setMenuItemData(jsonResult.menuitemsingredients);
           setMenuItemDescriptions(jsonResult.menuitemsingredients);
+
+          const response = await fetch('http://localhost:5001/order/lastid');
+          const lastIdData = await response.json();
+          const lastId = lastIdData.lastId;
+          console.log(lastId);
+          setUniqueId(lastId + 1);
+          console.log(uniqueId);
         } catch (alternativeError) {
           console.error('Error fetching menu data from the alternative URL:', alternativeError);
         }
       }
     }
     fetchMenuData();
-    fetchLastId();
   }, [])
 
 
@@ -122,29 +132,6 @@ const MenuBoard = () => {
     return totalPrice.toFixed(2); // Return the total with two decimal places
   };
 
-  const fetchLastId = async () => {
-    console.log("fetching")
-    try {
-      const response = await fetch('https://bobaposapp.onrender.com/order/lastid');
-      if (!response.ok) {
-        throw new Error(`Failed to fetch last ID: ${response.statusText}`);
-      }
-      const lastIdData = await response.json();
-      const lastId = lastIdData.lastId;
-      setUniqueId(lastId + 1);
-    } catch (error) {
-      if (!response.ok) {
-        throw new Error(`Failed to fetch last ID: ${response.statusText}`);
-      }
-      const response = await fetch('http://localhost:5001/order/lastid');
-      const lastIdData = await response.json();
-      const lastId = lastIdData.lastId;
-      console.log(lastId);
-      setUniqueId(lastId + 1);
-      console.log(uniqueId);
-      console.error('Error fetching last ID:', error);
-    }
-  };
 
   const handleCheckout = async () => {
     try {
