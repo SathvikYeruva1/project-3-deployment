@@ -175,20 +175,10 @@ const MenuBoard = () => {
 
   return (
     <Flex flexDirection="column">
-    {/* Dark Blue Banner */}
-    <Box
-      bg="grey" // Adjust the shade of blue as needed
-      color="white"
-      py={2}
-      px={4}
-      textAlign="center"
-      borderRadius="md"
-    >
-      <Heading as="h1" size="lg" color="black">
-        Menu Board
-      </Heading>
+    <Box background={"gray.800"} py={3}>
+      <Heading textAlign={'center'} color={'white'} fontFamily={'Roboto, sans-serif'}>Menu Board</Heading>
     </Box>
-    <Flex alignItems="flex-start" bg="#F2F2F2">
+    <Flex alignItems="flex-start" bg="gray.800">
       {/* Left Side */}
       <Center w="20%" display="flex" flexDirection="column">
 
