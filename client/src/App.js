@@ -10,6 +10,7 @@ import Menuinfo from "./components/Menuinfo/menuinfo";
 // 1. import `ChakraProvider` component
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { useEffect } from "react";
+import { gapi } from "gapi-script";
 
 const customTheme = extendTheme({ 
   styles: {
@@ -35,6 +36,14 @@ const App = () => {
     document.body.appendChild(addScriptToTranslate);
     window.googleTranslateElementInit = googleTranslateElementInit;
   }, []);
+
+  gapi.load("client:auth2", () => {
+    gapi.client.init({
+      clientId:
+        "881293908310-52t5ht6pc84gr01iklt9bjr8voh7ng85.apps.googleusercontent.com",
+      plugin_name: "chat",
+    });
+  });
 
   return (
     <ChakraProvider theme={customTheme}>
