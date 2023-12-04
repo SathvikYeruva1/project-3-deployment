@@ -60,7 +60,7 @@ const MenuBoard = () => {
       console.error('Error fetching menu data:', error);
       // Attempt an alternative URL
       try {
-          const initialResult = await fetch(`http://54.92.197.133/menudata/teaorders`);
+          const initialResult = await fetch(`https://bobaposapp.onrender.com/menudata/teaorders`);
           const jsonResult = await initialResult.json();
           setMenuItemIngredients(jsonResult.menuitemsingredients);
           setMenuItemData(jsonResult.menuitemsingredients);
@@ -136,7 +136,7 @@ const MenuBoard = () => {
       if (!response.ok) {
         throw new Error(`Failed to fetch last ID: ${response.statusText}`);
       }
-      const response = await fetch('http://54.92.197.133/order/lastid');
+      const response = await fetch('https://bobaposapp.onrender.com/order/lastid');
       const lastIdData = await response.json();
       const lastId = lastIdData.lastId;
       console.log(lastId);

@@ -54,7 +54,7 @@ function Menuinfo() {
         console.error('Error fetching menu ID data:', error);
         // Attempt an alternative URL
         try {
-          const initialResult = await fetch(`http://54.92.197.133/menuinfo/data`);
+          const initialResult = await fetch(`https://bobaposapp.onrender.com/menuinfo/data`);
           const jsonResult = await initialResult.json();
           setMenuinfoItems(jsonResult);
         } catch (alternativeError) {

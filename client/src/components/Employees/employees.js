@@ -62,7 +62,7 @@ function Employees() {
     .then(response => response.json())
     .then(data => setEmployeeData(data))
     .catch(() => {
-        fetch('http://54.92.197.133/employeesdata')
+        fetch('https://bobaposapp.onrender.com/employeesdata')
         .then(response => response.json())
         .then(data => setEmployeeData(data))
       });

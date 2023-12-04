@@ -60,7 +60,7 @@ function ManagerDashboard() {
       .then(response => response.json())
       .then(data => setOrdersData(data))
       .catch(() => {
-        fetch('http://54.92.197.133/ordersdata')
+        fetch('https://bobaposapp.onrender.com/ordersdata')
         .then(response => response.json())
         .then(data => setOrdersData(data))
       });
