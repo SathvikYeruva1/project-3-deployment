@@ -46,15 +46,15 @@ function Menuinfo() {
   useEffect(() =>{
     const fetchMenuinfo = async () => {
       try{
-      const initialResult = await fetch(`http://54.92.197.133/menuinfo/data`);
-      const jsonResult = await initialResult.json();
-      setMenuinfoItems(jsonResult);
+        const initialResult = await fetch(`http://localhost:5001/menuinfo/data`);
+        const jsonResult = await initialResult.json();
+        setMenuinfoItems(jsonResult);
       } catch (error) {
         // Handle the error or try an alternative URL
         console.error('Error fetching menu ID data:', error);
         // Attempt an alternative URL
         try {
-          const initialResult = await fetch(`http://localhost:5001/menuinfo/data`);
+          const initialResult = await fetch(`http://54.92.197.133/menuinfo/data`);
           const jsonResult = await initialResult.json();
           setMenuinfoItems(jsonResult);
         } catch (alternativeError) {

@@ -50,7 +50,7 @@ const MenuBoard = () => {
   useEffect(() =>{
   const fetchMenuData = async () => {
     try{
-      const initialResult = await fetch(`http://54.92.197.133/menudata/teaorders`);
+      const initialResult = await fetch(`http://localhost:5001/menudata/teaorders`);
       const jsonResult = await initialResult.json();
       setMenuItemIngredients(jsonResult.menuitemsingredients);
       setMenuItemData(jsonResult.menuitemsingredients);
@@ -60,7 +60,7 @@ const MenuBoard = () => {
       console.error('Error fetching menu data:', error);
       // Attempt an alternative URL
       try {
-          const initialResult = await fetch(`http://localhost:5001/menudata/teaorders`);
+          const initialResult = await fetch(`http://54.92.197.133/menudata/teaorders`);
           const jsonResult = await initialResult.json();
           setMenuItemIngredients(jsonResult.menuitemsingredients);
           setMenuItemData(jsonResult.menuitemsingredients);
@@ -125,7 +125,7 @@ const MenuBoard = () => {
   const fetchLastId = async () => {
     console.log("fetching")
     try {
-      const response = await fetch('http://54.92.197.133/order/lastid');
+      const response = await fetch('http://localhost:5001/order/lastid');
       if (!response.ok) {
         throw new Error(`Failed to fetch last ID: ${response.statusText}`);
       }
@@ -133,10 +133,10 @@ const MenuBoard = () => {
       const lastId = lastIdData.lastId;
       setUniqueId(lastId + 1);
     } catch (error) {
-      const response = await fetch('http://localhost:5001/order/lastid');
       if (!response.ok) {
         throw new Error(`Failed to fetch last ID: ${response.statusText}`);
       }
+      const response = await fetch('http://54.92.197.133/order/lastid');
       const lastIdData = await response.json();
       const lastId = lastIdData.lastId;
       console.log(lastId);

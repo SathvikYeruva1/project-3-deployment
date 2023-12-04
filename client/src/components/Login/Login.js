@@ -9,7 +9,7 @@ import {
   Text,
   extendTheme,
 } from '@chakra-ui/react';
-import { GoogleLogin } from 'react-google-login';
+//import { GoogleLogin } from 'react-google-login';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -152,9 +152,9 @@ function Login() {
             >
               Log In
             </Button>
-            <div id="SignInButton">
+            {/* <div id="SignInButton">
               <GoogleLogin clientId={clientId} buttonText="Manager Login with Google" onSuccess={onSuccess} onFailure={onFailure} cookiePolicy={'single_host_origin'}></GoogleLogin>
-            </div>
+            </div> */}
           </Box>
         </Box>
       </Box>
