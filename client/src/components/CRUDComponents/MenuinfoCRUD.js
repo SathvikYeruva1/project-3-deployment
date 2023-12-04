@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Button, Input } from "@chakra-ui/react";
 
-export default function MenuinfoCRUD() {
+export default function MenuinfoCRUD(props) {
   const [formData, setFormData] = useState({
     id: "",
     name: "",
@@ -29,6 +29,7 @@ export default function MenuinfoCRUD() {
   };
 
   const handleAddClick = () => {
+    props.onUpdate();
     console.log(formData);
     fetch("http://54.92.197.133/menuinfo/post", {
       method: "POST",
@@ -62,6 +63,7 @@ export default function MenuinfoCRUD() {
   };
 
   const handleEditClick = () => {
+    props.onUpdate();
     fetch(`http://54.92.197.133/menuinfo/edit/${formData.id}`, {
       method: 'PUT',
       headers: {
@@ -108,6 +110,7 @@ export default function MenuinfoCRUD() {
   
   // Delete item
   const handleDeleteClick = () => {
+    props.onUpdate();
     fetch(`http://54.92.197.133/menuinfo/delete/${formData.id}`, {
       method: 'DELETE',
     })
