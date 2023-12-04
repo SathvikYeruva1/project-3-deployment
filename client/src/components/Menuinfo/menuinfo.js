@@ -39,6 +39,22 @@ import { useToast } from "@chakra-ui/react";
 
 function Menuinfo() {
   const navigate = useNavigate();
+  
+  const handleLogout = () => {
+    navigate("/");
+  };
+  const handleEmployee = () => {
+    navigate("/employees");
+  };
+  const handleInventory = () => {
+    navigate("/inventory");
+  };
+  const handleMenuInfo = () => {
+    navigate("/menuinfo");
+  };
+  const handleDashboard = () => {
+    navigate("/manager-dashboard");
+  };
   const [menuinfoItems, setMenuinfoItems] = useState([]);
   const [handleMenuinfoUpdate, setMenuinfoUpdate] = useState(false);
   const toast = useToast();
@@ -65,9 +81,7 @@ function Menuinfo() {
     fetchMenuinfo();
   }, [handleMenuinfoUpdate])
 
-  const handleLogout = () => {
-    navigate("/");
-  };
+
 
   const handleCrudButtonClick = () => {
     setMenuinfoUpdate((prevValue) => !prevValue);
@@ -96,18 +110,18 @@ function Menuinfo() {
         />
         <UnorderedList styleType="none" p="0">
           <ListItem mb="15px" fontSize="lg">
-            <a href="/manager-dashboard">Dashboard</a>
+            <a onClick={handleDashboard}>Dashboard</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href="/inventory">Inventory</a>
+            <a onClick={handleInventory}>Inventory</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href = "/menuinfo">
+            <a onClick={handleMenuInfo}>
               Menu
             </a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href="/employees">Employees</a>
+            <a onClick={handleEmployee}>Employees</a>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
             <a href="/" onClick={handleLogout}>
