@@ -9,7 +9,7 @@ const app = express();
 const bodyParser = require('body-parser'); // Import body-parser
 
 app.use(cors({
-  origin: 'http://localhost:5001',
+  origin: 'http://localhost:5001', 
 }));
 app.options('*', cors());
 
