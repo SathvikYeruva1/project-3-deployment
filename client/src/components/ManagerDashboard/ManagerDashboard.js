@@ -82,32 +82,29 @@ function ManagerDashboard() {
   return (
  <Flex >
     <Box display="flex" width="200px">
-      <Box className="sidebar" backgroundColor="#1A202C" color="#FFFFFF" height="100vh" width="200px" p="20px" >
+      <Box aria-label="Sidebar Navigation" className="sidebar" backgroundColor="#1A202C" color="#FFFFFF" height="100vh" width="200px" p="20px" >
       <Image
-            src='/kungfutealogo.png' borderRadius="lg" mb={6} mt={10}
+            src='/kungfutealogo.png' alt="Kung Fu Tea Logo" borderRadius="lg" mb={6} mt={10}
         />
         <UnorderedList styleType="none" p="0">
           <ListItem mb="15px" fontSize="lg">
-            <a onClick={handleDashboard}>Dashboard</a>
+            <Button onClick={handleDashboard} variant="unstyled">Dashboard</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a onClick={handleInventory}>Inventory</a>
+            <Button onClick={handleInventory} variant="unstyled">Inventory</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a onClick={handleMenuInfo}>
-              Menu
-            </a>
+            <Button onClick={handleMenuInfo} variant="unstyled">Menu</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a onClick={handleEmployee}>Employees</a>
+            <Button onClick={handleEmployee} variant="unstyled">Employees</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href="/" onClick={handleLogout}>
-              Log out </a>
+          <Button onClick={handleLogout} variant="unstyled">Log out</Button>
           </ListItem>
         </UnorderedList>
       </Box>
-      </Box>
+    </Box>
       {/* Right-side content */}
       <Flex direction="column" flex="10" bg="#F2F2F2"  minHeight="100vh" pb={10} mt={5}> 
       <HStack
@@ -162,10 +159,10 @@ function ManagerDashboard() {
           <Table variant="simple" borderCollapse="separate">
             <Thead>
               <Tr>
-                <Th>Date</Th>
-                <Th>Order Number</Th>
-                <Th>Amount</Th>
-                <Th>Cashier Name</Th>
+                <Th scope="col">Date</Th>
+                <Th scope="col">Order Number</Th>
+                <Th scope="col">Amount</Th>
+                <Th scope="col">Cashier Name</Th>
               </Tr>
             </Thead>
             <Tbody>
