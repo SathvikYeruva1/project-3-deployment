@@ -43,8 +43,8 @@ function Login() {
       navigate('/manager-dashboard');
     } else if (username === 'customer' && password === 'customer') {
       navigate('/menuboard');
-    // } else if (username === 'cashier' && password === 'cashier') {
-    //   navigate('/CashierDashboard');
+    } else if (username === 'cashier' && password === 'cashier') {
+      navigate('/menuboard');
     } else {
       alert('Invalid username or password.');
     }
@@ -53,10 +53,23 @@ function Login() {
   return (
     <GoogleOAuthProvider clientId="881293908310-52t5ht6pc84gr01iklt9bjr8voh7ng85.apps.googleusercontent.com">
     <ChakraProvider theme={customTheme}>
-      <Box className='weather-text' textAlign='center' marginTop='10px'>
+          {/* Skip Links */}
+          <Box position="absolute" top="-40px" left="0" zIndex="100">
+            <Button
+              as="a"
+              href="#mainContent" 
+              onFocus={(e) => (e.target.style.position = 'static')}
+              onBlur={(e) => (e.target.style.position = 'absolute')}
+              variant="ghost"
+            >
+              Skip to main content
+            </Button>
+          </Box>
+      <Box className='weather-text' aria-label="Weather Information" role="form" textAlign='center' marginTop='10px'>
         <Input
           type='text'
           placeholder='Enter City'
+          aria-label='Enter City'
           value={city}
           onChange={handleCityChange}
           fontFamily='Varela Round'
@@ -77,7 +90,7 @@ function Login() {
               <Text className='weather-text' style={{ top: '285px' }}>Description: {weatherData.weather[0].description}</Text>
             </>
           )}
-      <Box className='login-page' width='360px' padding='8% 0 0' margin='auto'>
+      <Box role="form" aria-label="Login Form" className='login-page' width='360px' padding='8% 0 0' margin='auto'>
         <Box
           className='form'
           position='relative'
@@ -101,6 +114,7 @@ function Login() {
             <Input
               type='text'
               placeholder='Username'
+              aria-label='Username'
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               fontFamily='Varela Round'
@@ -112,6 +126,7 @@ function Login() {
             <Input
               type='password'
               placeholder='Password'
+              aria-label='Password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               fontFamily='Varela Round'

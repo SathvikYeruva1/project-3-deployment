@@ -80,26 +80,23 @@ function Employees() {
     <Box display="flex" width="200px">
       <Box className="sidebar" backgroundColor="#1A202C" color="#FFFFFF" height="100vh" width="200px" p="20px" >
       <Image
-            src='/kungfutealogo.png' borderRadius="lg" mb={6} mt={10}
+            src='/kungfutealogo.png' alt="Kung Fu Tea Logo" borderRadius="lg" mb={6} mt={10}
         />
         <UnorderedList styleType="none" p="0">
           <ListItem mb="15px" fontSize="lg">
-            <a onClick={handleDashboard}>Dashboard</a>
+            <Button onClick={handleDashboard} variant="unstyled">Dashboard</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a onClick={handleInventory}>Inventory</a>
+            <Button onClick={handleInventory} variant="unstyled">Inventory</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a onClick={handleMenuInfo}>
-              Menu
-            </a>
+            <Button onClick={handleMenuInfo} variant="unstyled">Menu</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a onClick={handleEmployee}>Employees</a>
+           <Button onClick={handleEmployee} variant="unstyled">Employees</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <a href="/" onClick={handleLogout}>
-              Log out </a>
+            <Button onClick={handleLogout} variant="unstyled">Log out</Button>
           </ListItem>
         </UnorderedList>
       </Box>
@@ -155,10 +152,10 @@ function Employees() {
           <Table variant="simple" borderCollapse="separate">
             <Thead>
               <Tr>
-                <Th>ID</Th>
-                <Th>Employee Name</Th>
-                <Th>Salary</Th>
-                <Th>Employee Role</Th>
+                <Th scope="col">ID</Th>
+                <Th scope="col">Employee Name</Th>
+                <Th scope="col">Salary</Th>
+                <Th scope="col">Employee Role</Th>
               </Tr>
             </Thead>
             <Tbody>
