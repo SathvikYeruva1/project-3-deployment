@@ -57,7 +57,7 @@ function Login() {
           <Box position="absolute" top="-40px" left="0" zIndex="100">
             <Button
               as="a"
-              href="#mainContent" 
+              href="#weather-text" 
               onFocus={(e) => (e.target.style.position = 'static')}
               onBlur={(e) => (e.target.style.position = 'absolute')}
               variant="ghost"
