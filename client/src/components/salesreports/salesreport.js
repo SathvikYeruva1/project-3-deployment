@@ -3,10 +3,24 @@ import { useNavigate } from "react-router-dom";
 import {
   Box,
   Heading,
+  Divider,
+  Card,
+  Grid,
+  GridItem,
+  VStack,
   HStack,
+  Button,
   Text,
   Image,
   Center,
+  IconButton,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverHeader,
+  PopoverBody,
   Flex,  // Import Flex from Chakra UI for layout
   UnorderedList,
    ListItem,
@@ -14,17 +28,14 @@ import {
    Table,
    Thead,
    Tbody,
-   Button,
    Tr,
    Th,
    Td,
-   useToast,
 } from "@chakra-ui/react";
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
-import "./inventory.css";
-import InventoryCRUD from "../CRUDComponents/InventoryCRUD";
+import "./salesreport.css";
 
-function Inventory() {
+function SalesReport() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -45,30 +56,6 @@ function Inventory() {
   const handleReport = () => {
     navigate("/salesreport");
   };
-  const [inventoryItems, setInventoryItems] = useState([]);
-  const [handleInventoryUpdate, setInventoryUpdate] = useState(false);
-  const toast = useToast();
-  
-  useEffect(() =>{
-    const fetchInventory = async () => {
-      try{
-        const initialResult = await fetch(`https://bobaposapp.onrender.com/inventory/data`);
-        const jsonResult = await initialResult.json();
-        setInventoryItems(jsonResult);
-      } catch (error) {
-        // Handle the error or try an alternative URL
-        console.error('Error fetching inventory ID data:', error);
-      }
-    }
-    fetchInventory();
-  }, [handleInventoryUpdate])
-  
-
-
-  const handleCrudButtonClick = () => {
-    setInventoryUpdate((prevValue) => !prevValue);
-    toast({ title: 'Operation Success', description: 'Database modified', status: 'success', duration: 2500 });
-  };
 
   const TableRow = ({ data, borderBottom = true }) => (
     <Tr>
@@ -78,11 +65,30 @@ function Inventory() {
         </Td>
       ))}
     </Tr>
-  );  
+  );
+
+
+  //get the salesreport data
+  const [salesreportData, setsalesreportData] = useState([]);
+  const [honorsreportData, sethonorsreportData] = useState([]);
+  const [salespairData, setsalespairData] = useState([]);
+  const [selectedCard, setSelectedCard] = useState("sales");
+
+  useEffect(() => {
+    fetch('https://bobaposapp.onrender.com/salesreportdata')
+    .then(response => response.json())
+    .then(data => setsalesreportData(data))
+    fetch('https://bobaposapp.onrender.com/honorsreportdata')
+    .then(response => response.json())
+    .then(data => sethonorsreportData(data))
+    fetch('https://bobaposapp.onrender.com/salespairdata')
+    .then(response => response.json())
+    .then(data => setsalespairData(data))
+  }, []);
 
   return (
  <Flex >
-    <Box display="flex" width="200px" alignItems="center" justifyContent="center">
+    <Box display="flex" width="200px">
       <Box className="sidebar" backgroundColor="#1A202C" color="#FFFFFF" height="100vh" width="200px" p="20px" >
       <Image
             src='/kungfutealogo.png' alt="Kung Fu Tea Logo" borderRadius="lg" mb={6} mt={10}
@@ -114,23 +120,25 @@ function Inventory() {
       <HStack
         flex="1"
         pt={-10}  // Adjust the padding-top as needed
-        pb={5}
+        pb={-5}
         spacing={3}  // Adjust the spacing as needed
         align="center"
         color="white"
         justifyContent="center"
       >
-        <Box w="32%" bg="blue.900" ml={6} mr={4} borderRadius="lg" h="140px">
+        <Box w="32%" bg="blue.900" ml={6} mr={4} borderRadius="lg" h="140px" _hover={{ bg: "blue.700" }}
+          onClick={() => setSelectedCard("sales")}>
           <Center
             w="40px"
             h="58px"
           >
             <Icon as={FaDollarSign} fontSize="2xl" color="white" ml={3} />
           </Center>
-          <Text fontSize="l" textAlign="center" ml={3} ><a href="/menuinfo">Menu</a></Text>
+          <Text fontSize="l" textAlign="center" ml={3} ><a href="/menuinfo">Sales Report</a></Text>
         </Box>
 
-        <Box w="32%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="140px">
+        <Box w="32%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="140px" _hover={{ bg: "blue.700" }}
+          onClick={() => setSelectedCard("honors")}>
           <Center
             w="40px"
             h="58px"
@@ -138,10 +146,11 @@ function Inventory() {
           >
             <Icon as={FaReceipt} fontSize="2xl" color="white" ml={3}/>
           </Center>
-          <Text fontSize="l" textAlign="center" ml={3}><a href="/inventory">Inventory</a></Text>
+          <Text fontSize="l" textAlign="center" ml={3}><a href="/inventory">Honors Report</a></Text>
         </Box>
 
-        <Box w="32%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="140px">
+        <Box w="32%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="140px" _hover={{ bg: "blue.700" }}
+          onClick={() => setSelectedCard("pair")}>
           <Center
             w="40px"
             h="58px"
@@ -149,36 +158,38 @@ function Inventory() {
           >
             <Icon as={FaUsers} fontSize="2xl" color="white" ml={3}/>
           </Center>
-          <Text fontSize="l" textAlign="center" ml={3}><a href="/employees">Employees</a></Text>
+          <Text fontSize="l" textAlign="center" ml={3}><a href="/employees">Pair Report</a></Text>
         </Box>
       </HStack>
         {/* Table */}
-        <Flex w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto" justifyContent={"center"} alignItems={"center"} flexDirection={"column"}>
+        <Flex w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto" alignItems={"center"} justifyContent={"center"} flexDirection={"column"}>
           <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
-            Inventory Details
+          {selectedCard === "sales" ? "Sales" : selectedCard === "honors" ? "Honors" : "Pair"} Report Details
           </Heading>
           <Table variant="simple" borderCollapse="separate">
             <Thead>
               <Tr>
-                <Th scope="col">Item ID</Th>
-                <Th scope="col">Quantity</Th>
-                <Th scope="col">Item Category</Th>
-                <Th scope="col">Minimum Amount</Th>
+                <Th scope="col">Item Name</Th>
+                <Th scope="col">Quantity Sold</Th>
               </Tr>
             </Thead>
             <Tbody>
-          {/* Use the TableRow component to render rows */}
-          {inventoryItems.map((item, index) => (
-          <TableRow key = {index} data={[item.itemid, item.quantity, item.itemcategory, item.minimumamount]} />
-          ))}
+            {selectedCard === "sales" && salesreportData.map((salesdata, index) => (
+              <TableRow key={index} data={[salesdata.itemreport, salesdata.quantitysold]} />
+            ))}
+            {selectedCard === "honors" && honorsreportData.map((salesdata, index) => (
+              <TableRow key={index} data={[salesdata.itemreport, salesdata.quantitysold]} />
+            ))}
+            {selectedCard === "pair" && salespairData.map((salespairs, index) => (
+              <TableRow key={index} data={[salespairs.item1, salespairs.item2, salespairs.frequency]} />
+            ))}
           {/* Add more rows as needed */}
             </Tbody>
           </Table>
-          <InventoryCRUD onUpdate={handleCrudButtonClick}></InventoryCRUD>
         </Flex>
-      </Flex>
+        </Flex>
     </Flex>
   );
 }
 
-export default Inventory;
+export default SalesReport;

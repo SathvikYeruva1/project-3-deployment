@@ -55,6 +55,9 @@ function Menuinfo() {
   const handleDashboard = () => {
     navigate("/manager-dashboard");
   };
+  const handleReport = () => {
+    navigate("/salesreport");
+  };
   const [menuinfoItems, setMenuinfoItems] = useState([]);
   const [handleMenuinfoUpdate, setMenuinfoUpdate] = useState(false);
   const toast = useToast();
@@ -111,10 +114,13 @@ function Menuinfo() {
             <Button onClick={handleMenuInfo} variant="unstyled">Menu</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-            <Button onClick={handleEmployee} variant="unstyled">Employees</Button>
+           <Button onClick={handleEmployee} variant="unstyled">Employees</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
-          <Button onClick={handleLogout} variant="unstyled">Log out</Button>
+            <Button onClick={handleReport} variant="unstyled">SalesReport</Button>
+          </ListItem>
+          <ListItem mb="15px" fontSize="lg">
+            <Button onClick={handleLogout} variant="unstyled">Log out</Button>
           </ListItem>
         </UnorderedList>
       </Box>
