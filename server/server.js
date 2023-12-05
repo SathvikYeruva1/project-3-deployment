@@ -133,7 +133,7 @@ app.get('/order/lastid', (req, res) => {
 
 //get all of the orders data
 app.get('/ordersdata', cors(),(req, res) => {
-  pool.query('SELECT * FROM orders WHERE orderdate LIKE "2023%" ORDER BY orderdate DESC LIMIT 100;').then(query_res => {
+  pool.query("SELECT * FROM orders WHERE orderdate LIKE '2023%' ORDER BY orderdate DESC LIMIT 100;").then(query_res => {
     res.json(query_res.rows);
   }).catch(err => {
     res.status(500).json({error: err.message});
