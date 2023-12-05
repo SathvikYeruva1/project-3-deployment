@@ -107,6 +107,7 @@ function Login() {
             fontWeight='bold'
             color='#FFFFFF'
             marginBottom='10px'
+            as='h1'
           >
             Kung Fu Tea
           </Text>
