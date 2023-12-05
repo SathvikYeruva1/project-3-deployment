@@ -68,14 +68,6 @@ function Menuinfo() {
       } catch (error) {
         // Handle the error or try an alternative URL
         console.error('Error fetching menu ID data:', error);
-        // Attempt an alternative URL
-        try {
-          const initialResult = await fetch(`http://localhost:5001/menuinfo/data`);
-          const jsonResult = await initialResult.json();
-          setMenuinfoItems(jsonResult);
-        } catch (alternativeError) {
-          console.error('Error fetching menu ID data from the alternative URL:', alternativeError);
-        }
       }
     }
     fetchMenuinfo();
@@ -172,8 +164,8 @@ function Menuinfo() {
       </HStack>
       
         {/* Table */}
-        <Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">
-          <Heading as="h1" fontSize="xl" mb={8} color="blackAlpha.900">
+        <Flex w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto" alignItems={"center"} justifyContent={"center"} flexDirection={"column"}>
+          <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
             Menu Information
           </Heading>
           <Table variant="simple" borderCollapse="separate">
@@ -195,8 +187,8 @@ function Menuinfo() {
           {/* Add more rows as needed */}
             </Tbody>
           </Table>
-        </Box>
-        <MenuinfoCRUD onUpdate={handleCrudButtonClick}></MenuinfoCRUD>
+          <MenuinfoCRUD onUpdate={handleCrudButtonClick}></MenuinfoCRUD>
+        </Flex>
         </Flex>
     </Flex>
   );

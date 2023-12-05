@@ -43,22 +43,8 @@ export default function MenuinfoCRUD(props) {
         // Handle the response or perform additional actions
         console.log("Data posted successfully:", data);
       })
-      .catch(() => {
-        fetch("http://localhost:5001/menuinfo/post", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            // Handle the response or perform additional actions
-            console.log("Data posted successfully:", data);
-          })
-          .catch((error) => {
-            console.error("Error posting data:", error);
-          });
+      .catch((error) => {
+        console.error("Error posting data:", error);
       })
   };
 
@@ -82,29 +68,8 @@ export default function MenuinfoCRUD(props) {
         console.log('Item updated successfully:', data);
         // Perform additional actions if needed
       })
-      .catch(() => {
-        fetch(`http://localhost:5001/menuinfo/edit/${formData.id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            price: formData.price,
-            ingredients: formData.ingredients,
-            description: formData.description,
-            category: formData.category
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log('Item updated successfully:', data);
-            // Perform additional actions if needed
-          })
-          .catch((error) => {
-            console.error('Error updating item:', error);
-            // Handle error
-          });
+      .catch((error) => {
+          console.error('Error updating item:', error);
       })
   };
   
@@ -119,19 +84,8 @@ export default function MenuinfoCRUD(props) {
         console.log('Item deleted successfully:', data);
         // Perform additional actions if needed
       })
-      .catch(() => {
-        fetch(`http://localhost:5001/menuinfo/delete/${formData.id}`, {
-          method: 'DELETE',
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log('Item deleted successfully:', data);
-            // Perform additional actions if needed
-          })
-          .catch((error) => {
-            console.error('Error deleting item:', error);
-            // Handle error
-          });
+      .catch((error) => {
+        console.error('Error deleting item:', error);
       })
   };
 
