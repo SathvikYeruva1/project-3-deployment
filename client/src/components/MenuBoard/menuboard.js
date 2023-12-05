@@ -24,6 +24,7 @@ import {
   PopoverBody,
   Input,
   HStack,
+  Select,
   Flex,  // Import Flex from Chakra UI for layout
 } from "@chakra-ui/react";
 import { AddIcon, InfoIcon, CloseIcon, ArrowBackIcon, } from "@chakra-ui/icons";
@@ -107,12 +108,34 @@ const MenuBoard = () => {
 
 
   const handleAddToCart = (item) => {
+    const newItem = {
+      ...item,
+      size: "Medium", // Default size
+      ice: "Regular", // Default ice amount
+      sugar: "Regular", // Default sugar amount
+      adjustedPrice: parseFloat(item.price).toFixed(2) // Default adjusted price
+    };
     setCartItems([...cartItems, item]); // Add the selected item to the cart
     setIsCartOpen(true); // Display the cart section when an item is added
   };
 
+  const updateCartItem = (index, key, value) => {
+    const updatedCartItems = [...cartItems];
+    const item = updatedCartItems[index];
+    item[key] = value;
+  
+    // Simple hardcoded price adjustments
+    let priceAdjustment = 0;
+    if (item.size === "Large") priceAdjustment += 0.5;
+    if (item.ice === "Extra") priceAdjustment += 0.2;
+    if (item.sugar === "Extra") priceAdjustment += 0.2;
+  
+    item.adjustedPrice = (parseFloat(item.price) + priceAdjustment).toFixed(2);
+    setCartItems(updatedCartItems);
+  };
+
   const calculateTotalPrice = () => {
-    const totalPrice = cartItems.reduce((total, item) => total + parseFloat(item.price), 0); // Sum up the prices of all items in the cart
+    const totalPrice = cartItems.reduce((total, item) => total + parseFloat(item.adjustedPrice), 0); // Sum up the prices of all items in the cart
     return totalPrice.toFixed(2); // Return the total with two decimal places
   };
 
@@ -322,25 +345,56 @@ const MenuBoard = () => {
           boxShadow="md"
           p="4"
           zIndex="1"
+          maxH="100vh" // Set maximum height to 100% of the viewport height
+          overflowY="auto" // Enable vertical scrolling
         >
           <Heading as="h3" size="md" mb="4" color="black">
             Cart
           </Heading>
           {cartItems.map((cartItem, index) => (
-            <Flex key={index} alignItems="center" justifyContent="space-between" mb="2">
-              {/* Add more details here as needed */}
-              <IconButton
-              aria-label="Remove from cart"
-              icon={<CloseIcon />} // Use the CloseIcon component
-              colorScheme="red"
-              onClick={() => {
-                const updatedCartItems = cartItems.filter((_, i) => i !== index); // Filter out the clicked item
-                setCartItems(updatedCartItems); // Update the cart items
-              }}
-              mr={1}
-            />
-            <Text color="black" marginLeft="0" marginRight="2" flexGrow="1" >{cartItem.name}</Text>
-            <Text color="black">${parseFloat(cartItem.price)}</Text>
+              <Flex key={index} direction="column" mb={4}>
+              <Flex alignItems="center" justifyContent="space-between">
+                <Text fontWeight="bold">{cartItem.name}</Text>
+                <IconButton
+                  aria-label="Remove from cart"
+                  icon={<CloseIcon />}
+                  colorScheme="red"
+                  onClick={() => {
+                    const updatedCartItems = cartItems.filter((_, i) => i !== index);
+                    setCartItems(updatedCartItems);
+                  }}
+                />
+              </Flex>
+              <Select
+                placeholder="Size"
+                defaultValue={cartItem.size}
+                onChange={(e) => updateCartItem(index, "size", e.target.value)}
+              >
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+              </Select>
+              <Select
+                placeholder="Ice"
+                defaultValue={cartItem.ice}
+                onChange={(e) => updateCartItem(index, "ice", e.target.value)}
+              >
+                <option value="None">No Ice</option>
+                <option value="Less">Less Ice</option>
+                <option value="Regular">Regular Ice</option>
+                <option value="Extra">Extra Ice</option>
+              </Select>
+              <Select
+                placeholder="Sugar"
+                defaultValue={cartItem.sugar}
+                onChange={(e) => updateCartItem(index, "sugar", e.target.value)}
+              >
+                <option value="None">No Sugar</option>
+                <option value="Less">Less Sugar</option>
+                <option value="Regular">Regular Sugar</option>
+                <option value="Extra">Extra Sugar</option>
+              </Select>
+              <Text mt={2}>Price: ${cartItem.adjustedPrice}</Text>
             </Flex>
           ))}
           <Divider my={4} />
@@ -348,7 +402,7 @@ const MenuBoard = () => {
             <Text fontWeight="bold" color="black">Total Price:</Text>
             <Text color="black">${calculateTotalPrice()}</Text>
           </Flex>
-          <Button width="100%" position="absolute" bottom="4" colorScheme="blue" onClick={() => setShowCheckout(true)} aria-label="Proceed to Checkout">
+          <Button width="100%" colorScheme="blue" onClick={() => setShowCheckout(true)} aria-label="Proceed to Checkout">
             Checkout
           </Button>
         </Box>
