@@ -56,6 +56,9 @@ function ManagerDashboard() {
   const handleReport = () => {
     navigate("/salesreport");
   };
+  const handleMenuDisplayInfo = () => {
+    navigate("/menuboard-display");
+  };
 
 
   const TableRow = ({ data, borderBottom = true }) => (
@@ -93,6 +96,9 @@ function ManagerDashboard() {
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
             <Button onClick={handleMenuInfo} variant="unstyled">Menu</Button>
+          </ListItem>
+          <ListItem mb="15px" fontSize="lg">
+            <Button onClick={handleMenuDisplayInfo} variant="unstyled">Menu Board Display</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
            <Button onClick={handleEmployee} variant="unstyled">Employees</Button>

@@ -8,9 +8,6 @@ import Employees from "./components/Employees/employees";
 import Menuinfo from "./components/Menuinfo/menuinfo";
 import MenuBoardDisplay from "./components/MenuBoard/menuboarddisplay";
 import SalesReport from "./components/salesreports/salesreport";
-
-// import "./App.css"
-// 1. import `ChakraProvider` component
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { useEffect } from "react";
 
@@ -46,10 +43,10 @@ const App = () => {
         <div id="google_translate_element"></div>
       </div>
       <Routes>
+        <Route path="/" element={<MenuBoard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/menuboard-display" element={<MenuBoardDisplay />} />
         <Route path="/manager-dashboard" element={<ManagerDashboard />} />
-        <Route path="/" element={<MenuBoard />} />
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/employees" element={<Employees />} />
         <Route path="/menuinfo" element={<Menuinfo />} />

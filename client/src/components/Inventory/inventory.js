@@ -45,6 +45,9 @@ function Inventory() {
   const handleReport = () => {
     navigate("/salesreport");
   };
+  const handleMenuDisplayInfo = () => {
+    navigate("/menuboard-display");
+  };
   const [inventoryItems, setInventoryItems] = useState([]);
   const [handleInventoryUpdate, setInventoryUpdate] = useState(false);
   const toast = useToast();
@@ -96,6 +99,9 @@ function Inventory() {
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
             <Button onClick={handleMenuInfo} variant="unstyled">Menu</Button>
+          </ListItem>
+          <ListItem mb="15px" fontSize="lg">
+            <Button onClick={handleMenuDisplayInfo} variant="unstyled">Menu Board Display</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
            <Button onClick={handleEmployee} variant="unstyled">Employees</Button>
