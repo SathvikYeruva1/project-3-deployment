@@ -53,6 +53,18 @@ function Login() {
   return (
     <GoogleOAuthProvider clientId="881293908310-52t5ht6pc84gr01iklt9bjr8voh7ng85.apps.googleusercontent.com">
     <ChakraProvider theme={customTheme}>
+          {/* Skip Links */}
+          <Box position="absolute" top="-40px" left="0" zIndex="100">
+            <Button
+              as="a"
+              href="#mainContent" 
+              onFocus={(e) => (e.target.style.position = 'static')}
+              onBlur={(e) => (e.target.style.position = 'absolute')}
+              variant="ghost"
+            >
+              Skip to main content
+            </Button>
+          </Box>
       <Box className='weather-text' aria-label="Weather Information" role="form" textAlign='center' marginTop='10px'>
         <Input
           type='text'
