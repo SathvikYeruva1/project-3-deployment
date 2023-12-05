@@ -117,6 +117,14 @@ const MenuBoard = () => {
     return totalPrice.toFixed(2); // Return the total with two decimal places
   };
 
+  function formatDate(date) {
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Months are zero-indexed
+    const year = date.getFullYear().toString().slice(-2); // Extract last two digits of the year
+  
+    return `${month}/${day}/${year}`;
+  };
+
   const handleCheckout = async () => {
     let totalPrice = 0;
 
@@ -129,7 +137,7 @@ const MenuBoard = () => {
     const requestBody = {
       id: uniqueId,
       totalAmount: totalPrice,
-      orderDate: new Date().toISOString(),
+      orderDate: formatDate(new Date()),
       cashierName: 'Blake', 
       paymentMethod: selectedPaymentMethod, 
       time: new Date().toLocaleTimeString(),
