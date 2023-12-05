@@ -83,6 +83,39 @@ app.get('/menudata/teaorders', (req, res) => {
       });
 });
 
+app.get('/salesreportdata', (req, res) => {
+  salesreportdata = []
+  pool.query('SELECT oi.itemname as itemreport, SUM(oi.quantity) as quantitysold FROM orders o JOIN orderitems oi ON o.id = oi.orderid WHERE (o.orderdate::timestamp || " " || o.time::time) BETWEEN "1/1/23 00:00:00" AND "2/4/2023 00:00:00" GROUP BY oi.itemname;').then(query_res => {
+          for (let i = 0; i < query_res.rowCount; i++){
+              salesreportdata.push(query_res.rows[i]);
+          }
+          const data = {salesreportdata: salesreportdata};
+          res.json(data);
+      });
+});
+
+app.get('/honorsreportdata', (req, res) => {
+  salesreportdata = []
+  pool.query('SELECT oi.itemname as itemreport, SUM(oi.quantity) as quantitysold FROM orders o JOIN orderitems oi ON o.id = oi.orderid WHERE (o.orderdate::timestamp || " " || o.time::time) BETWEEN "1/1/23 00:00:00" AND "2/4/23 00:00:00" GROUP BY oi.itemname ORDER BY quantitysold DESC LIMIT 100;').then(query_res => {
+          for (let i = 0; i < query_res.rowCount; i++){
+              salesreportdata.push(query_res.rows[i]);
+          }
+          const data = {salesreportdata: salesreportdata};
+          res.json(data);
+      });
+});
+
+app.get('/salespairdata', (req, res) => {
+  salesreportdata = []
+  pool.query('SELECT oi1.itemname AS item1, oi2.itemname AS item2, COUNT(*) AS frequency FROM orderitems oi1 JOIN orderitems oi2 ON oi1.orderid = oi2.orderid AND oi1.itemname < oi2.itemname JOIN orders o ON oi1.orderid = o.id WHERE o.time BETWEEN "1/1/23 00:00:00" AND "2/4/2023 00:00:00" GROUP BY oi1.itemname, oi2.itemname ORDER BY frequency DESC;').then(query_res => {
+          for (let i = 0; i < query_res.rowCount; i++){
+              salesreportdata.push(query_res.rows[i]);
+          }
+          const data = {salesreportdata: salesreportdata};
+          res.json(data);
+      });
+});
+
 app.get('/menudata/descriptions', (req, res) => {
   menuitemsdescriptions = []
   pool.query('SELECT descriptions FROM teaorders;').then(query_res => {
@@ -106,7 +139,7 @@ app.get('/order/lastid', (req, res) => {
 
 //get all of the orders data
 app.get('/ordersdata', cors(),(req, res) => {
-  pool.query('SELECT * FROM orders LIMIT 100;').then(query_res => {
+  pool.query('SELECT * FROM orders WHERE orderdate LIKE "2023%" ORDER BY orderdate DESC LIMIT 100;').then(query_res => {
     res.json(query_res.rows);
   }).catch(err => {
     res.status(500).json({error: err.message});

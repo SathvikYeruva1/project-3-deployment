@@ -54,6 +54,9 @@ function Employees() {
   const handleDashboard = () => {
     navigate("/manager-dashboard");
   };
+  const handleReport = () => {
+    navigate("/salesreport");
+  };
 
   const TableRow = ({ data, borderBottom = true }) => (
     <Tr>
@@ -94,6 +97,9 @@ function Employees() {
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
            <Button onClick={handleEmployee} variant="unstyled">Employees</Button>
+          </ListItem>
+          <ListItem mb="15px" fontSize="lg">
+            <Button onClick={handleReport} variant="unstyled">SalesReport</Button>
           </ListItem>
           <ListItem mb="15px" fontSize="lg">
             <Button onClick={handleLogout} variant="unstyled">Log out</Button>

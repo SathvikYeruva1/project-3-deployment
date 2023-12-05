@@ -1,0 +1,38 @@
+@import url(https://fonts.googleapis.com/css?family=Varela+Round);
+
+.salesreport-container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Varela Round";
+  color: white;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+.sidebar{
+  width: 250px;
+  height: 100%;
+  background: rgba(0,0,0,0.1);
+  padding: 20px 22px;
+  top: 0;
+  left: 0;
+  position: fixed;
+}
+
+.nav-links {
+    list-style: none;
+    position: relative;
+}
+
+.nav-links li {
+    padding: 10px 0;
+}
+
+.nav-links li a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 10px 14px;
+}
