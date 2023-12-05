@@ -73,11 +73,6 @@ function Employees() {
     fetch('https://bobaposapp.onrender.com/employeesdata')
     .then(response => response.json())
     .then(data => setEmployeeData(data))
-    .catch(() => {
-        fetch('http://localhost:5001/employeesdata')
-        .then(response => response.json())
-        .then(data => setEmployeeData(data))
-      });
   }, []);
 
   return (
@@ -152,9 +147,8 @@ function Employees() {
           <Text fontSize="l" textAlign="center" ml={3}><a href="/employees">Employees</a></Text>
         </Box>
       </HStack>
-      <EmployeeCRUD/>
         {/* Table */}
-        <Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">
+        <Flex w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto" alignItems={"center"} justifyContent={"center"} flexDirection={"column"}>
           <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
             Employee Details
           </Heading>
@@ -175,7 +169,8 @@ function Employees() {
           {/* Add more rows as needed */}
             </Tbody>
           </Table>
-        </Box>
+          <EmployeeCRUD/>
+        </Flex>
         </Flex>
     </Flex>
   );

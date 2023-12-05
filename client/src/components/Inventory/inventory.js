@@ -54,14 +54,6 @@ function Inventory() {
       } catch (error) {
         // Handle the error or try an alternative URL
         console.error('Error fetching inventory ID data:', error);
-        // Attempt an alternative URL
-        try {
-          const initialResult = await fetch(`http://localhost:5001/inventory/data`);
-          const jsonResult = await initialResult.json();
-          setInventoryItems(jsonResult);
-        } catch (alternativeError) {
-          console.error('Error fetching inventory ID data from the alternative URL:', alternativeError);
-        }
       }
     }
     fetchInventory();
@@ -156,9 +148,8 @@ function Inventory() {
           <Text fontSize="l" textAlign="center" ml={3}><a href="/employees">Employees</a></Text>
         </Box>
       </HStack>
-      <InventoryCRUD onUpdate={handleCrudButtonClick}></InventoryCRUD>
         {/* Table */}
-        <Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">
+        <Flex w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto" justifyContent={"center"} alignItems={"center"} flexDirection={"column"}>
           <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
             Inventory Details
           </Heading>
@@ -179,7 +170,8 @@ function Inventory() {
           {/* Add more rows as needed */}
             </Tbody>
           </Table>
-        </Box>
+          <InventoryCRUD onUpdate={handleCrudButtonClick}></InventoryCRUD>
+        </Flex>
       </Flex>
     </Flex>
   );

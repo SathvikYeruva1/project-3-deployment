@@ -42,22 +42,7 @@ export default function InventoryCRUD(props) {
         console.log("Data posted successfully:", data);
       })
       .catch((error) => {
-        console.error("Error posting data:", error);
-        fetch("http://localhost:5001/inventory/post", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            // Handle the response or perform additional actions
-            console.log("Data posted successfully:", data);
-          })
-          .catch((error) => {
-            console.error("Error posting data:", error);
-          });
+          console.error("Error posting data:", error);
       });
   };
 
@@ -78,22 +63,8 @@ export default function InventoryCRUD(props) {
       .then((data) => {
         console.log('Item updated successfully:', data);
       })
-      .catch(() => {
-        fetch(`http://localhost:5001/inventory/edit/${formData.itemId}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            quantity: formData.quantity,
-            itemcategory: formData.itemCategory,
-            minimumamount: formData.minimumAmount
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log('Item updated successfully:', data);
-          })
+      .catch((error) => {
+        console.error('Error deleting item:', error);
       })
   };
   
@@ -110,18 +81,6 @@ export default function InventoryCRUD(props) {
       })
       .catch((error) => {
         console.error('Error deleting item:', error);
-        fetch(`http://localhost:5001/inventory/delete/${formData.itemId}`, {
-          method: 'DELETE',
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log('Item deleted successfully:', data);
-            // Perform additional actions if needed
-          })
-          .catch((error) => {
-            console.error('Error deleting item:', error);
-            // Handle error
-          });
       });
   };
 

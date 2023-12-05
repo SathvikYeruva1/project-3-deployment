@@ -40,22 +40,8 @@ export default function EmployeeCRUD() {
         // Handle the response or perform additional actions
         console.log("Data posted successfully:", data);
       })
-      .catch(() => {
-        fetch("http://localhost:5001/employee/post", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            // Handle the response or perform additional actions
-            console.log("Data posted successfully:", data);
-          })
-          .catch((error) => {
-            console.error("Error posting data:", error);
-          });
+      .catch((error) => {
+        console.error("Error posting data:", error);
       })
   };
 
@@ -74,29 +60,9 @@ export default function EmployeeCRUD() {
       .then((response) => response.json())
       .then((data) => {
         console.log('Item updated successfully:', data);
-        // Perform additional actions if needed
       })
-      .catch(() => {
-        fetch(`http://localhost:5001/employee/edit/${formData.id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            employeeName: formData.employeeName,
-            salary: formData.salary,
-            employeeRole: formData.employeeRole
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log('Item updated successfully:', data);
-            // Perform additional actions if needed
-          })
-          .catch((error) => {
-            console.error('Error updating item:', error);
-            // Handle error
-          });
+      .catch((error) => {
+        console.error('Error updating item:', error);
       })
   };
   
@@ -110,19 +76,8 @@ export default function EmployeeCRUD() {
         console.log('Item deleted successfully:', data);
         // Perform additional actions if needed
       })
-      .catch(() => {
-        fetch(`http://localhost:5001/employee/delete/${formData.id}`, {
-          method: 'DELETE',
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log('Item deleted successfully:', data);
-            // Perform additional actions if needed
-          })
-          .catch((error) => {
-            console.error('Error deleting item:', error);
-            // Handle error
-          });
+      .catch((error) => {
+        console.error('Error deleting item:', error);
       })
   };
 

@@ -62,23 +62,6 @@ const MenuBoard = () => {
     } catch (error) {
       // Handle the error or try an alternative URL
       console.error('Error fetching menu data:', error);
-      // Attempt an alternative URL
-      try {
-          const initialResult = await fetch(`http://localhost:5001/menudata/teaorders`);
-          const jsonResult = await initialResult.json();
-          setMenuItemIngredients(jsonResult.menuitemsingredients);
-          setMenuItemData(jsonResult.menuitemsingredients);
-          setMenuItemDescriptions(jsonResult.menuitemsingredients);
-
-          const response = await fetch('http://localhost:5001/order/lastid');
-          const lastIdData = await response.json();
-          const lastId = lastIdData.lastId;
-          console.log(lastId);
-          setUniqueId(lastId + 1);
-          console.log(uniqueId);
-        } catch (alternativeError) {
-          console.error('Error fetching menu data from the alternative URL:', alternativeError);
-        }
       }
     }
     fetchMenuData();
