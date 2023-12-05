@@ -137,7 +137,7 @@ const MenuBoard = () => {
     const requestBody = {
       id: uniqueId,
       totalAmount: totalPrice,
-      orderDate: formatDate(new Date()),
+      orderDate: new Date().toISOString(),
       cashierName: 'Blake', 
       paymentMethod: selectedPaymentMethod, 
       time: new Date().toLocaleTimeString(),
