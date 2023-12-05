@@ -6,11 +6,9 @@ import MenuBoard from "./components/MenuBoard/menuboard";
 import Inventory from "./components/Inventory/inventory";
 import Employees from "./components/Employees/employees";
 import Menuinfo from "./components/Menuinfo/menuinfo";
-// import "./App.css"
-// 1. import `ChakraProvider` component
+import MenuBoardDisplay from "./components/MenuBoard/menuboarddisplay";
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { useEffect } from "react";
-import { gapi } from "gapi-script";
 
 const customTheme = extendTheme({ 
   styles: {
@@ -44,9 +42,10 @@ const App = () => {
         <div id="google_translate_element"></div>
       </div>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/menuboard-display" element={<MenuBoardDisplay />} />
         <Route path="/manager-dashboard" element={<ManagerDashboard />} />
-        <Route path="/menuboard" element={<MenuBoard />} />
+        <Route path="/" element={<MenuBoard />} />
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/employees" element={<Employees />} />
         <Route path="/menuinfo" element={<Menuinfo />} />

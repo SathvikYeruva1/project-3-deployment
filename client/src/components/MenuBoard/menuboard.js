@@ -30,6 +30,7 @@ import { AddIcon, InfoIcon, CloseIcon, ArrowBackIcon, } from "@chakra-ui/icons";
 import { FaMoneyBill, FaCreditCard, FaQrcode} from "react-icons/fa"
 import "./menuboard.css";
 import { useToast } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const MenuBoard = () => {
   const [menuItemData, setMenuItemData] = useState([]);
@@ -47,6 +48,7 @@ const MenuBoard = () => {
   const [uniqueId, setUniqueId] = useState(0);
 
   const toast = useToast();
+  const navigate = useNavigate();
 
   useEffect(() =>{
   const fetchMenuData = async () => {
@@ -105,7 +107,6 @@ const MenuBoard = () => {
     setSelectedCategory((prevCategory) => (prevCategory === category ? null : category));
   };
 
-
   const handleAddToCart = (item) => {
     setCartItems([...cartItems, item]); // Add the selected item to the cart
     setIsCartOpen(true); // Display the cart section when an item is added
@@ -115,7 +116,6 @@ const MenuBoard = () => {
     const totalPrice = cartItems.reduce((total, item) => total + parseFloat(item.price), 0); // Sum up the prices of all items in the cart
     return totalPrice.toFixed(2); // Return the total with two decimal places
   };
-
 
   const handleCheckout = async () => {
     let totalPrice = 0;
@@ -157,6 +157,10 @@ const MenuBoard = () => {
       })
   };
 
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
   return (
     <Flex flexDirection="column">
     <Box background={"gray.800"} py={3}>
@@ -165,7 +169,20 @@ const MenuBoard = () => {
     <Flex alignItems="flex-start" bg="gray.800">
       {/* Left Side */}
       <Center w="20%" display="flex" flexDirection="column">
-
+        <Button
+          onClick={handleLogin}
+          fontFamily='Varela Round'
+          textTransform='uppercase'
+          background='#D49D8F'
+          padding='15px'
+          color='#FFFFFF'
+          fontSize='14px'
+          marginTop={"30px"}
+          marginBottom={"-60px"}
+          _hover={{ background: '#C39B91' }}
+        >
+          Log In
+        </Button>
         {/* Kung Fu Tea Logo */}
         <Image
             src='/kungfutealogo.png'   // Adjust the image path as needed
