@@ -161,7 +161,7 @@ const MenuBoard = () => {
       id: uniqueId,
       totalAmount: totalPrice,
       orderDate: new Date().toISOString(),
-      cashierName: 'Blake', 
+      cashierName: 'Brady', 
       paymentMethod: selectedPaymentMethod, 
       time: new Date().toLocaleTimeString(),
     };
