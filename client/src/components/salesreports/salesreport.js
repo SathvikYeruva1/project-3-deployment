@@ -132,9 +132,8 @@ function SalesReport() {
             w="40px"
             h="58px"
           >
-            <Icon as={FaDollarSign} fontSize="2xl" color="white" ml={3} />
           </Center>
-          <Text fontSize="l" textAlign="center" ml={3} ><a href="/menuinfo">Sales Report</a></Text>
+          <Text fontSize="l" textAlign="center" ml={3} >Sales Report</Text>
         </Box>
 
         <Box w="32%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="140px" _hover={{ bg: "blue.700" }}
@@ -144,9 +143,8 @@ function SalesReport() {
             h="58px"
             borderRadius="lg"
           >
-            <Icon as={FaReceipt} fontSize="2xl" color="white" ml={3}/>
           </Center>
-          <Text fontSize="l" textAlign="center" ml={3}><a href="/inventory">Honors Report</a></Text>
+          <Text fontSize="l" textAlign="center" ml={3}>Honors Report</Text>
         </Box>
 
         <Box w="32%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="140px" _hover={{ bg: "blue.700" }}
@@ -156,9 +154,8 @@ function SalesReport() {
             h="58px"
             borderRadius="lg"
           >
-            <Icon as={FaUsers} fontSize="2xl" color="white" ml={3}/>
           </Center>
-          <Text fontSize="l" textAlign="center" ml={3}><a href="/employees">Pair Report</a></Text>
+          <Text fontSize="l" textAlign="center" ml={3}>Pair Report</Text>
         </Box>
       </HStack>
         {/* Table */}
@@ -169,8 +166,29 @@ function SalesReport() {
           <Table variant="simple" borderCollapse="separate">
             <Thead>
               <Tr>
+                {selectedCard === "honors" &&
                 <Th scope="col">Item Name</Th>
-                <Th scope="col">Quantity Sold</Th>
+                }
+                {selectedCard === "honors" &&
+                <Th scope="col">Quantity</Th>
+                }
+
+                {selectedCard === "sales" &&
+                <Th scope="col">Item Name</Th>
+                }
+                {selectedCard === "sales" &&
+                <Th scope="col">Quantity</Th>
+                }
+       
+                {selectedCard === "pair" && 
+                <Th scope="col">Item 1</Th>
+                }
+                {selectedCard === "pair" && 
+                <Th scope="col">Item 2</Th>
+                }
+                {selectedCard === "pair" && 
+                <Th scope="col">Item Frequency</Th>
+                }
               </Tr>
             </Thead>
             <Tbody>
