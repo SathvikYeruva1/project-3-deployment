@@ -42,9 +42,9 @@ function Login() {
     if (username === 'manager' && password === 'manager') {
       navigate('/manager-dashboard');
     } else if (username === 'customer' && password === 'customer') {
-      navigate('/menuboard');
+      navigate('/');
     } else if (username === 'cashier' && password === 'cashier') {
-      navigate('/menuboard');
+      navigate('/cashier');
     } else {
       alert('Invalid username or password.');
     }
