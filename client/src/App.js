@@ -7,6 +7,7 @@ import Inventory from "./components/Inventory/inventory";
 import Employees from "./components/Employees/employees";
 import Menuinfo from "./components/Menuinfo/menuinfo";
 import MenuBoardDisplay from "./components/MenuBoard/menuboarddisplay";
+import Cashier from "./components/CashierDashboard/CashierDashboard";
 import SalesReport from "./components/salesreports/salesreport";
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { useEffect, useState } from "react";
@@ -29,18 +30,20 @@ const App = () => {
     new window.google.translate.TranslateElement({pageLanguage: "en"},"google_translate_element");
   };
 
-  const[zoom, setZoom] = useState(100);
+  const[zoom, setZoom] = useState(110);
   
   const zoomIn = () =>{
     setZoom(prevZoom => prevZoom + 10);
   }
 
   const zoomOut = () =>{
-    setZoom(prevZoom => prevZoom - 10);
+    if(zoom > 110){
+      setZoom(prevZoom => prevZoom - 10);
+    }
   }
 
   const resetZoom = () => {
-    setZoom(100);
+    setZoom(110);
   }
 
   useEffect(() => {
@@ -67,6 +70,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/menuboard-display" element={<MenuBoardDisplay />} />
         <Route path="/manager-dashboard" element={<ManagerDashboard />} />
+        <Route path="/cashier" element={<Cashier />} />
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/employees" element={<Employees />} />
         <Route path="/menuinfo" element={<Menuinfo />} />
