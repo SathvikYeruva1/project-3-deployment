@@ -1,4 +1,32 @@
-import React, { useState, useEffect } from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Login/Login.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Login/Login.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -46,7 +74,7 @@ function Login() {
 
   /**
    * Weather Data
-   * @type {Array<number>}
+   * @type {Array&lt;number>}
    */
   const [weatherData, setWeatherData] = useState(null);
 
@@ -72,7 +100,7 @@ function Login() {
     const fetchWeatherData = async () => {
       try {
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=4daab2a267f0a71ed3b614f2e168abfa`
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&amp;units=imperial&amp;appid=4daab2a267f0a71ed3b614f2e168abfa`
         );
         setWeatherData(response.data);
       } catch (error) {
@@ -87,11 +115,11 @@ function Login() {
    * Handles page navigation based on Login Type and information
    */
   const handleLogin = () => {
-    if (username === 'manager' && password === 'manager') {
+    if (username === 'manager' &amp;&amp; password === 'manager') {
       navigate('/manager-dashboard');
-    } else if (username === 'customer' && password === 'customer') {
+    } else if (username === 'customer' &amp;&amp; password === 'customer') {
       navigate('/');
-    } else if (username === 'cashier' && password === 'cashier') {
+    } else if (username === 'cashier' &amp;&amp; password === 'cashier') {
       navigate('/cashier');
     } else {
       alert('Invalid username or password.');
@@ -99,11 +127,11 @@ function Login() {
   };
 
   return (
-    <GoogleOAuthProvider clientId="881293908310-52t5ht6pc84gr01iklt9bjr8voh7ng85.apps.googleusercontent.com">
-    <ChakraProvider theme={customTheme}>
+    &lt;GoogleOAuthProvider clientId="881293908310-52t5ht6pc84gr01iklt9bjr8voh7ng85.apps.googleusercontent.com">
+    &lt;ChakraProvider theme={customTheme}>
           {/* Skip Links */}
-          <Box position="absolute" top="-40px" left="0" zIndex="100">
-            <Button
+          &lt;Box position="absolute" top="-40px" left="0" zIndex="100">
+            &lt;Button
               as="a"
               href="#weather-text" 
               onFocus={(e) => (e.target.style.position = 'static')}
@@ -111,10 +139,10 @@ function Login() {
               variant="ghost"
             >
               Skip to main content
-            </Button>
-          </Box>
-      <Box className='weather-text' aria-label="Weather Information" role="form" textAlign='center' marginTop='10px'>
-        <Input
+            &lt;/Button>
+          &lt;/Box>
+      &lt;Box className='weather-text' aria-label="Weather Information" role="form" textAlign='center' marginTop='10px'>
+        &lt;Input
           type='text'
           placeholder='Enter City'
           aria-label='Enter City'
@@ -127,19 +155,19 @@ function Login() {
           padding='15px'
           top= '95px'
         />
-      </Box>
-      {weatherData && (
-            <>
-              <Text className='weather-text' style={{ top: '135px' }}>City: {weatherData.name}</Text>
-              <Text className='weather-text' style={{ top: '165px' }}>Current Temperature: {weatherData.main.temp}°F</Text>
-              <Text className='weather-text' style={{ top: '195px', color: 'red' }}>High: {weatherData.main.temp_max}°F <Text color="blue" display="inline">Low: {weatherData.main.temp_min}°F</Text></Text>
-              <Text className='weather-text' style={{ top: '225px' }}>Wind: {weatherData.wind.speed} mph</Text>
-              <Text className='weather-text' style={{ top: '255px' }}>Feels Like: {weatherData.main.feels_like}°F</Text>
-              <Text className='weather-text' style={{ top: '285px' }}>Description: {weatherData.weather[0].description}</Text>
-            </>
+      &lt;/Box>
+      {weatherData &amp;&amp; (
+            &lt;>
+              &lt;Text className='weather-text' style={{ top: '135px' }}>City: {weatherData.name}&lt;/Text>
+              &lt;Text className='weather-text' style={{ top: '165px' }}>Current Temperature: {weatherData.main.temp}°F&lt;/Text>
+              &lt;Text className='weather-text' style={{ top: '195px', color: 'red' }}>High: {weatherData.main.temp_max}°F &lt;Text color="blue" display="inline">Low: {weatherData.main.temp_min}°F&lt;/Text>&lt;/Text>
+              &lt;Text className='weather-text' style={{ top: '225px' }}>Wind: {weatherData.wind.speed} mph&lt;/Text>
+              &lt;Text className='weather-text' style={{ top: '255px' }}>Feels Like: {weatherData.main.feels_like}°F&lt;/Text>
+              &lt;Text className='weather-text' style={{ top: '285px' }}>Description: {weatherData.weather[0].description}&lt;/Text>
+            &lt;/>
           )}
-      <Box role="form" aria-label="Login Form" className='login-page' width='360px' padding='8% 0 0' margin='auto'>
-        <Box
+      &lt;Box role="form" aria-label="Login Form" className='login-page' width='360px' padding='8% 0 0' margin='auto'>
+        &lt;Box
           className='form'
           position='relative'
           zIndex='1'
@@ -149,7 +177,7 @@ function Login() {
           padding='45px'
           textAlign='center'
         >
-          <Text
+          &lt;Text
             fontFamily='Varela Round'
             fontSize='40px'
             fontWeight='bold'
@@ -158,9 +186,9 @@ function Login() {
             as='h1'
           >
             Kung Fu Tea
-          </Text>
-          <Box as='form' className='login-form'>
-            <Input
+          &lt;/Text>
+          &lt;Box as='form' className='login-form'>
+            &lt;Input
               type='text'
               placeholder='Username'
               aria-label='Username'
@@ -172,7 +200,7 @@ function Login() {
               marginBottom='15px'
               padding='15px'
             />
-            <Input
+            &lt;Input
               type='password'
               placeholder='Password'
               aria-label='Password'
@@ -184,7 +212,7 @@ function Login() {
               marginBottom='15px'
               padding='15px'
             />
-            <Button
+            &lt;Button
               onClick={handleLogin}
               fontFamily='Varela Round'
               textTransform='uppercase'
@@ -196,8 +224,8 @@ function Login() {
               _hover={{ background: '#C39B91' }}
             >
               Log In
-            </Button>
-            <GoogleLogin
+            &lt;/Button>
+            &lt;GoogleLogin
               onSuccess={credentialResponse => {
                 const USER_CREDENTIAL = jwtDecode(credentialResponse.credential);
                 console.log(USER_CREDENTIAL);
@@ -210,11 +238,11 @@ function Login() {
                 console.log('Login Failed');
               }}
             />
-          </Box>
-        </Box>
-      </Box>
-    </ChakraProvider>
-    </GoogleOAuthProvider>
+          &lt;/Box>
+        &lt;/Box>
+      &lt;/Box>
+    &lt;/ChakraProvider>
+    &lt;/GoogleOAuthProvider>
   );
 }
 
@@ -237,4 +265,26 @@ const customTheme = extendTheme({
   },
 });
 
-export default Login;
+export default Login;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-components_Employees_employees.html">components/Employees/employees</a></li><li><a href="module-components_Inventory_inventory.html">components/Inventory/inventory</a></li><li><a href="module-components_Login_Login.html">components/Login/Login</a></li><li><a href="module-components_ManagerDashboard_ManagerDashboard.html">components/ManagerDashboard/ManagerDashboard</a></li><li><a href="module-components_MenuBoard_menuboard.html">components/MenuBoard/menuboard</a></li><li><a href="module-components_MenuBoard_menuboarddisplay.html">components/MenuBoard/menuboarddisplay</a></li><li><a href="module-components_Menuinfo_menuinfo.html">components/Menuinfo/menuinfo</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#customTheme">customTheme</a></li><li><a href="global.html#root">root</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Dec 06 2023 15:32:08 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

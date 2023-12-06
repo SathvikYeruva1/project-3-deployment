@@ -37,29 +37,59 @@ import "./salesreport.css";
 
 function SalesReport() {
   const navigate = useNavigate();
-
+  /**
+   * Navigate to Home page
+   */
   const handleLogout = () => {
     navigate("/");
   };
+
+  /**
+   * Navigate to employee page
+   */
   const handleEmployee = () => {
     navigate("/employees");
   };
+
+  /**
+   * Navigate to inventory page
+   */
   const handleInventory = () => {
     navigate("/inventory");
   };
+
+  /**
+   * Navigate to menu information page
+   */
   const handleMenuInfo = () => {
     navigate("/menuinfo");
   };
+
+  /**
+   * Navigate to manager dashboard page
+   */
   const handleDashboard = () => {
     navigate("/manager-dashboard");
   };
+
+  /**
+   * Navigate to sales report page
+   */
   const handleReport = () => {
     navigate("/salesreport");
   };
+
+  /**
+   * Navigate to menu board page
+   */
   const handleMenuDisplayInfo = () => {
     navigate("/menuboard-display");
   };
-
+  /**
+   * Maps data into table
+   * @param {*} param0 
+   * @returns {TableRow}
+   */
   const TableRow = ({ data, borderBottom = true }) => (
     <Tr>
       {data.map((item, index) => (
@@ -72,11 +102,33 @@ function SalesReport() {
 
 
   //get the salesreport data
+  /**
+   * Quantity of all items sold within 2023 
+   * @type {Array<number>}
+   */
   const [salesreportData, setsalesreportData] = useState([]);
+
+  /**
+   * Quantity of all items sold within 2023 sorted
+   * @type {Array<number>}
+   */
   const [honorsreportData, sethonorsreportData] = useState([]);
+
+  /**
+   * Frequency of pairs of items bought together during 2023
+   * @type {Array<number>}
+   */
   const [salespairData, setsalespairData] = useState([]);
+
+  /**
+   * Storing which sales report is currently displaying
+   * @type {Array<*>}
+   */
   const [selectedCard, setSelectedCard] = useState("sales");
 
+  /**
+   * Fetch different sales reports from the backend
+   */
   useEffect(() => {
     fetch('https://bobaposapp.onrender.com/salesreportdata')
     .then(response => response.json())

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/ManagerDashboard/ManagerDashboard.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/ManagerDashboard/ManagerDashboard.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  Box,
+  Heading,
+  Divider,
+  Card,
+  Grid,
+  GridItem,
+  VStack,
+  HStack,
+  Button,
+  Text,
+  Image,
+  Center,
+  IconButton,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverHeader,
+  PopoverBody,
+  Flex,  // Import Flex from Chakra UI for layout
+  UnorderedList,
+   ListItem,
+   Icon,
+   Table,
+   Thead,
+   Tbody,
+   Tr,
+   Th,
+   Td,
+} from "@chakra-ui/react";
+import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
+import "./ManagerDashboard.css";
+
+
+/**
+ * Manager Dashboard Page
+ * @module
+ */
+
+
+/**
+ * Manager dashboard page returns a REACT HTML component that loads order data from the database 
+ * contains function that maps order data from database to table sorted to show the most recent orders 
+ * @returns {ReactHTML}
+ */
+
+function ManagerDashboard() {
+  const navigate = useNavigate();
+  /**
+   * Navigate to Home page
+   */
+  const handleLogout = () => {
+    navigate("/");
+  };
+
+  /**
+   * Navigate to employee page
+   */
+  const handleEmployee = () => {
+    navigate("/employees");
+  };
+
+  /**
+   * Navigate to inventory page
+   */
+  const handleInventory = () => {
+    navigate("/inventory");
+  };
+
+  /**
+   * Navigate to menu information page
+   */
+  const handleMenuInfo = () => {
+    navigate("/menuinfo");
+  };
+
+  /**
+   * Navigate to manager dashboard page
+   */
+  const handleDashboard = () => {
+    navigate("/manager-dashboard");
+  };
+
+  /**
+   * Navigate to sales report page
+   */
+  const handleReport = () => {
+    navigate("/salesreport");
+  };
+
+  /**
+   * Navigate to menu board page
+   */
+  const handleMenuDisplayInfo = () => {
+    navigate("/menuboard-display");
+  };
+
+  /**
+   * Maps data into table
+   * @param {*} param0 
+   * @returns {TableRow}
+   */
+  const TableRow = ({ data, borderBottom = true }) => (
+    &lt;Tr>
+      {data.map((item, index) => (
+        &lt;Td key={index} borderBottom={borderBottom ? "1px solid #E2E8F0" : "none"} color="blackAlpha.900">
+          {item}
+        &lt;/Td>
+      ))}
+    &lt;/Tr>
+  );
+
+  //fetching the order data
+  /**
+   * Orders Information 
+   * @type {Array&lt;number>}
+   */
+  const [ordersData, setOrdersData] = useState([]);
+  /**
+   * Fetch order data from the database
+   */
+  useEffect(() => {
+    fetch('https://bobaposapp.onrender.com/ordersdata')
+    .then(response => response.json())
+    .then(data => setOrdersData(data))
+  }, []);
+
+  return (
+ &lt;Flex >
+    &lt;Box display="flex" width="200px">
+      &lt;Box aria-label="Sidebar Navigation" className="sidebar" backgroundColor="#1A202C" color="#FFFFFF" height="100vh" width="200px" p="20px" >
+      &lt;Image
+            src='/kungfutealogo.png' alt="Kung Fu Tea Logo" borderRadius="lg" mb={6} mt={10}
+        />
+        &lt;UnorderedList styleType="none" p="0">
+          &lt;ListItem mb="15px" fontSize="lg">
+            &lt;Button onClick={handleDashboard} variant="unstyled">Dashboard&lt;/Button>
+          &lt;/ListItem>
+          &lt;ListItem mb="15px" fontSize="lg">
+            &lt;Button onClick={handleInventory} variant="unstyled">Inventory&lt;/Button>
+          &lt;/ListItem>
+          &lt;ListItem mb="15px" fontSize="lg">
+            &lt;Button onClick={handleMenuInfo} variant="unstyled">Menu Items&lt;/Button>
+          &lt;/ListItem>
+          &lt;ListItem mb="15px" fontSize="lg">
+            &lt;Button onClick={handleMenuDisplayInfo} variant="unstyled">Menu Board Display&lt;/Button>
+          &lt;/ListItem>
+          &lt;ListItem mb="15px" fontSize="lg">
+           &lt;Button onClick={handleEmployee} variant="unstyled">Employees&lt;/Button>
+          &lt;/ListItem>
+          &lt;ListItem mb="15px" fontSize="lg">
+            &lt;Button onClick={handleReport} variant="unstyled">SalesReport&lt;/Button>
+          &lt;/ListItem>
+          &lt;ListItem mb="15px" fontSize="lg">
+            &lt;Button onClick={handleLogout} variant="unstyled">Log out&lt;/Button>
+          &lt;/ListItem>
+        &lt;/UnorderedList>
+      &lt;/Box>
+    &lt;/Box>
+      {/* Right-side content */}
+      &lt;Flex direction="column" flex="10" bg="#F2F2F2"  minHeight="100vh" pb={10} mt={5}> 
+      &lt;HStack
+        flex="1"
+        pt={-10}  // Adjust the padding-top as needed
+        pb={5}
+        spacing={3}  // Adjust the spacing as needed
+        align="center"
+        color="white"
+        justifyContent="center"
+      >
+        &lt;Box w="32%" bg="blue.900" ml={6} mr={4} borderRadius="lg" h="140px">
+          &lt;Center
+            w="40px"
+            h="58px"
+          >
+            &lt;Icon as={FaDollarSign} fontSize="2xl" color="white" ml={3} />
+          &lt;/Center>
+          &lt;Text fontSize="xl" textAlign="left" ml={3} mb={0.5}>$10,000&lt;/Text>
+          &lt;Text fontSize="l" textAlign="left" ml={3} >Total Revenue&lt;/Text>
+        &lt;/Box>
+
+        &lt;Box w="32%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="140px">
+          &lt;Center
+            w="40px"
+            h="58px"
+            borderRadius="lg"
+          >
+            &lt;Icon as={FaReceipt} fontSize="2xl" color="white" ml={3}/>
+          &lt;/Center>
+          &lt;Text fontSize="xl" textAlign="left" ml={3} mb={0.5}>500&lt;/Text>
+          &lt;Text fontSize="l" textAlign="left" ml={3}>&lt;a href="/inventory">Inventory&lt;/a>&lt;/Text>
+        &lt;/Box>
+
+        &lt;Box w="32%"  bg="blue.900" ml={4} mr={4} borderRadius="lg" h="140px">
+          &lt;Center
+            w="40px"
+            h="58px"
+            borderRadius="lg"
+          >
+            &lt;Icon as={FaUsers} fontSize="2xl" color="white" ml={3}/>
+          &lt;/Center>
+          &lt;Text fontSize="xl" textAlign="left" ml={3} mb={0.5}>20&lt;/Text>
+          &lt;Text fontSize="l" textAlign="left" ml={3}>&lt;a href="/employees">Employees&lt;/a>&lt;/Text>
+        &lt;/Box>
+      &lt;/HStack>
+        {/* Table */}
+        &lt;Box w="96%" bg="white" border="1px solid #E2E8F0" p={10} mx="auto">
+          &lt;Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
+            Order Details
+          &lt;/Heading>
+          &lt;Table variant="simple" borderCollapse="separate">
+            &lt;Thead>
+              &lt;Tr>
+                &lt;Th scope="col">Date&lt;/Th>
+                &lt;Th scope="col">Order Number&lt;/Th>
+                &lt;Th scope="col">Amount&lt;/Th>
+                &lt;Th scope="col">Cashier Name&lt;/Th>
+              &lt;/Tr>
+            &lt;/Thead>
+            &lt;Tbody>
+          {/* Use the TableRow component to render rows */}
+              {ordersData.map((order, index) => (
+                &lt;TableRow key={index} data={[order.orderdate, order.id, `$${order.totalamount}`, order.cashiername]} />
+              ))}
+          {/* Add more rows as needed */}
+            &lt;/Tbody>
+          &lt;/Table>
+        &lt;/Box>
+        &lt;/Flex>
+    &lt;/Flex>
+  );
+}
+
+export default ManagerDashboard;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-components_Employees_employees.html">components/Employees/employees</a></li><li><a href="module-components_Inventory_inventory.html">components/Inventory/inventory</a></li><li><a href="module-components_Login_Login.html">components/Login/Login</a></li><li><a href="module-components_ManagerDashboard_ManagerDashboard.html">components/ManagerDashboard/ManagerDashboard</a></li><li><a href="module-components_MenuBoard_menuboard.html">components/MenuBoard/menuboard</a></li><li><a href="module-components_MenuBoard_menuboarddisplay.html">components/MenuBoard/menuboarddisplay</a></li><li><a href="module-components_Menuinfo_menuinfo.html">components/Menuinfo/menuinfo</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#customTheme">customTheme</a></li><li><a href="global.html#root">root</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Dec 06 2023 15:32:08 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

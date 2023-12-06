@@ -35,32 +35,75 @@ import {
 import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./ManagerDashboard.css";
 
+
+/**
+ * Manager Dashboard Page
+ * @module
+ */
+
+
+/**
+ * Manager dashboard page returns a REACT HTML component that loads order data from the database 
+ * contains function that maps order data from database to table sorted to show the most recent orders 
+ * @returns {ReactHTML}
+ */
+
 function ManagerDashboard() {
   const navigate = useNavigate();
-
+  /**
+   * Navigate to Home page
+   */
   const handleLogout = () => {
     navigate("/");
   };
+
+  /**
+   * Navigate to employee page
+   */
   const handleEmployee = () => {
     navigate("/employees");
   };
+
+  /**
+   * Navigate to inventory page
+   */
   const handleInventory = () => {
     navigate("/inventory");
   };
+
+  /**
+   * Navigate to menu information page
+   */
   const handleMenuInfo = () => {
     navigate("/menuinfo");
   };
+
+  /**
+   * Navigate to manager dashboard page
+   */
   const handleDashboard = () => {
     navigate("/manager-dashboard");
   };
+
+  /**
+   * Navigate to sales report page
+   */
   const handleReport = () => {
     navigate("/salesreport");
   };
+
+  /**
+   * Navigate to menu board page
+   */
   const handleMenuDisplayInfo = () => {
     navigate("/menuboard-display");
   };
 
-
+  /**
+   * Maps data into table
+   * @param {*} param0 
+   * @returns {TableRow}
+   */
   const TableRow = ({ data, borderBottom = true }) => (
     <Tr>
       {data.map((item, index) => (
@@ -72,8 +115,14 @@ function ManagerDashboard() {
   );
 
   //fetching the order data
+  /**
+   * Orders Information 
+   * @type {Array<number>}
+   */
   const [ordersData, setOrdersData] = useState([]);
-
+  /**
+   * Fetch order data from the database
+   */
   useEffect(() => {
     fetch('https://bobaposapp.onrender.com/ordersdata')
     .then(response => response.json())

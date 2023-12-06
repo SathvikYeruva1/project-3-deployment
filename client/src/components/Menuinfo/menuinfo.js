@@ -37,34 +37,90 @@ import "./menuinfo.css";
 import MenuinfoCRUD from "../CRUDComponents/MenuinfoCRUD";
 import { useToast } from "@chakra-ui/react";
 
+/**
+ * Menu Info Page
+ * @module
+ */
+
+
+/**
+ * Page that returns a REACT HTML component that displays Menu information from the database, this page 
+ * contains a function that maps menu information from database, the manager is also able to add, update and delete
+ * items from the menu 
+ * @returns {ReactHTML}
+ */
+
 function Menuinfo() {
   const navigate = useNavigate();
-
+  /**
+   * Navigate to Home page
+   */
   const handleLogout = () => {
     navigate("/");
   };
+
+  /**
+   * Navigate to employee page
+   */
   const handleEmployee = () => {
     navigate("/employees");
   };
+
+  /**
+   * Navigate to inventory page
+   */
   const handleInventory = () => {
     navigate("/inventory");
   };
+
+  /**
+   * Navigate to menu information page
+   */
   const handleMenuInfo = () => {
     navigate("/menuinfo");
   };
+
+  /**
+   * Navigate to manager dashboard page
+   */
   const handleDashboard = () => {
     navigate("/manager-dashboard");
   };
+
+  /**
+   * Navigate to sales report page
+   */
   const handleReport = () => {
     navigate("/salesreport");
   };
+
+  /**
+   * Navigate to menu board page
+   */
   const handleMenuDisplayInfo = () => {
     navigate("/menuboard-display");
   };
+
+  /**
+   * Menu Information 
+   * @type {Array<number>}
+   */
   const [menuinfoItems, setMenuinfoItems] = useState([]);
+
+  /**
+   * Orders Information 
+   * @type {boolean}
+   */
   const [handleMenuinfoUpdate, setMenuinfoUpdate] = useState(false);
+
+  /**
+   * Toast
+   */
   const toast = useToast();
 
+  /**
+   * Get menu data from the database
+   */
   useEffect(() =>{
     const fetchMenuinfo = async () => {
       try{
@@ -80,12 +136,19 @@ function Menuinfo() {
   }, [handleMenuinfoUpdate])
 
 
-
+  /**
+   * Notify user that menu update was successful
+   */
   const handleCrudButtonClick = () => {
     setMenuinfoUpdate((prevValue) => !prevValue);
     toast({ title: 'Operation Success', description: 'Database modified', status: 'success', duration: 2500 });
   }
 
+  /**
+   * Display menu data into the table
+   * @param {*} param0 
+   * @returns {TableRow}
+   */
   const TableRow = ({ data, borderBottom = true }) => (
     <Tr>
       {data.map((item, index) => (

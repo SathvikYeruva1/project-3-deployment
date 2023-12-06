@@ -12,6 +12,9 @@ import SalesReport from "./components/salesreports/salesreport";
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { useEffect, useState } from "react";
 
+/**
+ * Adjust theme for google translate element
+ */
 const customTheme = extendTheme({ 
   styles: {
     global: {
@@ -25,27 +28,45 @@ const customTheme = extendTheme({
   },
 })
 
+/**
+ * Creates google translate component and Zoom In/Out Feature
+ * @returns Homepage
+ */
 const App = () => {
   const googleTranslateElementInit = () => {
     new window.google.translate.TranslateElement({pageLanguage: "en"},"google_translate_element");
   };
-
+  /**
+   * Zoom State
+   */
   const[zoom, setZoom] = useState(110);
   
+  /**
+   * Zoom in by 10
+   */
   const zoomIn = () =>{
     setZoom(prevZoom => prevZoom + 10);
   }
 
+  /**
+   * Zoom out by 10
+   */
   const zoomOut = () =>{
     if(zoom > 110){
       setZoom(prevZoom => prevZoom - 10);
     }
   }
 
+  /**
+   * Reset the zoom
+   */
   const resetZoom = () => {
     setZoom(110);
   }
 
+  /**
+   * Add google translate element
+   */
   useEffect(() => {
     var addScriptToTranslate = document.createElement("script");
     addScriptToTranslate.setAttribute("src","https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit");
@@ -53,6 +74,9 @@ const App = () => {
     window.googleTranslateElementInit = googleTranslateElementInit;
   }, []);
 
+  /**
+   * Loads Home page
+   */
   return (
     <ChakraProvider theme={customTheme}>
       <div style={{ zoom : zoom + "%",position: "absolute", top: "0", left: "0", zIndex: "999" }}>

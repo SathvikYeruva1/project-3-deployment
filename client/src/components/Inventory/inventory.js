@@ -24,35 +24,92 @@ import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./inventory.css";
 import InventoryCRUD from "../CRUDComponents/InventoryCRUD";
 
+
+/**
+ * Inventory Page
+ * @module
+ */
+
+
+/**
+ * Employee page returns a REACT HTML component that loads inventory data from the database 
+ * Contains function that maps data from database to table, managers are able to
+ * modify, delete and add inventory items.
+ * @returns {ReactHTML}
+ */
+
 function Inventory() {
   const navigate = useNavigate();
-
+  /**
+   * Navigate to Home page
+   */
   const handleLogout = () => {
     navigate("/");
   };
+
+  /**
+   * Navigate to employee page
+   */
   const handleEmployee = () => {
     navigate("/employees");
   };
+
+  /**
+   * Navigate to inventory page
+   */
   const handleInventory = () => {
     navigate("/inventory");
   };
+
+  /**
+   * Navigate to menu information page
+   */
   const handleMenuInfo = () => {
     navigate("/menuinfo");
   };
+
+  /**
+   * Navigate to manager dashboard page
+   */
   const handleDashboard = () => {
     navigate("/manager-dashboard");
   };
+
+  /**
+   * Navigate to sales report page
+   */
   const handleReport = () => {
     navigate("/salesreport");
   };
+
+  /**
+   * Navigate to menu board page
+   */
   const handleMenuDisplayInfo = () => {
     navigate("/menuboard-display");
   };
+
+  /**
+   * Inventory Items Array
+   * @type {Array<number>}
+   */
   const [inventoryItems, setInventoryItems] = useState([]);
+
+  /**
+   * Store whether inventory needs to be updated or not
+   * @type {boolean}
+   */
   const [handleInventoryUpdate, setInventoryUpdate] = useState(false);
+
+  /**
+   * Use toast
+   */
   const toast = useToast();
   
   useEffect(() =>{
+    /**
+     * Get inventory from backend
+     */
     const fetchInventory = async () => {
       try{
         const initialResult = await fetch(`https://bobaposapp.onrender.com/inventory/data`);
@@ -67,7 +124,9 @@ function Inventory() {
   }, [handleInventoryUpdate])
   
 
-
+  /**
+   * Function to notify user inventory update was successful
+   */
   const handleCrudButtonClick = () => {
     setInventoryUpdate((prevValue) => !prevValue);
     toast({ title: 'Operation Success', description: 'Database modified', status: 'success', duration: 2500 });

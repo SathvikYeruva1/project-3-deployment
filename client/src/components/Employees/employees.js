@@ -36,31 +36,78 @@ import { FaDollarSign, FaReceipt, FaUsers } from 'react-icons/fa';
 import "./employees.css";
 import EmployeeCRUD from "../CRUDComponents/EmployeeCRUD";
 
+/**
+ * Employees Page
+ * @module
+ */
+
+
+/**
+ * Employee page returns a REACT HTML component that loads employee data from the database 
+ * Contains function that maps data from database to table. Managers are also able to 
+ * add, update employee information, managers can also delete employees.
+ * @returns {ReactHTML}
+ */
 function Employees() {
   const navigate = useNavigate();
-
+  /**
+   * Navigate to Home page
+   */
   const handleLogout = () => {
     navigate("/");
   };
+  /**
+ * testing
+ * @type {String}
+ */
+
+  /**
+   * Navigate to employee page
+   */
   const handleEmployee = () => {
     navigate("/employees");
   };
+
+  /**
+   * Navigate to inventory page
+   */
   const handleInventory = () => {
     navigate("/inventory");
   };
+
+  /**
+   * Navigate to menu information page
+   */
   const handleMenuInfo = () => {
     navigate("/menuinfo");
   };
+
+  /**
+   * Navigate to manager dashboard page
+   */
   const handleDashboard = () => {
     navigate("/manager-dashboard");
   };
+
+  /**
+   * Navigate to sales report page
+   */
   const handleReport = () => {
     navigate("/salesreport");
   };
+
+  /**
+   * Navigate to menu board page
+   */
   const handleMenuDisplayInfo = () => {
     navigate("/menuboard-display");
   };
 
+  /**
+   * Loads employee data into table
+   * @param {*} employeeData 
+   * @returns {void}
+   */
   const TableRow = ({ data, borderBottom = true }) => (
     <Tr>
       {data.map((item, index) => (
@@ -73,8 +120,14 @@ function Employees() {
 
 
   //get the employee data
+  /**
+ * Employee Data
+ * @type {Array<number>}
+ */
   const [employeeData, setEmployeeData] = useState([]);
-
+  /**
+   * Fetch employee data from database
+   */
   useEffect(() => {
     fetch('https://bobaposapp.onrender.com/employeesdata')
     .then(response => response.json())

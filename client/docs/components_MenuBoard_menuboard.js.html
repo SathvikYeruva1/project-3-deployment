@@ -1,4 +1,32 @@
-// menuboard.js
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/MenuBoard/menuboard.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/MenuBoard/menuboard.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// menuboard.js
 import React, { useState, useEffect } from 'react';
 //import axios from 'axios';
 import {
@@ -87,7 +115,7 @@ const MenuBoard = () => {
 
 
   useEffect(() => {
-    if (menuItemData.length !== 0 && menuItemDescriptions.length !== 0) {
+    if (menuItemData.length !== 0 &amp;&amp; menuItemDescriptions.length !== 0) {
       // Combine the data from menuItemData and menuItemDescriptions
       const newMenuItems = menuItemData.map((item) => {
         const description = item.descriptions + '\n\nIngredients: ' + item.ingredients;
@@ -212,14 +240,14 @@ const MenuBoard = () => {
   };
 
   return (
-    <Flex flexDirection="column">
-    <Box background={"gray.800"} py={3}>
-      <Heading as="h1" textAlign={'center'} color={'white'} fontFamily={'Roboto, sans-serif'}>Self Checkout</Heading>
-    </Box>
-    <Flex alignItems="flex-start" bg="gray.800">
+    &lt;Flex flexDirection="column">
+    &lt;Box background={"gray.800"} py={3}>
+      &lt;Heading as="h1" textAlign={'center'} color={'white'} fontFamily={'Roboto, sans-serif'}>Self Checkout&lt;/Heading>
+    &lt;/Box>
+    &lt;Flex alignItems="flex-start" bg="gray.800">
       {/* Left Side */}
-      <Center w="20%" display="flex" flexDirection="column">
-        <Button
+      &lt;Center w="20%" display="flex" flexDirection="column">
+        &lt;Button
           onClick={handleLogin}
           fontFamily='Varela Round'
           textTransform='uppercase'
@@ -232,8 +260,8 @@ const MenuBoard = () => {
           _hover={{ background: '#C39B91' }}
         >
           Log In
-        </Button>
-        <Button
+        &lt;/Button>
+        &lt;Button
           onClick={handleMenuboarddisplay}
           fontFamily='Varela Round'
           textTransform='uppercase'
@@ -246,9 +274,9 @@ const MenuBoard = () => {
           _hover={{ background: '#C39B91' }}
         >
           Menu Board
-        </Button>
+        &lt;/Button>
         {/* Kung Fu Tea Logo */}
-        <Image
+        &lt;Image
             src='/kungfutealogo.png'   // Adjust the image path as needed
             alt='Kung Fu Tea Logo'
             boxSize="125px"             // Reduce the size of the image
@@ -262,14 +290,14 @@ const MenuBoard = () => {
           
         {/* Category Cards */}
         
-        <Card
+        &lt;Card
         borderRadius="lg"      // Add rounded edges
         boxShadow="md"    
         boxSize="155px"
         mb={5}     // Add a small drop shadow
         height='auto'
         >
-        <Image
+        &lt;Image
             src='/milkTea.jpg'   // Adjust the image path as needed
             alt='Milk Tea'
             objectFit="cover" 
@@ -277,26 +305,26 @@ const MenuBoard = () => {
             borderRadius="md"
             boxShadow="md"
         />
-        <Divider />
-        {/* <Text>Freshly brewed teas paired with milk powder</Text> */}
-        <Button 
+        &lt;Divider />
+        {/* &lt;Text>Freshly brewed teas paired with milk powder&lt;/Text> */}
+        &lt;Button 
         variant={selectedCategory === "Milk Tea" ? "solid" : "outline"}
         colorScheme="blue"
         onClick={() => handleFilterCategory("Milk Tea")}
         align="start"
         aria-label="Filter Milk Tea">
             Filter
-        </Button>
-        </Card>
+        &lt;/Button>
+        &lt;/Card>
 
-        <Card
+        &lt;Card
         borderRadius="lg"      // Add rounded edges
         boxShadow="md"    
         boxSize="155px"
         mb={5}     // Add a small drop shadow
         height='auto'
         >
-        <Image
+        &lt;Image
             src='/punchTea.jpg'   // Adjust the image path as needed
             alt='Punch Tea'
             objectFit="cover" 
@@ -304,25 +332,25 @@ const MenuBoard = () => {
             borderRadius="md"
             boxShadow="md"
         />
-        <Divider />
-        {/* <Text>Freshly brewed teas paired with milk powder</Text> */}
-        <Button variant={selectedCategory === "Fruit" ? "solid" : "outline"}
+        &lt;Divider />
+        {/* &lt;Text>Freshly brewed teas paired with milk powder&lt;/Text> */}
+        &lt;Button variant={selectedCategory === "Fruit" ? "solid" : "outline"}
           colorScheme="blue"
           onClick={() => handleFilterCategory("Fruit")}
           align="start"
           aria-label="Filter Punch Tea">
             Filter
-        </Button>
-        </Card>
+        &lt;/Button>
+        &lt;/Card>
 
-        <Card
+        &lt;Card
         borderRadius="lg"      // Add rounded edges
         boxShadow="md"    
         boxSize="155px"
         mb={5}     // Add a small drop shadow
         height='auto'
         >
-        <Image
+        &lt;Image
             src='/seasonalTea.jpg'   // Adjust the image path as needed
             alt='Seasonal Tea'
             objectFit="cover" 
@@ -330,20 +358,20 @@ const MenuBoard = () => {
             borderRadius="md"
             boxShadow="md"
         />
-        <Divider />
-        {/* <Text>Freshly brewed teas paired with milk powder</Text> */}
-        <Button variant={selectedCategory === "Classic" ? "solid" : "outline"}
+        &lt;Divider />
+        {/* &lt;Text>Freshly brewed teas paired with milk powder&lt;/Text> */}
+        &lt;Button variant={selectedCategory === "Classic" ? "solid" : "outline"}
           colorScheme="blue"
           onClick={() => handleFilterCategory("Classic")}
           align="start"
           aria-label="Filter Classic Tea">
             Filter
-        </Button>
-        </Card>
-      </Center>
+        &lt;/Button>
+        &lt;/Card>
+      &lt;/Center>
 
       {/* Right Side */}
-      <Grid
+      &lt;Grid
         templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
         gap={4} // Reduced the gap to decrease the space between rows
         pl={6} // Left padding to ensure some space from the left side
@@ -353,40 +381,40 @@ const MenuBoard = () => {
         w="full" // Ensure the grid takes full width of the right side
       >
         {filteredItems.map((item, index) => (
-          <GridItem key={index} colSpan={1}>
-          <Card borderRadius="lg" overflow="hidden" display="flex" flexDirection="column" position="relative">
+          &lt;GridItem key={index} colSpan={1}>
+          &lt;Card borderRadius="lg" overflow="hidden" display="flex" flexDirection="column" position="relative">
             {/* Display the image for the drink */}
-            <Image src={item.image} alt={item.name} boxSize="100%" objectFit="cover" />
+            &lt;Image src={item.image} alt={item.name} boxSize="100%" objectFit="cover" />
                       
             {/* Product Name */}
-            <Box p={3} d="flex" flexDirection="column" justifyContent="space-between" flexGrow={1}>
-              <Text fontWeight="bold" textAlign="center" color="black">{item.name}</Text>
-              <Flex justifyContent="center" alignItems="center" mt={2}>
+            &lt;Box p={3} d="flex" flexDirection="column" justifyContent="space-between" flexGrow={1}>
+              &lt;Text fontWeight="bold" textAlign="center" color="black">{item.name}&lt;/Text>
+              &lt;Flex justifyContent="center" alignItems="center" mt={2}>
                 {/* Add to Cart Button */}
-                <IconButton aria-label="Add to cart" icon={<AddIcon />} colorScheme="teal" onClick={() => handleAddToCart(item)}/>
+                &lt;IconButton aria-label="Add to cart" icon={&lt;AddIcon />} colorScheme="teal" onClick={() => handleAddToCart(item)}/>
         
                 {/* Description Popover */}
-                <Popover placement="bottom" strategy="fixed">
-                  <PopoverTrigger>
-                    <IconButton aria-label={`Description of ${item.name}`} icon={<InfoIcon />} colorScheme="teal" ml={2} />
-                  </PopoverTrigger>
-                  <PopoverContent>
-                    <PopoverArrow />
-                    <PopoverCloseButton aria-label="Close description"/>
-                    <PopoverHeader color="black">Description of {item.name}</PopoverHeader>
+                &lt;Popover placement="bottom" strategy="fixed">
+                  &lt;PopoverTrigger>
+                    &lt;IconButton aria-label={`Description of ${item.name}`} icon={&lt;InfoIcon />} colorScheme="teal" ml={2} />
+                  &lt;/PopoverTrigger>
+                  &lt;PopoverContent>
+                    &lt;PopoverArrow />
+                    &lt;PopoverCloseButton aria-label="Close description"/>
+                    &lt;PopoverHeader color="black">Description of {item.name}&lt;/PopoverHeader>
                     {/* This is where the description will show */}
-                    <PopoverBody color="black">{item.description}</PopoverBody>
-                  </PopoverContent>
-                </Popover>
-              </Flex>
-            </Box>
-          </Card>
-        </GridItem>
+                    &lt;PopoverBody color="black">{item.description}&lt;/PopoverBody>
+                  &lt;/PopoverContent>
+                &lt;/Popover>
+              &lt;/Flex>
+            &lt;/Box>
+          &lt;/Card>
+        &lt;/GridItem>
         
         ))}
-      </Grid>
-      {cartItems.length > 0 && (
-        <Box
+      &lt;/Grid>
+      {cartItems.length > 0 &amp;&amp; (
+        &lt;Box
           position="fixed"
           right="0"
           top="0"
@@ -399,68 +427,68 @@ const MenuBoard = () => {
           maxH="100vh" // Set maximum height to 100% of the viewport height
           overflowY="auto" // Enable vertical scrolling
         >
-          <Heading as="h3" size="md" mb="4" color="black">
+          &lt;Heading as="h3" size="md" mb="4" color="black">
             Cart
-          </Heading>
+          &lt;/Heading>
           {cartItems.map((cartItem, index) => (
-              <Flex key={index} direction="column" mb={4}>
-              <Flex alignItems="center" justifyContent="space-between">
-                <Text fontWeight="bold">{cartItem.name}</Text>
-                <IconButton
+              &lt;Flex key={index} direction="column" mb={4}>
+              &lt;Flex alignItems="center" justifyContent="space-between">
+                &lt;Text fontWeight="bold">{cartItem.name}&lt;/Text>
+                &lt;IconButton
                   aria-label="Remove from cart"
-                  icon={<CloseIcon />}
+                  icon={&lt;CloseIcon />}
                   colorScheme="red"
                   onClick={() => {
                     const updatedCartItems = cartItems.filter((_, i) => i !== index);
                     setCartItems(updatedCartItems);
                   }}
                 />
-              </Flex>
-              <Select
+              &lt;/Flex>
+              &lt;Select
                 placeholder="Size"
                 defaultValue={cartItem.size}
                 onChange={(e) => updateCartItem(index, "size", e.target.value)}
               >
-                <option value="Small">Small</option>
-                <option value="Medium">Medium</option>
-                <option value="Large">Large</option>
-              </Select>
-              <Select
+                &lt;option value="Small">Small&lt;/option>
+                &lt;option value="Medium">Medium&lt;/option>
+                &lt;option value="Large">Large&lt;/option>
+              &lt;/Select>
+              &lt;Select
                 placeholder="Ice"
                 defaultValue={cartItem.ice}
                 onChange={(e) => updateCartItem(index, "ice", e.target.value)}
               >
-                <option value="None">No Ice</option>
-                <option value="Less">Less Ice</option>
-                <option value="Regular">Regular Ice</option>
-                <option value="Extra">Extra Ice</option>
-              </Select>
-              <Select
+                &lt;option value="None">No Ice&lt;/option>
+                &lt;option value="Less">Less Ice&lt;/option>
+                &lt;option value="Regular">Regular Ice&lt;/option>
+                &lt;option value="Extra">Extra Ice&lt;/option>
+              &lt;/Select>
+              &lt;Select
                 placeholder="Sugar"
                 defaultValue={cartItem.sugar}
                 onChange={(e) => updateCartItem(index, "sugar", e.target.value)}
               >
-                <option value="None">No Sugar</option>
-                <option value="Less">Less Sugar</option>
-                <option value="Regular">Regular Sugar</option>
-                <option value="Extra">Extra Sugar</option>
-              </Select>
-              <Text mt={2}>Price: ${cartItem.adjustedPrice}</Text>
-            </Flex>
+                &lt;option value="None">No Sugar&lt;/option>
+                &lt;option value="Less">Less Sugar&lt;/option>
+                &lt;option value="Regular">Regular Sugar&lt;/option>
+                &lt;option value="Extra">Extra Sugar&lt;/option>
+              &lt;/Select>
+              &lt;Text mt={2}>Price: ${cartItem.adjustedPrice}&lt;/Text>
+            &lt;/Flex>
           ))}
-          <Divider my={4} />
-          <Flex justifyContent="space-between" alignItems="center">
-            <Text fontWeight="bold" color="black">Total Price:</Text>
-            <Text color="black">${calculateTotalPrice()}</Text>
-          </Flex>
-          <Button width="100%" colorScheme="blue" onClick={() => setShowCheckout(true)} aria-label="Proceed to Checkout">
+          &lt;Divider my={4} />
+          &lt;Flex justifyContent="space-between" alignItems="center">
+            &lt;Text fontWeight="bold" color="black">Total Price:&lt;/Text>
+            &lt;Text color="black">${calculateTotalPrice()}&lt;/Text>
+          &lt;/Flex>
+          &lt;Button width="100%" colorScheme="blue" onClick={() => setShowCheckout(true)} aria-label="Proceed to Checkout">
             Checkout
-          </Button>
-        </Box>
+          &lt;/Button>
+        &lt;/Box>
       )}
 
-      {showCheckout && (
-        <Box
+      {showCheckout &amp;&amp; (
+        &lt;Box
           className={showCheckout ? 'checkout-pane' : ''}
           position="fixed"
           right="0"
@@ -472,9 +500,9 @@ const MenuBoard = () => {
           p="4"
           zIndex="2"  // Set a higher z-index to appear above the cart panel
         >
-            <IconButton
+            &lt;IconButton
             aria-label="Back to Cart"
-            icon={<ArrowBackIcon />}  
+            icon={&lt;ArrowBackIcon />}  
             colorScheme="gray"
             position="absolute"
             top="4"
@@ -482,22 +510,22 @@ const MenuBoard = () => {
             onClick={() => setShowCheckout(false)}
           />
           {/* Checkout pane content */}
-          <Heading as="h3" size="md" mb="4" color="black">
+          &lt;Heading as="h3" size="md" mb="4" color="black">
             Checkout
-          </Heading>
+          &lt;/Heading>
 
               {/* Order Total */}
-          <Text textAlign="center" fontWeight="bold" color="black" fontSize="xl" mb="2">
+          &lt;Text textAlign="center" fontWeight="bold" color="black" fontSize="xl" mb="2">
             Order Total:
-          </Text>
-          <Text textAlign="center" color="black" fontSize="2xl" mb="4">
+          &lt;/Text>
+          &lt;Text textAlign="center" color="black" fontSize="2xl" mb="4">
             ${calculateTotalPrice()}
-          </Text>
+          &lt;/Text>
 
           {/* Payment options */}
-          <HStack spacing={4} mt={4} justify="center">
+          &lt;HStack spacing={4} mt={4} justify="center">
             {/* Cash */}
-            <Box
+            &lt;Box
               width="70px"
               height="70px"
               bg={selectedPaymentMethod === 'cash' ? 'blue.200' : 'white'}
@@ -509,14 +537,14 @@ const MenuBoard = () => {
               cursor="pointer"
               onClick={() => setSelectedPaymentMethod('cash')}
             >
-            <Icon as={FaMoneyBill} size={30} aria-label="Cash Payment" color={selectedPaymentMethod === 'cash' ? 'white' : 'black'} />
-              <Text mt="2" fontSize="sm">
+            &lt;Icon as={FaMoneyBill} size={30} aria-label="Cash Payment" color={selectedPaymentMethod === 'cash' ? 'white' : 'black'} />
+              &lt;Text mt="2" fontSize="sm">
                 Cash
-              </Text>
-            </Box>
+              &lt;/Text>
+            &lt;/Box>
 
             {/* Card */}
-            <Box
+            &lt;Box
               width="70px"
               height="70px"
               bg={selectedPaymentMethod === 'card' ? 'blue.200' : 'white'}
@@ -528,14 +556,14 @@ const MenuBoard = () => {
               cursor="pointer"
               onClick={() => setSelectedPaymentMethod('card')}
             >
-            <Icon as={FaCreditCard} size={30} aria-label="Card Payment" color={selectedPaymentMethod === 'card' ? 'white' : 'black'} />
-              <Text mt="2" fontSize="sm">
+            &lt;Icon as={FaCreditCard} size={30} aria-label="Card Payment" color={selectedPaymentMethod === 'card' ? 'white' : 'black'} />
+              &lt;Text mt="2" fontSize="sm">
                 Card
-              </Text>
-            </Box>
+              &lt;/Text>
+            &lt;/Box>
 
             {/* QR Code */}
-            <Box
+            &lt;Box
               width="70px"
               height="70px"
               bg={selectedPaymentMethod === 'qrCode' ? 'blue.200' : 'white'}
@@ -547,47 +575,69 @@ const MenuBoard = () => {
               cursor="pointer"
               onClick={() => setSelectedPaymentMethod('qrCode')}
             >
-            <Icon as={FaQrcode} size={30} aria-label="QR Code Payment" color={selectedPaymentMethod === 'qrCode' ? 'white' : 'black'} />
-              <Text mt="2" fontSize="sm">
+            &lt;Icon as={FaQrcode} size={30} aria-label="QR Code Payment" color={selectedPaymentMethod === 'qrCode' ? 'white' : 'black'} />
+              &lt;Text mt="2" fontSize="sm">
                 QR Code
-              </Text>
-            </Box>
-          </HStack>
+              &lt;/Text>
+            &lt;/Box>
+          &lt;/HStack>
           {/* Payment details */}
-          {selectedPaymentMethod === 'card' && (
-             <VStack spacing={4} mt={4}>
-             <Input
+          {selectedPaymentMethod === 'card' &amp;&amp; (
+             &lt;VStack spacing={4} mt={4}>
+             &lt;Input
                placeholder="Card Number"
              />
-             <Input
+             &lt;Input
                placeholder="Expiration Date"
              />
-             <Input
+             &lt;Input
                placeholder="CVV"
              />
-             <Input
+             &lt;Input
                placeholder="Card Type"
              />
-           </VStack>
+           &lt;/VStack>
           )}
 
           {/* QR Code */}
-          {selectedPaymentMethod === 'qrCode' && (
-            <Box textAlign="center" mt="4">
+          {selectedPaymentMethod === 'qrCode' &amp;&amp; (
+            &lt;Box textAlign="center" mt="4">
               {/* Display fake QR Code */}
-              <Image src="/rickroll.jpg" alt="You j got rick rolled!" />
-            </Box>
+              &lt;Image src="/rickroll.jpg" alt="You j got rick rolled!" />
+            &lt;/Box>
           )}
 
-          <Button width="95%" position="absolute" bottom="4" colorScheme="blue" onClick={handleCheckout}>
+          &lt;Button width="95%" position="absolute" bottom="4" colorScheme="blue" onClick={handleCheckout}>
             Place Order
-          </Button>
-        </Box>
+          &lt;/Button>
+        &lt;/Box>
       )}
 
-    </Flex>
-    </Flex>
+    &lt;/Flex>
+    &lt;/Flex>
   );
 };
 
-export default MenuBoard;
+export default MenuBoard;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-components_Employees_employees.html">components/Employees/employees</a></li><li><a href="module-components_Inventory_inventory.html">components/Inventory/inventory</a></li><li><a href="module-components_Login_Login.html">components/Login/Login</a></li><li><a href="module-components_ManagerDashboard_ManagerDashboard.html">components/ManagerDashboard/ManagerDashboard</a></li><li><a href="module-components_MenuBoard_menuboard.html">components/MenuBoard/menuboard</a></li><li><a href="module-components_MenuBoard_menuboarddisplay.html">components/MenuBoard/menuboarddisplay</a></li><li><a href="module-components_Menuinfo_menuinfo.html">components/Menuinfo/menuinfo</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#customTheme">customTheme</a></li><li><a href="global.html#root">root</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Dec 06 2023 15:32:08 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: App.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: App.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { Routes, Route } from 'react-router-dom';
+import Login from "./components/Login/Login";
+import ManagerDashboard from "./components/ManagerDashboard/ManagerDashboard";
+import MenuBoard from "./components/MenuBoard/menuboard";
+import Inventory from "./components/Inventory/inventory";
+import Employees from "./components/Employees/employees";
+import Menuinfo from "./components/Menuinfo/menuinfo";
+import MenuBoardDisplay from "./components/MenuBoard/menuboarddisplay";
+import Cashier from "./components/CashierDashboard/CashierDashboard";
+import SalesReport from "./components/salesreports/salesreport";
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { useEffect, useState } from "react";
+
+/**
+ * Adjust theme for google translate element
+ */
+const customTheme = extendTheme({ 
+  styles: {
+    global: {
+      body: {
+        color: "black", // Set the default text color to black
+      },
+      "#google_translate_element .goog-te-text": {
+        color: "black !important",
+      },
+    },
+  },
+})
+
+/**
+ * Creates google translate component and Zoom In/Out Feature
+ * @returns Homepage
+ */
+const App = () => {
+  const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement({pageLanguage: "en"},"google_translate_element");
+  };
+  /**
+   * Zoom State
+   */
+  const[zoom, setZoom] = useState(110);
+  
+  /**
+   * Zoom in by 10
+   */
+  const zoomIn = () =>{
+    setZoom(prevZoom => prevZoom + 10);
+  }
+
+  /**
+   * Zoom out by 10
+   */
+  const zoomOut = () =>{
+    if(zoom > 110){
+      setZoom(prevZoom => prevZoom - 10);
+    }
+  }
+
+  /**
+   * Reset the zoom
+   */
+  const resetZoom = () => {
+    setZoom(110);
+  }
+
+  /**
+   * Add google translate element
+   */
+  useEffect(() => {
+    var addScriptToTranslate = document.createElement("script");
+    addScriptToTranslate.setAttribute("src","https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit");
+    document.body.appendChild(addScriptToTranslate);
+    window.googleTranslateElementInit = googleTranslateElementInit;
+  }, []);
+
+  /**
+   * Loads Home page
+   */
+  return (
+    &lt;ChakraProvider theme={customTheme}>
+      &lt;div style={{ zoom : zoom + "%",position: "absolute", top: "0", left: "0", zIndex: "999" }}>
+        {/* Container for Google Translate element */}
+        &lt;div id="google_translate_element">&lt;/div>
+      &lt;/div>
+      &lt;div style={{ zoom: zoom + "%", position: "fixed", bottom: "10px", right: "0" }}>
+        &lt;button style={{marginRight: "10px", color: "white"}} onClick={zoomIn}>Zoom In&lt;/button>
+        &lt;button style={{marginRight: "10px", color: "white"}} onClick={zoomOut}>Zoom Out&lt;/button>
+        &lt;button style={{color: "white"}} onClick={resetZoom}>Reset Zoom&lt;/button>
+        &lt;/div>
+        &lt;div style={{ zoom: zoom + "%"}}>
+      &lt;Routes>
+        &lt;Route path="/" element={&lt;MenuBoard />} />
+        &lt;Route path="/login" element={&lt;Login />} />
+        &lt;Route path="/menuboard-display" element={&lt;MenuBoardDisplay />} />
+        &lt;Route path="/manager-dashboard" element={&lt;ManagerDashboard />} />
+        &lt;Route path="/cashier" element={&lt;Cashier />} />
+        &lt;Route path="/inventory" element={&lt;Inventory />} />
+        &lt;Route path="/employees" element={&lt;Employees />} />
+        &lt;Route path="/menuinfo" element={&lt;Menuinfo />} />
+        &lt;Route path="/salesreport" element={&lt;SalesReport />} />
+      &lt;/Routes>
+      &lt;/div>
+    &lt;/ChakraProvider>
+  );
+};
+
+export default App;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-components_Employees_employees.html">components/Employees/employees</a></li><li><a href="module-components_Inventory_inventory.html">components/Inventory/inventory</a></li><li><a href="module-components_Login_Login.html">components/Login/Login</a></li><li><a href="module-components_ManagerDashboard_ManagerDashboard.html">components/ManagerDashboard/ManagerDashboard</a></li><li><a href="module-components_MenuBoard_menuboard.html">components/MenuBoard/menuboard</a></li><li><a href="module-components_MenuBoard_menuboarddisplay.html">components/MenuBoard/menuboarddisplay</a></li><li><a href="module-components_Menuinfo_menuinfo.html">components/Menuinfo/menuinfo</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#customTheme">customTheme</a></li><li><a href="global.html#root">root</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Dec 06 2023 15:32:08 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
