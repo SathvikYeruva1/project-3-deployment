@@ -27,7 +27,7 @@ import {
   Flex,  // Import Flex from Chakra UI for layout
 } from "@chakra-ui/react";
 import { AddIcon, InfoIcon, CloseIcon, ArrowBackIcon, } from "@chakra-ui/icons";
-import { FaMoneyBill, FaCreditCard, FaQrcode} from "react-icons/fa"
+import { FaMoneyBill, FaCreditCard, FaQrcode} from "react-icons/fa";
 import "./menuboard.css";
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
@@ -75,7 +75,7 @@ const MenuBoard = () => {
     if (menuItemData.length !== 0 && menuItemDescriptions.length !== 0) {
       // Combine the data from menuItemData and menuItemDescriptions
       const newMenuItems = menuItemData.map((item) => {
-        const description = item.description + '\nIngredients: ' + item.ingredients;
+        const description = item.descriptions + '\nIngredients: ' + item.ingredients;
         let category;
         category = item.categories
         let image;
@@ -107,9 +107,6 @@ const MenuBoard = () => {
     setSelectedCategory((prevCategory) => (prevCategory === category ? null : category));
   };
 
-  const handleBack = () => {
-    navigate('/manager-dashboard');
-  };
 
   return (
     <Flex flexDirection="column">
@@ -120,7 +117,7 @@ const MenuBoard = () => {
       {/* Left Side */}
       <Center w="20%" display="flex" flexDirection="column">
         <Button
-          onClick={handleBack}
+          onClick={() => navigate(-1)}
           fontFamily='Varela Round'
           textTransform='uppercase'
           background='#D49D8F'

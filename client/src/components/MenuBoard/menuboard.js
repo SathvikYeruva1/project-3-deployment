@@ -28,7 +28,7 @@ import {
   Flex,  // Import Flex from Chakra UI for layout
 } from "@chakra-ui/react";
 import { AddIcon, InfoIcon, CloseIcon, ArrowBackIcon, } from "@chakra-ui/icons";
-import { FaMoneyBill, FaCreditCard, FaQrcode} from "react-icons/fa"
+import { FaMoneyBill, FaCreditCard, FaQrcode} from "react-icons/fa";
 import "./menuboard.css";
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
@@ -76,7 +76,7 @@ const MenuBoard = () => {
     if (menuItemData.length !== 0 && menuItemDescriptions.length !== 0) {
       // Combine the data from menuItemData and menuItemDescriptions
       const newMenuItems = menuItemData.map((item) => {
-        const description = item.description + '\nIngredients: ' + item.ingredients;
+        const description = item.descriptions + '\n\nIngredients: ' + item.ingredients;
         let category;
         category = item.categories
         let image;
@@ -127,6 +127,7 @@ const MenuBoard = () => {
   
     // Simple hardcoded price adjustments
     let priceAdjustment = 0;
+    if(item.size === "Small") priceAdjustment -= 0.5;
     if (item.size === "Large") priceAdjustment += 0.5;
     if (item.ice === "Extra") priceAdjustment += 0.2;
     if (item.sugar === "Extra") priceAdjustment += 0.2;
@@ -191,11 +192,15 @@ const MenuBoard = () => {
   const handleLogin = () => {
     navigate('/login');
   };
+  
+  const handleMenuboarddisplay = () => {
+    navigate('/menuboard-display');
+  };
 
   return (
     <Flex flexDirection="column">
     <Box background={"gray.800"} py={3}>
-      <Heading as="h1" textAlign={'center'} color={'white'} fontFamily={'Roboto, sans-serif'}>Menu Board</Heading>
+      <Heading as="h1" textAlign={'center'} color={'white'} fontFamily={'Roboto, sans-serif'}>Self Checkout</Heading>
     </Box>
     <Flex alignItems="flex-start" bg="gray.800">
       {/* Left Side */}
@@ -213,6 +218,20 @@ const MenuBoard = () => {
           _hover={{ background: '#C39B91' }}
         >
           Log In
+        </Button>
+        <Button
+          onClick={handleMenuboarddisplay}
+          fontFamily='Varela Round'
+          textTransform='uppercase'
+          background='#D49D8F'
+          padding='15px'
+          color='#FFFFFF'
+          fontSize='14px'
+          marginTop={"70px"}
+          marginBottom={"-60px"}
+          _hover={{ background: '#C39B91' }}
+        >
+          Menu Board
         </Button>
         {/* Kung Fu Tea Logo */}
         <Image
