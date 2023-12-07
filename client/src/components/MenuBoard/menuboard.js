@@ -205,6 +205,18 @@ const MenuBoard = () => {
     <Flex alignItems="flex-start" bg="gray.800">
       {/* Left Side */}
       <Center w="20%" display="flex" flexDirection="column">
+        {/* Kung Fu Tea Logo */}
+      <Image
+            src='/kungfutealogo.png'   // Adjust the image path as needed
+            alt='Kung Fu Tea Logo'
+            boxSize="125px"             // Reduce the size of the image
+            objectFit="contain" 
+            textAlign="center"  
+            borderRadius="md"
+            boxShadow="md"   
+            mb={4}  
+            mt = {20}  
+        />
         <Button
           onClick={handleLogin}
           fontFamily='Varela Round'
@@ -212,8 +224,8 @@ const MenuBoard = () => {
           background='#D49D8F'
           padding='15px'
           color='#FFFFFF'
-          fontSize='14px'
-          marginTop={"30px"}
+          fontSize='18px'
+          marginTop={"10px"}
           marginBottom={"-60px"}
           _hover={{ background: '#C39B91' }}
         >
@@ -226,26 +238,14 @@ const MenuBoard = () => {
           background='#D49D8F'
           padding='15px'
           color='#FFFFFF'
-          fontSize='14px'
+          fontSize='18px'
           marginTop={"70px"}
-          marginBottom={"-60px"}
+          marginBottom={"30px"}
           _hover={{ background: '#C39B91' }}
         >
           Menu Board
         </Button>
-        {/* Kung Fu Tea Logo */}
-        <Image
-            src='/kungfutealogo.png'   // Adjust the image path as needed
-            alt='Kung Fu Tea Logo'
-            boxSize="125px"             // Reduce the size of the image
-            objectFit="contain" 
-            textAlign="center"  
-            borderRadius="md"
-            boxShadow="md"   
-            mb={4}  
-            mt = {20}  
-        />
-          
+
         {/* Category Cards */}
         
         <Card

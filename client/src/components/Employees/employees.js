@@ -161,6 +161,7 @@ function Employees() {
           <Heading as="h2" fontSize="xl" mb={8} color="blackAlpha.900">
             Employee Details
           </Heading>
+          <EmployeeCRUD onUpdate={handleCrudButtonClick}></EmployeeCRUD>
           <Table variant="simple" borderCollapse="separate">
             <Thead>
               <Tr>
@@ -178,7 +179,6 @@ function Employees() {
           {/* Add more rows as needed */}
             </Tbody>
           </Table>
-          <EmployeeCRUD/>
         </Flex>
         </Flex>
     </Flex>
